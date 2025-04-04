@@ -1,0 +1,60 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.0.16 Chrome/132.0.6834.196 Electron/34.2.0 Safari/537.36" version="26.0.16">
+  <diagram name="Page-1" id="CI_ALZHZPHJ0Nv8C9rJL">
+    <mxGraphModel dx="1050" dy="621" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="fvUeJiE1tfrVCGBhcJI6-1" value="3rd Party" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="370" y="310" width="60" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="fvUeJiE1tfrVCGBhcJI6-2" value="Main" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="150" y="310" width="60" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="fvUeJiE1tfrVCGBhcJI6-6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="fvUeJiE1tfrVCGBhcJI6-4" target="fvUeJiE1tfrVCGBhcJI6-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fvUeJiE1tfrVCGBhcJI6-4" value="START" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="370" y="120" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fvUeJiE1tfrVCGBhcJI6-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="fvUeJiE1tfrVCGBhcJI6-5" target="fvUeJiE1tfrVCGBhcJI6-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fvUeJiE1tfrVCGBhcJI6-8" value="Hey I want to log in using the account on Main" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="fvUeJiE1tfrVCGBhcJI6-7">
+          <mxGeometry x="-0.1714" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fvUeJiE1tfrVCGBhcJI6-5" value="User wants to log into third party server using their account on the main server" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="180" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fvUeJiE1tfrVCGBhcJI6-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0;exitDx=0;exitDy=15;exitPerimeter=0;entryX=1;entryY=0;entryDx=0;entryDy=15;entryPerimeter=0;" edge="1" parent="1" source="fvUeJiE1tfrVCGBhcJI6-1" target="fvUeJiE1tfrVCGBhcJI6-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fvUeJiE1tfrVCGBhcJI6-10" value="Hey I have a user that&lt;br&gt;wants to log in. Gimme&lt;br&gt;your public key." style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="fvUeJiE1tfrVCGBhcJI6-9">
+          <mxGeometry x="0.1569" y="3" relative="1" as="geometry">
+            <mxPoint x="13" y="-8" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fvUeJiE1tfrVCGBhcJI6-11" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="530" y="160" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fvUeJiE1tfrVCGBhcJI6-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0;exitDx=0;exitDy=70;exitPerimeter=0;entryX=0;entryY=0;entryDx=0;entryDy=70;entryPerimeter=0;" edge="1" parent="1" source="fvUeJiE1tfrVCGBhcJI6-2" target="fvUeJiE1tfrVCGBhcJI6-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fvUeJiE1tfrVCGBhcJI6-13" value="Sure mate, &lt;br&gt;here&#39;s my public key" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="fvUeJiE1tfrVCGBhcJI6-12">
+          <mxGeometry x="-0.2525" y="4" relative="1" as="geometry">
+            <mxPoint x="20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fvUeJiE1tfrVCGBhcJI6-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="fvUeJiE1tfrVCGBhcJI6-1" target="fvUeJiE1tfrVCGBhcJI6-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fvUeJiE1tfrVCGBhcJI6-15" value="Here, have this key wrapped&lt;br&gt;with the key I asked for.&lt;br&gt;I&#39;m sending a user your way,&lt;br&gt;if they&#39;re legit wrap their token&lt;br&gt;with this key then chuck in this&amp;nbsp;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="fvUeJiE1tfrVCGBhcJI6-14">
+          <mxGeometry x="-0.085" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
