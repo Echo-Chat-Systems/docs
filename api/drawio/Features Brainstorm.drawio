@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.2.2 Chrome/134.0.6998.178 Electron/35.1.2 Safari/537.36" version="26.2.2">
   <diagram name="Page-1" id="S7OwfqyslhEaKaafc7HS">
-    <mxGraphModel dx="816" dy="1654" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="985" dy="1755" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -212,7 +212,10 @@
         <mxCell id="cCKECOhjynZBywvS4mbj-87" value="Display Name" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="780" y="510" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="cCKECOhjynZBywvS4mbj-88" value="Email As PK" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="aAWIrtA_UfFcJKhFcBHo-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" edge="1" parent="1" source="cCKECOhjynZBywvS4mbj-88" target="aAWIrtA_UfFcJKhFcBHo-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cCKECOhjynZBywvS4mbj-88" value="Email Not&lt;div&gt;Required&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="780" y="210" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="cCKECOhjynZBywvS4mbj-110" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" parent="1" source="cCKECOhjynZBywvS4mbj-89" target="cCKECOhjynZBywvS4mbj-88" edge="1">
@@ -221,7 +224,7 @@
         <mxCell id="cCKECOhjynZBywvS4mbj-111" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" parent="1" source="cCKECOhjynZBywvS4mbj-89" target="cCKECOhjynZBywvS4mbj-86" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="6vi2f0P-OOcmaFmLqezp-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" edge="1" parent="1" source="cCKECOhjynZBywvS4mbj-89" target="6vi2f0P-OOcmaFmLqezp-1">
+        <mxCell id="6vi2f0P-OOcmaFmLqezp-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" parent="1" source="cCKECOhjynZBywvS4mbj-89" target="6vi2f0P-OOcmaFmLqezp-1" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="cCKECOhjynZBywvS4mbj-89" value="Security &amp;amp; Auth" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
@@ -309,8 +312,11 @@
         <mxCell id="lBb4UWEkdVM-ROISVBTY-1" value="Mobile Device Popup???&lt;br&gt;More investigation needed" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="540" y="360" width="100" height="55" as="geometry" />
         </mxCell>
-        <mxCell id="6vi2f0P-OOcmaFmLqezp-1" value="Inter-Host logins" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="6vi2f0P-OOcmaFmLqezp-1" value="Inter-Host logins" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="720" y="210" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="aAWIrtA_UfFcJKhFcBHo-1" value="Uses keypair for user authentication." style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="720" y="120" width="90" height="50" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
