@@ -233,6 +233,9 @@
         <mxCell id="cCKECOhjynZBywvS4mbj-89" value="Security &amp;amp; Auth" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="780" y="280" width="60" height="30" as="geometry" />
         </mxCell>
+        <mxCell id="3jOnJADhadLVjRBI3uCC-17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" edge="1" parent="1" source="cCKECOhjynZBywvS4mbj-95" target="3jOnJADhadLVjRBI3uCC-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="cCKECOhjynZBywvS4mbj-95" value="Accounts With Low Rep Will Have This Feature Disabled" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="969" y="630" width="131" height="50" as="geometry" />
         </mxCell>
@@ -359,6 +362,9 @@
         </mxCell>
         <mxCell id="3jOnJADhadLVjRBI3uCC-14" value="Optional breadcrumbs linking old origin with new" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="695" y="445" width="85" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="3jOnJADhadLVjRBI3uCC-16" value="Individual users can define their own rep tolerances" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="800" y="630" width="110" height="50" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
