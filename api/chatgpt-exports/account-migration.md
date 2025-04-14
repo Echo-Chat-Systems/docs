@@ -250,6 +250,6 @@ If advanced functionality is needed, consider:
 - Password prompt for secure backup
 - Warnings that messages remain private even post-migration
 
----
+## Breadcrumbs - OPTIONAL
 
-Let me know if you'd like this integrated into your planning documents or turned into a formal spec!
+A user may elect to have their public key remain on their original server as a breadcrumb for their account's new home server. 
