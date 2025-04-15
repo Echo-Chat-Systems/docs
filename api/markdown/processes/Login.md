@@ -20,8 +20,8 @@ The sign in initiation is the following JSON object:
     "target": "auth",
     "data": {
         "action": "signin",
-        "encrypt-key": "",
-        "sign-key": ""
+        "sign-key": "",
+        "encrypt-key": ""
     }
 }
 ```
@@ -36,11 +36,11 @@ The server will always challenge the signing key as it is the main identity prov
 - Login on a new device
 - Encryption key change
 
-For the purposes of this document, it is assumed that the encrpytion key has changed
+For the purposes of this document, it is assumed that the encrpytion key signature has changed and therefore needs to be challenged. 
 
 ```json
 {
-    "encrypted-challenge": "",
-    "sc": ""
+    "sign-challenge": "",
+    "encrypt-challenge": ""
 }
 ```
