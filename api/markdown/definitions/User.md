@@ -44,9 +44,9 @@ Where:
 - `status` is a [Status](./Status.md) object
 - `sig` is the signature of the profile
 
-### Server Signed
+### Server Signed User Certificate
 
-In most cases however, their origin server will be involved in the creation of a signed user identifier that they will use for most purposes.
+In most cases, a Server Signed User Certificate is required. 
 
 ```json
 {
@@ -81,14 +81,19 @@ In most cases however, their origin server will be involved in the creation of a
                 },
             }
         },
-        "sig": ""
+        "expiry": "",
+        "sig": "",
+        "origin": ""
     },
     "sig": ""
 }
-    
 ```
 
 Where
 - `marks` is an array of [Remarks](./Reputation/Remark.md).
-- The 1st `package` is the user provided info and server context.
-- The 1st `sig` is the server signature for the new package.
+- `expiry` is the point at which a user must have their certificate re-signed
+- `package` is the user-signed `package` along with the server-provided information.
+- `sig` is the server signature for the new package.
+- `origin` is the origin server issuing this certificate.
+
+As with any certificate, every server maintains a CRL or Certificate Revocation List.
