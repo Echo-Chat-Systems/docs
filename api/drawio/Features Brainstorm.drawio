@@ -115,6 +115,9 @@
         <mxCell id="cCKECOhjynZBywvS4mbj-52" value="Message Mass-Delete" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="414" y="285" width="80" height="30" as="geometry" />
         </mxCell>
+        <mxCell id="wbQXKGpKG1Xpryvx8BM4-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" edge="1" parent="1" source="cCKECOhjynZBywvS4mbj-54" target="wbQXKGpKG1Xpryvx8BM4-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="cCKECOhjynZBywvS4mbj-54" value="Markdown Formatting" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="344" y="420" width="70" height="30" as="geometry" />
         </mxCell>
@@ -146,7 +149,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="3jOnJADhadLVjRBI3uCC-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" edge="1" parent="1" source="cCKECOhjynZBywvS4mbj-58" target="3jOnJADhadLVjRBI3uCC-12">
+        <mxCell id="3jOnJADhadLVjRBI3uCC-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" parent="1" source="cCKECOhjynZBywvS4mbj-58" target="3jOnJADhadLVjRBI3uCC-12" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="cCKECOhjynZBywvS4mbj-58" value="Accounts" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1" parent="1" vertex="1">
@@ -233,7 +236,7 @@
         <mxCell id="cCKECOhjynZBywvS4mbj-89" value="Security &amp;amp; Auth" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="780" y="280" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="3jOnJADhadLVjRBI3uCC-17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" edge="1" parent="1" source="cCKECOhjynZBywvS4mbj-95" target="3jOnJADhadLVjRBI3uCC-16">
+        <mxCell id="3jOnJADhadLVjRBI3uCC-17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" parent="1" source="cCKECOhjynZBywvS4mbj-95" target="3jOnJADhadLVjRBI3uCC-16" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="cCKECOhjynZBywvS4mbj-95" value="Accounts With Low Rep Will Have This Feature Disabled" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
@@ -279,13 +282,13 @@
         <mxCell id="cCKECOhjynZBywvS4mbj-112" value="Hide Profile Rules" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="965.5" y="50" width="65.5" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="3jOnJADhadLVjRBI3uCC-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" edge="1" parent="1" source="cCKECOhjynZBywvS4mbj-114" target="3jOnJADhadLVjRBI3uCC-1">
+        <mxCell id="3jOnJADhadLVjRBI3uCC-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" parent="1" source="cCKECOhjynZBywvS4mbj-114" target="3jOnJADhadLVjRBI3uCC-1" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="3jOnJADhadLVjRBI3uCC-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" edge="1" parent="1" source="cCKECOhjynZBywvS4mbj-114" target="3jOnJADhadLVjRBI3uCC-4">
+        <mxCell id="3jOnJADhadLVjRBI3uCC-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" parent="1" source="cCKECOhjynZBywvS4mbj-114" target="3jOnJADhadLVjRBI3uCC-4" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="3jOnJADhadLVjRBI3uCC-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" edge="1" parent="1" source="cCKECOhjynZBywvS4mbj-114" target="3jOnJADhadLVjRBI3uCC-3">
+        <mxCell id="3jOnJADhadLVjRBI3uCC-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" parent="1" source="cCKECOhjynZBywvS4mbj-114" target="3jOnJADhadLVjRBI3uCC-3" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="cCKECOhjynZBywvS4mbj-114" value="Social reputatuion&lt;div&gt;system&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
@@ -333,38 +336,41 @@
         <mxCell id="aAWIrtA_UfFcJKhFcBHo-1" value="Uses keypair for user authentication." style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="720" y="120" width="90" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="3jOnJADhadLVjRBI3uCC-1" value="Points scoring system" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="3jOnJADhadLVjRBI3uCC-1" value="Points scoring system" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="865" y="10" width="70" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="3jOnJADhadLVjRBI3uCC-3" value="User-Driven moderation" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="3jOnJADhadLVjRBI3uCC-3" value="User-Driven moderation" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="752" y="10" width="75" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="3jOnJADhadLVjRBI3uCC-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" edge="1" parent="1" source="3jOnJADhadLVjRBI3uCC-4" target="3jOnJADhadLVjRBI3uCC-8">
+        <mxCell id="3jOnJADhadLVjRBI3uCC-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" parent="1" source="3jOnJADhadLVjRBI3uCC-4" target="3jOnJADhadLVjRBI3uCC-8" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="3jOnJADhadLVjRBI3uCC-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" edge="1" parent="1" source="3jOnJADhadLVjRBI3uCC-4" target="3jOnJADhadLVjRBI3uCC-10">
+        <mxCell id="3jOnJADhadLVjRBI3uCC-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" parent="1" source="3jOnJADhadLVjRBI3uCC-4" target="3jOnJADhadLVjRBI3uCC-10" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="3jOnJADhadLVjRBI3uCC-4" value="REP mark timeline" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="3jOnJADhadLVjRBI3uCC-4" value="REP mark timeline" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="822.5" y="-40" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="3jOnJADhadLVjRBI3uCC-8" value="Public timeline of rep marks" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="3jOnJADhadLVjRBI3uCC-8" value="Public timeline of rep marks" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="870" y="-130" width="60" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="3jOnJADhadLVjRBI3uCC-10" value="Small text snippet optional in rep mark" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="3jOnJADhadLVjRBI3uCC-10" value="Small text snippet optional in rep mark" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="760" y="-140" width="80" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="3jOnJADhadLVjRBI3uCC-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" edge="1" parent="1" source="3jOnJADhadLVjRBI3uCC-12" target="3jOnJADhadLVjRBI3uCC-14">
+        <mxCell id="3jOnJADhadLVjRBI3uCC-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" parent="1" source="3jOnJADhadLVjRBI3uCC-12" target="3jOnJADhadLVjRBI3uCC-14" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="3jOnJADhadLVjRBI3uCC-12" value="Inter-Server migration" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="3jOnJADhadLVjRBI3uCC-12" value="Inter-Server migration" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="780" y="360" width="80" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="3jOnJADhadLVjRBI3uCC-14" value="Optional breadcrumbs linking old origin with new" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="3jOnJADhadLVjRBI3uCC-14" value="Optional breadcrumbs linking old origin with new" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="695" y="445" width="85" height="65" as="geometry" />
         </mxCell>
-        <mxCell id="3jOnJADhadLVjRBI3uCC-16" value="Individual users can define their own rep tolerances" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="3jOnJADhadLVjRBI3uCC-16" value="Individual users can define their own rep tolerances" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="800" y="630" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="wbQXKGpKG1Xpryvx8BM4-2" value="HTML Formatting For Approved Tags" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="304" y="490" width="110" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
