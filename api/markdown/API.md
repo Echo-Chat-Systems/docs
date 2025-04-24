@@ -1,7 +1,6 @@
 # API
 
-The plan for the API is to have a REST API that can be used to interact with the system. Due to the nature of the
-project, some parts of the API will actually be WebSockets.
+The API has two distinct components, the HTTPS endpoints and the WebSocket actions. This document will only cover the HTTPS endpoints, as the WebSocket actions are too numerous to contian in one document.
 
 Notes:
 
@@ -11,8 +10,7 @@ Notes:
 
 ## Authentication
 
-To be able to used the API, you must have a token granted to your account. This token will be used to authenticate
-your requests. The token will be sent in the `Authorization` header of the request.
+To be able to use the API, you must posess an API token. The process for obtaining an API token is described in [this document](./api/markdown/processes/API-Token.md)
 
 In order to obtain a token, you must first create an account. This can be done using the `/users` endpoint. Once you
 have an account, you must verify your email address by clicking the link sent to your email. After that, you can use

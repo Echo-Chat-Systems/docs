@@ -1,13 +1,10 @@
-# Processes - Login
+# Process - Universal Auth
 
-Required knowledge: 
-- [Users](../definitions/User.md)
-
-A login is a WebSocket only process. 
+The universal authentication process is not a direct process on it's own, but rather a subprocess used by other processes to ensure authentication upon login and protected actions.
 
 ## Flow
 
-![Login Flow Diagram](/api/diagrams/flows/ws/Login.png)
+![Universal Auth Process](/api/diagrams/flows/ws/Universal-Auth.png)
 
 ## Fields
 
@@ -51,7 +48,7 @@ Where
 
 ### Response
 
-The client will send back the completed challenges in the 
+The client will send back the completed challenges in the following form:
 
 ```json
 {
@@ -59,3 +56,7 @@ The client will send back the completed challenges in the
     "decrypted": ""
 }
 ```
+
+Where
+- `signature` is the signature of the `sign-challenge`, signed with the client signing key
+- `decrypted` is 
