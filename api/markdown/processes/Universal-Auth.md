@@ -63,4 +63,4 @@ Where
 
 ### Certificate Issuance
 
-If the server verifies the user's credentials as correct they will issue a [Server Signed User Certificate](/api/markdown/processes/Universal-Auth.md)
+If the server verifies the user's credentials as correct they will issue a [Server Signed User Certificate](../processes/Universal-Auth.md)
