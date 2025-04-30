@@ -46,7 +46,7 @@ Where
 - `sign-challenge`is a random 128 byte string
 - `encrypt-challenge` is a random 128 byte string encrypted using the user's public encryption key
 
-### Response
+### Reply
 
 The client will send back the completed challenges in the following form:
 
@@ -59,4 +59,8 @@ The client will send back the completed challenges in the following form:
 
 Where
 - `signature` is the signature of the `sign-challenge`, signed with the client signing key
-- `decrypted` is 
+- `decrypted` is the decrypted value of `encrypt-challenge`
+
+### Certificate Issuance
+
+If the server verifies the user's credentials as correct they will issue a [Server Signed User Certificate](/api/markdown/processes/Universal-Auth.md#server-signed-user-certificate)
