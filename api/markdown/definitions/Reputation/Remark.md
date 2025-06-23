@@ -17,10 +17,10 @@ A remark is defined as the following JSON object:
 ```
 
 Where 
-- `sig` is the signature of
-- `dir` is a signed integer between -1 and 1 indicating the direction of the remark.
-- `com` is an optional 256 character string.
-- `usr` is the user id
+- `signature` is the signature of the remark computed by the user commiting it
+- `direction` is a signed short (represented as an enum) between -1 and 1 indicating the direction of the remark.
+- `comment` is an optional string denoting any comments the user may have.
+- `user` is the public key of the user commiting the comment. 
 
 ### Compacted
 

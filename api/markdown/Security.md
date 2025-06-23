@@ -1,5 +1,7 @@
 # Security
 
+THIS IS ALL OUTDATED
+
 The application handles authentication using JWT. Tokens are generated when a user logs in and are stored how the client
 sees fit. The token is then sent with each request to the server to authenticate the user. The token is signed with a
 secret key that is stored in the server's environment variables. The token is set to expire after 1 week.

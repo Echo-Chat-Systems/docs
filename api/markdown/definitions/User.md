@@ -22,19 +22,18 @@ A user may broadcast themselves as the following JSON object to any other user (
         },
         "profile": {
             "username": "",
+            "tag": 2445,
             "pronouns": "",
             "bio": "",
             "css": "",
             "pfp": "",
             "banner": "",
             "timezone": "",
-            "status": {
-                "type": "",
-                "text": ""
+            "status": {}
             }
         }
     },
-    "sig": ""
+    "signature": ""
 }
 ```
 
@@ -73,7 +72,7 @@ In most cases, a Server Signed User Certificate is required.
         },
         "rep": {
             "points": 100,
-            "marks": {
+            "remarks    ": {
                 "sig": {
                     "dir": 0,
                     "com": "",

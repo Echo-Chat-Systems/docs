@@ -1,4 +1,4 @@
-# Definitions - Status
+# Definitions - Status (`Common.Models.Common.UserStatus`)
 
 A status is simply a representation of a users availability or activity at a given moment as selected by the user for presentation to other users.
 
@@ -14,5 +14,4 @@ A status is defined in the below JSON object:
 ```
 
 Where: 
-- `type` is a 16 character string.
-- `text` is a 256 character string.
+- `type` and `text` are both strings.

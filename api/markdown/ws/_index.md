@@ -1,7 +1,6 @@
 # Websockets API
 
-The Echo-API makes extremely extensive use of websockets to provide most services. This document serves as an index page
-for all websocket endpoints and their respective documentation.
+The Echo-API makes extremely extensive use of websockets to provide most services. All functions of the API are performed within the context of a signluar websocket connection. 
 
 ## Table of Contents
 
@@ -28,9 +27,7 @@ Client communication with the server must follow the following schema:
     "target": "target_endpoint",
     "data": {
         "action": "endpoint_action",
-        "data": {
-            "action_specific_data": "here"
-        }
+        "params": {}
     }
 }
 ```

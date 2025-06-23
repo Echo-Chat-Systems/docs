@@ -1,19 +1,23 @@
-# Processes - Login
+# Processes - Verify
 
 Required knowledge: 
 - [Users](../definitions/User.md)
 
-A login is a WebSocket only process. 
+A verify is a WebSocket only process. 
+
+**This process is parked for now, as I can't really see a reason this would be useful**
 
 ## Flow
 
-![Login Flow Diagram](/api/diagrams/flows/ws/Login.png)
+![Auth Verify Flow Diagram](/api/diagrams/flows/ws/auth/Verify.png)
 
 ## Fields
 
-### Sign In Initiate
+### Authenticate Initiate
 
-The sign in initiation is the following JSON object:
+An authentication is always initiated by the client.
+
+The auth initiation is the following JSON object:
 
 ```json
 {
@@ -46,12 +50,12 @@ For the purposes of this document, it is assumed that the encrpytion key signatu
 ```
 
 Where
-- `sign-challenge`is a random 128 byte string
+- `sign-challenge` is a random 128 byte string
 - `encrypt-challenge` is a random 128 byte string encrypted using the user's public encryption key
 
 ### Response
 
-The client will send back the completed challenges in the 
+The client will send back the completed challenges in the following JSON object.
 
 ```json
 {
@@ -59,3 +63,7 @@ The client will send back the completed challenges in the
     "decrypted": ""
 }
 ```
+
+Where
+- `signature` is the signature of `sign-challenge` signed using the user's private signing key
+- `decrypted` is the decrypted 128 byte encryption challenge 

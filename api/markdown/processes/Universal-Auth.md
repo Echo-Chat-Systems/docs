@@ -17,8 +17,10 @@ The sign in initiation is the following JSON object:
     "target": "auth",
     "data": {
         "action": "signin",
-        "sign-key": "",
-        "encrypt-key": ""
+        "params": {
+            "sign-key": "",
+            "encrypt-key": ""
+        }
     }
 }
 ```
@@ -37,8 +39,11 @@ For the purposes of this document, it is assumed that the encrpytion key signatu
 
 ```json
 {
-    "sign-challenge": "",
-    "encrypt-challenge": ""
+    "code": 100,
+    "info": {
+        "sign-challenge": "",
+        "encrypt-challenge": ""
+    }
 }
 ```
 
@@ -52,6 +57,7 @@ The client will send back the completed challenges in the following form:
 
 ```json
 {
+    
     "signature": "",
     "decrypted": ""
 }
