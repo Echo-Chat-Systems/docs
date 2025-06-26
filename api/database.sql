@@ -27,20 +27,22 @@ CREATE TABLE config.data
 -- Public
 CREATE TABLE public.users
 (
-    id          bytea     NOT NULL PRIMARY KEY,
-    created_at  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    username    TEXT      NOT NULL,
-    tag         INT       NOT NULL,
+    id             bytea     NOT NULL PRIMARY KEY,
+    created_at     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    encryption_key bytea     NOT NULL,
+    username       TEXT      NOT NULL,
+    tag            INT       NOT NULL,
     -- All of these were moved into the profile as they are not designed to be searchable
     --pronouns    TEXT      NOT NULL DEFAULT '',
     --pfp         uuid,
     --bio         TEXT,
     --css         TEXT,
     --status      jsonb     NOT NULL DEFAULT '{}',
-    profile     jsonb     NOT NULL DEFAULT '{}',
-    last_online TIMESTAMP,
-    is_online   BOOLEAN   NOT NULL DEFAULT FALSE,
-    is_banned   BOOLEAN   NOT NULL DEFAULT FALSE
+    profile        jsonb     NOT NULL DEFAULT '{}',
+    settings       bytea     NOT NULL DEFAULT '',
+    last_online    TIMESTAMP,
+    is_online      BOOLEAN   NOT NULL DEFAULT FALSE,
+    is_banned      BOOLEAN   NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE public.files
@@ -95,8 +97,19 @@ CREATE TABLE public.channels
     guild_id      uuid      NOT NULL,
     name          TEXT      NOT NULL,
     type          INT       NOT NULL             DEFAULT 0,
-    parent        uuid,
-    customisation jsonb     NOT NULL             DEFAULT '{}'
+    customisation jsonb     NOT NULL             DEFAULT '{}',
+    config        jsonb     NOT NULL             DEFAULT '{}'
+);
+
+CREATE TABLE public.channel_categories
+(
+    id            uuid      NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
+    created_at    TIMESTAMP NOT NULL             DEFAULT CURRENT_TIMESTAMP,
+    guild_id      uuid      NOT NULL,
+    name          TEXT      NOT NULL,
+    type          INT       NOT NULL             DEFAULT 0,
+    customisation jsonb     NOT NULL             DEFAULT '{}',
+    config        jsonb     NOT NULL             DEFAULT '{}'
 );
 
 CREATE TABLE public.channel_members
