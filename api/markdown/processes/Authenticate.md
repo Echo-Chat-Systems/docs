@@ -5,8 +5,6 @@ Required knowledge:
 
 A verify is a WebSocket only process. 
 
-**This process is parked for now, as I can't really see a reason this would be useful**
-
 ## Flow
 
 ![Auth Verify Flow Diagram](/api/diagrams/flows/ws/auth/Verify.png)
@@ -23,9 +21,11 @@ The auth initiation is the following JSON object:
 {
     "target": "auth",
     "data": {
-        "action": "signin",
-        "sign-key": "",
-        "encrypt-key": ""
+        "action": "signin-start",
+        "params": {
+            "sign-key": "",
+            "encrypt-key": ""
+        }
     }
 }
 ```
@@ -44,14 +44,22 @@ For the purposes of this document, it is assumed that the encrpytion key signatu
 
 ```json
 {
-    "sign-challenge": "",
-    "encrypt-challenge": ""
+    "target": "auth",
+    "data": {
+        "action": "signin-challenge",
+        "params": {
+            "sign-challenge": "",
+            "encrypt-challenge": "",
+            "ref": ""
+        } 
+    }
 }
 ```
 
 Where
 - `sign-challenge` is a random 128 byte string
 - `encrypt-challenge` is a random 128 byte string encrypted using the user's public encryption key
+- `ref` is a 512 byte challenge reference code valid for 60 seconds
 
 ### Response
 
@@ -59,11 +67,55 @@ The client will send back the completed challenges in the following JSON object.
 
 ```json
 {
-    "signature": "",
-    "decrypted": ""
+    "target": "auth",
+    "data": {
+        "action": "signin-response",
+        "params": {
+            "signature": "",
+            "decrypted": "",
+            "ref": ""
+        }
+    }
 }
 ```
 
 Where
 - `signature` is the signature of `sign-challenge` signed using the user's private signing key
 - `decrypted` is the decrypted 128 byte encryption challenge 
+- `ref` is the reference code provided in `signin-challenge`
+
+### Verification
+
+The server will verify these values and provided they are correct, will issue a new [Server Signed User Certificate](/api/markdown/definitions/User.md#server-signed-user-certificate) in the current form. 
+
+```json
+{
+    "target": "auth",
+    "data": {
+        "action": "signin-success",
+        "params": {
+            "cert": {}
+        }
+    }
+}
+```
+
+Where
+- `cert` is the [Server Signed User Certificate](/api/markdown/definitions/User.md#server-signed-user-certificate) 
+
+If the signin fails, the server will respond as follows.
+
+```json
+{
+    "target": "auth",
+    "data": {
+        "action": "signin-fail",
+        "params": {
+            "msg": ""
+        }
+    }
+}
+```
+
+Where 
+- `msg` is an optional server provided error message
