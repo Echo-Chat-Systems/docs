@@ -30,10 +30,9 @@ A user may broadcast themselves as the following JSON object to any other user (
             "banner": "",
             "timezone": "",
             "status": {}
-            }
         }
     },
-    "signature": ""
+    "sig": ""
 }
 ```
 

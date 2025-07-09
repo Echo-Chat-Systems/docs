@@ -1,13 +1,11 @@
 # Processes - Verify
 
 Required knowledge: 
-- [Users](../definitions/User.md)
-
-A verify is a WebSocket only process. 
+- [Users](/api/markdown/definitions/User.md)
 
 ## Flow
 
-![Auth Verify Flow Diagram](/api/diagrams/flows/ws/auth/Verify.png)
+![Auth Verify Flow Diagram](/api/diagrams/flows/ws/auth/verify.png)
 
 ## Fields
 
