@@ -49,5 +49,20 @@ If the signup is a success the following message will be sent.
 }
 ```
 
-Where
+And if the signup fails the following message is sent
+
+```json
+{
+    "target": "auth",
+    "data": {
+        "action": "signup-fail",
+        "params": {
+            "msg": ""
+        }
+    }
+}
+```
+
+Where 
+- `msg` is the applicable error message.
 
