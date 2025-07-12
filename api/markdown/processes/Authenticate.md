@@ -57,7 +57,7 @@ For the purposes of this document, it is assumed that the encrpytion key signatu
 Where
 - `sign-challenge` is a random 128 byte string
 - `encrypt-challenge` is a random 128 byte string encrypted using the user's public encryption key
-- `ref` is a 512 byte challenge reference code valid for 60 seconds
+- `ref` is a challenge reference code valid for 60 seconds (UUID)
 
 ### Response
 
@@ -84,36 +84,22 @@ Where
 
 ### Verification
 
-The server will verify these values and provided they are correct, will issue a new [Server Signed User Certificate](/api/markdown/definitions/User.md#server-signed-user-certificate) in the current form. 
+The server will verify these values and provided they are correct, will issue a new [Server Signed User Certificate](/api/markdown/definitions/User.md#server-signed-user-certificate).
 
 ```json
 {
     "target": "auth",
     "data": {
-        "action": "signin-success",
+        "action": "signin-complete",
         "params": {
-            "cert": {}
-        }
-    }
-}
-```
-
-Where
-- `cert` is the [Server Signed User Certificate](/api/markdown/definitions/User.md#server-signed-user-certificate) 
-
-If the signin fails, the server will respond as follows.
-
-```json
-{
-    "target": "auth",
-    "data": {
-        "action": "signin-fail",
-        "params": {
+            "status": 0,
+            "cert": {},
             "msg": ""
         }
     }
 }
 ```
 
-Where 
+Where
+- `cert` is the [Server Signed User Certificate](/api/markdown/definitions/User.md#server-signed-user-certificate) provided on a successful login
 - `msg` is an optional server provided error message
