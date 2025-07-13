@@ -101,5 +101,6 @@ The server will verify these values and provided they are correct, will issue a 
 ```
 
 Where
+- `status` is the indication of if the login succeeded or failed. 0 for fail, 1 for success 
 - `cert` is the [Server Signed User Certificate](/api/markdown/definitions/User.md#server-signed-user-certificate) provided on a successful login
 - `msg` is an optional server provided error message
