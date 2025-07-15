@@ -1,17 +1,17 @@
-# Processes - Verify
+# Processes - Sign in
 
 Required knowledge: 
 - [Users](/api/markdown/definitions/User.md)
 
 ## Flow
 
-![Auth Verify Flow Diagram](/api/diagrams/flows/ws/auth/verify.png)
+![Auth Verify Flow Diagram](/api/diagrams/flows/ws/auth/sign-in.png)
 
 ## Fields
 
-### Authenticate Initiate
+### Signin Initiate
 
-An authentication is always initiated by the client.
+A signin is always initiated by the client.
 
 The auth initiation is the following JSON object:
 

@@ -1,21 +1,10 @@
 # Security
 
-THIS IS ALL OUTDATED
+The application uses a relatively archaic method of security. This document aims to completely cover the cryptographic security of the application. 
 
-The application handles authentication using JWT. Tokens are generated when a user logs in and are stored how the client
-sees fit. The token is then sent with each request to the server to authenticate the user. The token is signed with a
-secret key that is stored in the server's environment variables. The token is set to expire after 1 week.
+## Introduction
 
-The application also uses bcrypt to hash passwords before storing them in the database. This is to ensure that even if
-the database is compromised, the passwords are not easily accessible.
-
-## Auth Methods
-
-The application supports several authentication methods including: 
-
-- Email and Password
-- Passkeys
-- SSO From Other Echo Servers
+The core concept of security in Project Echo is a pair of keypairs, known as a *keyset*. A keyset is simply a pair of public-private keys, one pair for encrpytion and one for signing. These keys are owned by a single entity and cannot be reused for other entities.
 
 ### Email and Password
 
