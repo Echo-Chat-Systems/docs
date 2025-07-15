@@ -6,6 +6,10 @@ The application uses a relatively archaic method of security. This document aims
 
 The core concept of security in Project Echo is a pair of keypairs, known as a *keyset*. A keyset is simply a pair of public-private keys, one pair for encrpytion and one for signing. These keys are owned by a single entity and cannot be reused for other entities.
 
+All users and servers own a *keyset*. The private keys of this set must always be treated with the utmost security, as they are the authentication and verficiation system for each user. The user is entirely responsible for secure storage of their keyset at all times. 
+
+EVERYTHING BELOW IS OUTDATED
+
 ### Email and Password
 
 This is the most common authentication method. The user enters their email and password, which is then hashed and
