@@ -1,0 +1,16 @@
+﻿{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "/static/schemas/auth/keypair.json",
+    "title": "Keypair Schema",
+    "type": "object",
+    "properties": {
+        "sk": {
+            "type": "string",
+            "format": "base64"
+        },
+        "ek": {
+            "type": "string",
+            "format": "base64"
+        }
+    }
+}

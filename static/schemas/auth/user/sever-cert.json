@@ -1,0 +1,50 @@
+﻿{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "/static/schemas/auth/user/sever-cert.json",
+    "title": "Server-Signed User Certificate Schema",
+    "type": "object",
+    "properties": {
+        "package": {
+            "type": "object",
+            "properties": {
+                "user": {
+                    "$ref": "/static/schemas/auth/user/self-cert.json"
+                },
+                "rep": {
+                    "type": "object",
+                    "properties": {
+                        "package": {
+                            "properties": {
+                                "points": {
+                                    "type": "integer",
+                                    "description": "Reputation points awarded by the server"
+                                },
+                                "remarks": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "/static/schemas/auth/user/reputation/remark.json"
+                                    }
+                                },
+                                "origin": {
+                                    "type": "string",
+                                    "format": "uri",
+                                    "description": "The origin of the server that signed the certificate"
+                                },
+                                "expiry": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "The expiry date of the certificate"
+                                }
+                            }
+                        },
+                        "sig": {
+                            "type": "string",
+                            "format": "base64",
+                            "description": "Signature of the server over the user certificate package"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -88,7 +88,7 @@ In most cases, a Server Signed User Certificate is required.
 ```
 
 Where
-- `marks` is an array of [Remarks](./Reputation/Remark.md).
+- `marks` is an array of [Remarks](/api/components/Reputation/Remark.md).
 - `expiry` is the point at which a user must have their certificate re-signed
 - `package` is the user-signed `package` along with the server-provided information.
 - `sig` is the server signature for the new package.

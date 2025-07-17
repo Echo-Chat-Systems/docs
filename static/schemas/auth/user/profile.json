@@ -1,0 +1,28 @@
+{
+    "title": "User Profile Schema",
+    "$id": "/static/schemas/auth/user/profile.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema" ,
+    "type": "object",
+    "required": [
+        "username",
+        "tag"
+    ],
+    "parameters": {
+        "username": {"type":  "string"},
+        "tag" : {"type": "integer"},
+        "pronouns": {"type": "string"},
+        "bio": {"type": "string"},
+        "css": {"type": "string"},
+        "pfp": {"type": "string", "format": "uri"},
+        "banner": {"type": "string", "format": "uri"},
+        "timezone": {"type": "string"},
+        "status": {
+            "type": "object",
+            "properties": {
+                "type": {"type": "string"},
+                "text": {"type": "string"}
+            },
+            "required": ["type", "text"]
+        }
+    }
+}
