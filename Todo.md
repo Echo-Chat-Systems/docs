@@ -12,6 +12,7 @@
   - `signin-response`
   - `signin-complete` (Server -> User)
   - `signout`
+  - `signup`
 - `users`
   - `get-profile` (Any public profile)
   - `get-self` (All current user information including settings)
@@ -42,6 +43,10 @@
   - `delete`
   - `get-single`
   - `get-many`
+  - `react-add`
+  - `react-remove`
+  - `react-get`
+  - `reacts-edit` (moderation endpoint)
 - `postie`
   - `subscribe`
   - `unsubscribe`

@@ -1,0 +1,34 @@
+{
+    "$schema": "https://mintlify.com/docs.json",
+    "theme": "mint",
+    "name": "Echo API",
+    "description": "Echo API Offical Documentation",
+    "colors": {
+        "primary": "#ff0000"
+    },
+    "navigation": {
+        "dropdowns": [
+            {
+                "dropdown": "Articles",
+                "icon": "book",
+                "description": "Generalised articles",
+                "groups": [
+                    {
+                        "group": "Getting Started",
+                        "pages": ["index"]
+                    }
+                ]
+            },
+            {
+                "dropdown": "Protocol",
+                "description": "Protocol Specifications",
+                "groups": [
+                    {
+                        "group": "Home",
+                        "pages": ["protocol/index"]
+                    }
+                ]
+            }
+        ]
+    }
+}
