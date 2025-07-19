@@ -8,11 +8,19 @@
         "reputation"
     ],
     "properties": {
+        "origin": {
+            "type": "object",
+            "$ref": "/static/schemas/meta/origin.json"
+        },
+        "keys": {
+            "type": "object",
+
+        },
         "profile": {
             "type": "object",
             "$ref": "/static/schemas/user/profile.json"
         },
-        "reputation": {
+        "rep": {
             "type": "array",
             "contains": {
                 "type": "object",

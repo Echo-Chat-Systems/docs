@@ -1,0 +1,18 @@
+{
+    "title": "Origin Information Schema",
+    "$id": "/static/schemas/meta/origin.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "required": [
+        "host", "port"
+    ],
+    "properties": {
+        "host": {
+            "type": "string",
+            "format": "url"
+        },
+        "port": {
+            "type": "integer"
+        }
+    }
+}

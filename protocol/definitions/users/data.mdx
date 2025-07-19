@@ -1,0 +1,161 @@
+---
+title: User Data Representations
+description: Public and private formats for user objects in the protocol.
+---
+
+# User Data Representations
+
+This page defines the various structured forms in which user data may appear across the protocol. Depending on context,
+a user may be represented in a **profile**, as a **public-user**, or as a **private-user** with full internal data.
+
+---
+
+## `profile`
+
+A user profile is a broadcast structure typically attached guild membership or public presence.
+
+<CodeGroup>
+```json Example
+{
+    "username": "",
+    "tag": 1234,
+    "pronouns": "",
+    "bio": "",
+    "css": "",
+    "pfp": "",
+    "banner": "",
+    "timezone": "",
+    "status": {
+        "type": "",
+        "text": ""
+    }
+}
+```
+```json Schema
+{
+    "title": "User Profile Schema",
+    "$id": "/static/schemas/auth/user/profile.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "required": [
+        "username",
+        "tag"
+    ],
+    "properties": {
+        "username": {
+            "type": "string"
+        },
+        "tag": {
+            "type": "integer"
+        },
+        "pronouns": {
+            "type": "string"
+        },
+        "bio": {
+            "type": "string"
+        },
+        "css": {
+            "type": "string"
+        },
+        "pfp": {
+            "type": "string",
+            "format": "uri"
+        },
+        "banner": {
+            "type": "string",
+            "format": "uri"
+        },
+        "timezone": {
+            "type": "string"
+        },
+        "status": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "description": "test",
+                    "type": "string"
+                },
+                "text": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type",
+                "text"
+            ]
+        }
+    }
+}
+```
+</CodeGroup>
+
+This form **does not include any identifiers** like keys or internal user IDs. It's purely decorative and user-controlled.
+
+---
+
+## `public-user`
+
+This structure is used when the system needs to share a verified user identity with others, such as message authors, guild owners, or moderators.
+
+```json
+{
+    "origin": {  ...  },
+    "keys": {  ...  },
+    "profile": {  ...  },
+    "rep": {  ...  },
+}
+```
+
+References:
+- [`origin`](/protocol/definitions/meta/origin)
+- `keys` is [`pubkeys`](/protocol/definitions/crypto/keys#pubkeys)
+- [`profile`](#)
+- [`rep`](/protocol/definitions/users/reputation#rep-object)
+
+
+This representation is visible to all clients and safe for sharing.
+
+---
+
+## `private-user`
+
+The internal structure for a logged-in user, visible only to the user and the server. Includes sensitive fields like settings.
+
+```json
+{
+    "origin": {  ...  },
+    "keys": {  ...  },
+    "profile": {  ...  },
+    "rep": {  ...  },
+    "settings": ""
+}
+```
+
+This form should never be shared directly with other clients.
+
+---
+
+## 🧬 Key Differences
+
+| Representation | Includes Profile | Includes Keys | Includes Settings | Visibility        |
+|----------------|------------------|---------------|-------------------|-------------------|
+| `profile`      | ✅                | ❌             | ❌                 | Public everywhere |
+| `public-user`  | ✅                | ✅             | ❌                 | Public API usage  |
+| `private-user` | ✅                | ✅             | ✅                 | Internal/private  |
+
+---
+
+<Note>📌 Notes</Note>
+
+- All user objects must include `pubkeys` in any authenticated or signed context.
+- The `settings` object is an E2EE user-controlled blob.
+- Profiles are expected to be customizable, with potential for federation in future revisions.
+
+---
+
+## 📚 See Also
+
+- [`/definitions/crypto/keys`](/definitions/crypto/keys)
+- [`/protocol/auth/signin`](/protocol/auth/signin)
+- [`/protocol/users`](/protocol/users)
+

@@ -70,14 +70,7 @@ In most cases, a Server Signed User Certificate is required.
             }
         },
         "rep": {
-            "points": 100,
-            "remarks    ": {
-                "sig": {
-                    "dir": 0,
-                    "com": "",
-                    "usr": ""   
-                },
-            }
+            
         },
         "expiry": "",
         "sig": "",

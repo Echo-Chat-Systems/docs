@@ -43,7 +43,15 @@
                             {
                                 "group": "Users",
                                 "pages": [
-                                    "protocol/definitions/users/identity"
+                                    "protocol/definitions/users/identity",
+                                    "protocol/definitions/users/data",
+                                    "protocol/definitions/users/reputation"
+                                ]
+                            },
+                            {
+                                "group": "Meta",
+                                "pages": [
+                                    "protocol/definitions/meta/origin"
                                 ]
                             }
                         ]
@@ -54,10 +62,10 @@
                             {
                                 "group": "Auth",
                                 "pages": [
-                                    "protocol/auth/index",
-                                    "protocol/auth/signin",
-                                    "protocol/auth/signout",
-                                    "protocol/auth/signup"
+                                    "protocol/targets/auth/index",
+                                    "protocol/targets/auth/signin",
+                                    "protocol/targets/auth/signout",
+                                    "protocol/targets/auth/signup"
                                 ]
                             }
                         ]

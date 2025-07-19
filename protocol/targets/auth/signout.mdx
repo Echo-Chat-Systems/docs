@@ -1,0 +1,76 @@
+---
+title: signout
+description: Signs the user out of the current session.
+---
+
+# 🔓 `signout`
+
+Ends the user's current authenticated session. This action should be called when the user explicitly chooses to log out. It invalidates the current session token or authentication context, requiring a new signin process for further access.
+
+---
+
+## 🧭 Flow
+
+1. The client sends a `signout` request to the `auth` target.
+2. The server clears the associated session.
+3. The server responds with confirmation.
+4. Any further requests requiring authentication will be rejected until re-authentication.
+
+---
+
+## 📤 Client → Server
+
+```json
+{
+    "target": "auth",
+    "data": {
+        "action": "signout"
+    }
+}
+```
+
+> This action has no parameters.
+
+---
+
+## 📥 Server → Client (Success)
+
+```json
+{
+    "target": "auth",
+    "data": {
+        "action": "signout",
+        "status": "ok"
+    }
+}
+```
+
+---
+
+## 📥 Server → Client (Failure)
+
+```json
+{
+    "target": "auth",
+    "data": {
+        "action": "signout",
+        "status": "error",
+        "error": "not-signed-in"
+    }
+}
+```
+
+---
+
+## 📌 Notes
+
+- This only affects the **current connection** or session context.
+- No permanent user data is deleted or modified.
+- Servers may optionally broadcast a `session-ended` pubsub event if session tracking is implemented.
+
+---
+
+## 🔗 See Also
+
+- [`signin`](/protocol/auth/signin)
+- [`session`](/protocol/auth/session)

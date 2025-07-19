@@ -13,7 +13,8 @@
             "$ref": "/static/schemas/user/profile.json"
         },
         "settings": {
-            "type": "object"
+            "type": "string",
+            "format": "base64"
         }
     }
 }
