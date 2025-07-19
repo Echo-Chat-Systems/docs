@@ -19,13 +19,48 @@ The protocol is the foundation for a real-time, secure, and privacy-focused mess
 
 All messages sent via WebSocket follow a consistent envelope structure.
 
-Instead of documenting the format inline, we define it in a reusable JSON Schema file:
+<CodeGroup>
+```json Example
+{
+    "target": "messages",
+    "data": {
+        "action": "send",
+        "params": {}
+    }
+}
+```
 
-```import /static/schemas/comms/basic-message.json```
+```json Schema
+{
+    "title": "Basic WS Message Format",
+    "$id": "/static/schemas/comms/basic-message.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "required": ["target", "data"],
+    "properties": {
+    "target": {
+    "type": "string"
+    },
+        "data": {
+        "type": "object",
+        "required": ["action", "data"],
+        "properties": {
+            "action": {
+                "type": "string"
+                },
+            "data": {
+                "type": "object"
+                }
+            }
+        }
+    }
+}
+```
+</CodeGroup>
 
 > This schema defines the structure for all messages sent over WebSocket. It enforces:
-> - A top-level \`target\` string field
-> - A \`data\` object containing an \`action\` and a \`params\` object
+> - A top-level `target` string field
+> - A `data` object containing an `action` and a `params` object
 > - All action names and targets are **dash-separated**
 
 ## REST API Format

@@ -1,0 +1,19 @@
+{
+    "title": "Signin Start Params Schema",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "/static/schemas/comms/auth/signin/signin-start.json",
+    "type": "object",
+    "required": [
+        "sk", "ek"
+    ],
+    "properties": {
+        "sk": {
+            "type": "string",
+            "format": "base64"
+        },
+        "ek": {
+            "type": "string",
+            "format": "base64"
+        }
+    }
+}

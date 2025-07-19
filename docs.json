@@ -2,7 +2,7 @@
     "$schema": "https://mintlify.com/docs.json",
     "theme": "mint",
     "name": "Echo API",
-    "description": "Echo API Offical Documentation",
+    "description": "Echo API Official Documentation",
     "colors": {
         "primary": "#ff0000"
     },
@@ -15,7 +15,9 @@
                 "groups": [
                     {
                         "group": "Getting Started",
-                        "pages": ["index"]
+                        "pages": [
+                            "index"
+                        ]
                     }
                 ]
             },
@@ -25,7 +27,40 @@
                 "groups": [
                     {
                         "group": "Home",
-                        "pages": ["protocol/index"]
+                        "pages": [
+                            "protocol/index"
+                        ]
+                    },
+                    {
+                        "group": "Definitions",
+                        "pages": [
+                            {
+                                "group": "Crypto",
+                                "pages": [
+                                    "protocol/definitions/crypto/keys"
+                                ]
+                            },
+                            {
+                                "group": "Users",
+                                "pages": [
+                                    "protocol/definitions/users/identity"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "group": "Targets",
+                        "pages": [
+                            {
+                                "group": "Auth",
+                                "pages": [
+                                    "protocol/auth/index",
+                                    "protocol/auth/signin",
+                                    "protocol/auth/signout",
+                                    "protocol/auth/signup"
+                                ]
+                            }
+                        ]
                     }
                 ]
             }

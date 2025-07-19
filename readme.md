@@ -1,3 +1,3 @@
 # Echo Chat Docs
 
-Here you can find any and all documentation for Echo-Chat. This includes project planning documentation.
+These docs are designed to be hosted using Mintlify.
