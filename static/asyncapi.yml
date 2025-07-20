@@ -25,11 +25,11 @@ channels:
   auth:
     description: Authentication related messages.
     messages:
-      signup-initiate:
+      signin-initiate:
         payload:
-          type: string
-    
-operations: 
+          type: object
+          $ref: "/schemas/comms/auth/signin/signin-start.json"
+operations:
   ping:
     action: send 
     channel: 
@@ -57,47 +57,3 @@ components:
           event:
             type: string
             const: pong
-
-
-  schemas:
-    message-envelope: 
-      type: object
-      properties:
-        target: 
-          type: string
-        
-    base-user-profile:
-      type: object
-      description: Basic user profile information
-      properties:
-        username: 
-          type: string
-        tag:
-          type: integer
-          description: test
-          optional: true
-        pronouns: 
-          type: string
-        bio:
-          type: string
-        css: 
-          type: string
-        pfp: 
-          type: string
-        banner:
-          type: string
-        timezone: 
-          type: string
-        status:
-          type: object
-          properties:
-            type: 
-              type: string
-            text: 
-              type: string
-
-    ss-user-cert:
-      type: object
-      description: A user is the core component of  Echo.
-      
-

@@ -3,17 +3,17 @@ title: "Signin"
 description: "Step-by-step process for secure Ed25519-based user authentication."
 ---
 
-# `auth: signin`
+# `signin`
 
 The signin process is a multi-step authentication mechanism using Ed25519 public/private keypairs. It is **passwordless**, secure, and resistant to phishing.
 
-## 🔐 Overview
+## Overview
 
 The client proves ownership of a private key through a signed challenge-response protocol. The server does not store any passwords or long-term secrets for clients.
 
 ---
 
-## 🔄 Signin Flow
+## Signin Flow
 
 ### 1. `signin-start`
 
@@ -200,7 +200,7 @@ See [User Data](/protocol/definitions/users/data) for contents of `user` object.
 
 ---
 
-## ⚠️ Notes
+<Note>Notes</Note>
 
 - No session tokens are used — the connection is tied to the successful authentication over the WebSocket.
 - Each signin must be completed in order: no skipping steps.

@@ -2,7 +2,7 @@
 title: "Cryptographic Keys"
 ---
 
-# 🔐 Cryptographic Keys
+# Cryptographic Keys
 
 This page defines the terminology used throughout the documentation to refer to user identity and key cryptographic material.
 
@@ -10,7 +10,7 @@ All users in the system are identified and authenticated using cryptographic key
 
 ---
 
-## 🧾 Terms and Definitions
+## Terms and Definitions
 
 ### `signing-key`
 
@@ -49,7 +49,6 @@ The term `pubkeys` is used throughout the protocol to refer to this public key b
     "ek": "BASE64/HEX_STRING"
 }
 ```
-
 ```json Schema
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -82,7 +81,7 @@ The `keyset` must be **stored securely** on the client device and never transmit
 
 ---
 
-## 🔄 Key Rotation
+## Key Rotation
 
 There is no circumstance where a user's [`pubkeys`](#pubkeys) can be rotated whatsoever. This is a deliberate design
 decision meant to enforce security.
@@ -93,7 +92,7 @@ encrypted file locally.
 
 ---
 
-## 📘 Related
+## Related
 
 - [User Identity](/definitions/users/identity)
 - [Encryption Principles](/protocol/encryption)

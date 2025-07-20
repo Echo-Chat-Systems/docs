@@ -1,0 +1,78 @@
+---
+title: signup
+description: Registers a new user with a keypair and basic profile.
+---
+
+# `signup`
+
+Registers a new user on the server. This is a one-time operation per identity. The user provides their keypair and basic public profile information. The server validates the input, stores the identity, and begins tracking reputation and other user-associated data.
+
+---
+
+## Client → Server
+
+```json
+{
+    "target": "auth",
+    "data": {
+        "action": "signup",
+        "params": {
+            "keys": {  ...  },
+            "profile": {  ...  }
+        }
+    }
+}
+```
+
+### Fields
+
+- `keys`:
+- `profile`: A basic profile object. See [`/protocol/definitions/users/data`](/protocol/definitions/users/data) for field details.
+
+---
+
+## Server → Client (Success)
+
+```json
+{
+"target": "auth",
+"data": {
+"action": "signup",
+"status": "ok",
+"user-id": "<public-user-id>"
+}
+}
+```
+
+---
+
+## 📥 Server → Client (Failure)
+
+```json
+{
+"target": "auth",
+"data": {
+"action": "signup",
+"status": "error",
+"error": "key-already-registered"
+}
+}
+```
+
+> Other possible errors include `invalid-keys`, `profile-too-large`, and `malformed-request`.
+
+---
+
+## 🛡️ Security Notes
+
+- No passwords or emails are used.
+- Identity is derived solely from the cryptographic keys.
+- The server may perform basic rate-limiting or fingerprinting to deter abuse.
+
+---
+
+## 🔗 See Also
+
+- [`signin`](/protocol/auth/signin)
+- [`/protocol/definitions/users/data`](/protocol/definitions/users/data)
+- [`/protocol/definitions/crypto/keys`](/protocol/definitions/crypto/keys)
