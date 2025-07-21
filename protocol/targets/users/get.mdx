@@ -47,9 +47,9 @@ The `get` action allows clients to fetch basic profile information about any use
 
 ### Fields
 
-| Field | Description                         | Reference                                       |
-|-------|-------------------------------------|-------------------------------------------------|
-| `id`  | The ID of the user being requested. | [`users`](/protocol/definitions/users/identity) |
+| Field | Description                         | Reference                                           |
+|-------|-------------------------------------|-----------------------------------------------------|
+| `id`  | The ID of the user being requested. | [`users`](/protocol/definitions/users/identity.mdx) |
 
 ## Server → Client
 
@@ -86,9 +86,9 @@ The `get` action allows clients to fetch basic profile information about any use
 
 ### Fields
 
-| Field  | Description                | Reference                                                               |
-|--------|----------------------------|-------------------------------------------------------------------------|
-| `user` | User information returned. | [`public-user`](/protocol/definitions/users/data#public-user-structure) |
+| Field  | Description                | Reference                                                                   |
+|--------|----------------------------|-----------------------------------------------------------------------------|
+| `user` | User information returned. | [`public-user`](/protocol/definitions/users/data.mdx#public-user-structure) |
 
 ---
 
@@ -104,12 +104,11 @@ The `get` action allows clients to fetch basic profile information about any use
 <Note>Notes</Note>
 
 - This action returns only public fields such as display name, avatar, status, and reputation.
-- If the user does not exist, an [`error`](../error) message will be returned with `message: "User not found"`.
 
 ---
 
 ## See Also
 
-- [`get-self`](/protocol/users/get-self)
-- [`update-profile`](/protocol/users/update-profile)
-- [`rep-add`](/protocol/users/rep-add)
+- [`get-self`](/protocol/users/get-self.mdx)
+- [`update-profile`](/protocol/users/update-profile.mdx)
+- [`rep-add`](/protocol/users/rep-add.mdx)

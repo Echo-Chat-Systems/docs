@@ -10,12 +10,12 @@
         },
         "data": {
             "type": "object",
-            "required": ["action", "data"],
+            "required": ["action", "params"],
             "properties": {
                 "action": {
                     "type": "string"
                 },
-                "data": {
+                "params": {
                     "type": "object"
                 }
             }

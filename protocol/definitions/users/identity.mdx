@@ -8,11 +8,11 @@ description: How users are identified and authenticated in the protocol.
 This page outlines how users are uniquely identified in the protocol, and the reasoning behind using cryptographic keys instead of traditional identifiers such as usernames or passwords.
 
 Required knowledge:
-- [Keys](/protocol/auth/keys)
+- [Keys](/protocol/definitions/crypto/keys.mdx)
 
 ## Identity Through Public Keys
 
-Each user is uniquely identified by their [`sk`](/protocol/auth/keys#signing-key). This key acts as their permanent identity on the network. When a user connects or interacts with the system, they prove control over this key by signing challenges or payloads.
+Each user is uniquely identified by their [`sk`](/protocol/definitions/crypto/keys.mdx#signing-key). This key acts as their permanent identity on the network. When a user connects or interacts with the system, they prove control over this key by signing challenges or payloads.
 
 This replaces the need for user IDs, usernames, or email addresses as a core identity mechanism.
 
@@ -36,28 +36,6 @@ This system deliberately avoids email-password or username-password logins for s
 
 - No personal information is required to create or use an identity.
 - Even the server does not need to know who you "are" — just that you control your keys.
-
----
-
-## Example
-
-Here’s how a user might authenticate:
-
-1. Client generates a keypair:
-```json
-{
-    "signing-key": "...",
-    "encryption-key": "..."
-}
-```
-
-2. Client sends their public keys to the server using `signin-start`.
-
-3. Server issues a signed challenge.
-
-4. Client signs the challenge using their private signing key and returns the result.
-
-5. Server verifies the signature and issues a session token.
 
 ---
 
