@@ -1,0 +1,21 @@
+---
+title: "Protocol - Users"
+---
+
+# `users`
+
+The `users` target handles retrieving, updating, and interacting with user profiles and reputation information.
+These actions expose both public and private user information, depending on authentication and intent.
+
+---
+
+## Available Actions
+
+| Name                                       | Description                                                                |
+|--------------------------------------------|----------------------------------------------------------------------------|
+| [`get`](/protocol/users/get)               | Retrieves the public profile of a specific user.                           |
+| [`get-self`](/protocol/users/get-self)     | Retrieves the full authenticated user state and settings.                  |
+| [`update-profile`](/protocol/users/update) | Updates the current user's profile and status fields.                      |
+| [`rep-add`](/protocol/users/rep-add)       | Adds a reputation remark to a user profile.                                |
+| [`rep-del`](/protocol/users/rep-del)       | Allows a user to delete a reputation remark they have previously made.     |
+| [`rep-query`](/protocol/users/rep-query)   | Allows a user to query what reputation remarks they have made in the past. |

@@ -1,0 +1,16 @@
+{
+    "title": "Signin Complete Params Schema",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "/static/schemas/comms/auth/signin/signin-complete.json",
+    "type": "object",
+    "required": [
+        "status",
+        "user"
+    ],
+    "properties": {
+        "user": {
+            "type": "object",
+            "$ref": "/static/schemas/user/private-user.json"
+        }
+    }
+}

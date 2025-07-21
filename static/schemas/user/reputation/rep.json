@@ -1,0 +1,19 @@
+{
+    "title": "Reputation Information Schema",
+    "$id": "/static/schemas/user/reputation/rep.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "required": [
+        "points",
+        "remarks"
+    ],
+    "properties": {
+        "points": {
+            "type": "integer"
+        },
+        "remarks": {
+            "type": "object",
+            "$ref": "/static/schemas/user/reputation/remark.json"
+        }
+    }
+}

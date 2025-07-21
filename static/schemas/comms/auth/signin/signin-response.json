@@ -1,0 +1,21 @@
+{
+    "title": "Signin Response Params Schema",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "/static/schemas/comms/auth/signin/signin-response.json",
+    "type": "object",
+    "required": [
+        "signature",
+        "encrypt-challenge"
+    ],
+    "properties": {
+        "signature": {
+            "type": "string",
+            "format": "base64"
+        },
+        "decrypted": {
+            "type": "string",
+            "minLength": 128,
+            "maxLength": 128
+        }
+    }
+}

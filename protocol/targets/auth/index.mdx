@@ -1,0 +1,21 @@
+---
+title: "Protocol - Auth"
+---
+
+# `auth`
+
+The `auth` target handles signing users in and out.
+All `signin-*` actions are part of a secure multi-step authentication process using Ed25519 keypairs, without requiring usernames or passwords.
+
+---
+
+## Available Actions
+
+| Name                                        | Description                          |
+|---------------------------------------------|--------------------------------------|
+| [`signin-start`](/protocol/auth/signin)     | Initiates a signin flow.             |
+| [`signin-challenge`](/protocol/auth/signin) | Server challenge to the user.        |
+| [`signin-response`](/protocol/auth/signin)  | User's signed response to challenge. |
+| [`signin-complete`](/protocol/auth/signin)  | Finalizes signin with user info.     |
+| [`signout`](/protocol/auth/signout)         | Terminates the current session.      |
+| [`signup`](/protocol/auth/signup)           | Signs a user up to the server        |

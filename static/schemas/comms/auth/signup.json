@@ -1,0 +1,25 @@
+{
+    "title": "Signup Params Schema",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "/static/schemas/comms/auth/signup.json",
+    "type": "object",
+    "required": [
+        "keys",
+        "profile",
+        "sig"
+    ],
+    "properties": {
+        "sig": {
+            "type": "string",
+            "format": "base64"
+        },
+        "keys": {
+            "type": "object",
+            "$ref": "/static/schemas/crypto/keypair.json"
+        },
+        "profile": {
+            "type": "object",
+            "$ref": "/static/schemas/user/profile.json"
+        }
+    }
+}

@@ -1,0 +1,71 @@
+---
+title: Origin
+description: Describes the original source of any given data or action.
+---
+
+# Origin
+
+The `origin` object is a lightweight structure that describes **where** a piece of data or request **originated** from. While currently included for metadata and audit purposes, it is designed to support **future federation and multi-server communication**.
+
+---
+
+## Structure
+
+An origin has two fields:
+
+<CodeGroup>
+```json Example
+{
+    "host": "example.com",
+    "port": 443
+}
+```
+```json Schema
+{
+    "title": "Origin Information Schema",
+    "$id": "/static/schemas/meta/origin.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "required": [
+        "host", "port"
+    ],
+    "properties": {
+        "host": {
+            "type": "string",
+            "format": "url"
+        },
+        "port": {
+            "type": "integer"
+        }
+    }
+}
+```
+</CodeGroup>
+
+
+---
+
+## Purpose
+
+While currently not validated or enforced in any strict way, the `origin` field:
+
+- Marks the **source location** of a message or object
+- Prepares for **federated server-to-server communications**
+- May be used by moderation tools or diagnostic utilities
+
+---
+
+## Trust Model
+
+At present, the `origin` field is **informational only** and should not be trusted unless:
+
+- It is verified by a **trusted server signature**, or
+- The enclosing object is part of a **signed and authenticated context**
+
+---
+
+## See Also
+
+- [`/protocol/definitions/users/data`](/protocol/definitions/users/data)
+- [`/protocol/definitions/users/reputation`](/protocol/definitions/users/reputation)
+- [`/protocol/definitions/crypto/keys`](/protocol/definitions/crypto/keys)

@@ -1,0 +1,33 @@
+{
+    "title": "Public User Information Schema",
+    "$id": "/static/schemas/user/public-user.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema" ,
+    "type": "object",
+    "required": [
+        "origin",
+        "keys",
+        "profile",
+        "rep"
+    ],
+    "properties": {
+        "origin": {
+            "type": "object",
+            "$ref": "/static/schemas/meta/origin.json"
+        },
+        "keys": {
+            "type": "object",
+            "$ref": "/static/schemas/crypto/keypair.json"
+        },
+        "profile": {
+            "type": "object",
+            "$ref": "/static/schemas/user/profile.json"
+        },
+        "rep": {
+            "type": "array",
+            "contains": {
+                "type": "object",
+                "$ref": "/static/schemas/user/reputation/remark.json"
+            }
+        }
+    }
+}

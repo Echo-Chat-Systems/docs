@@ -1,0 +1,127 @@
+---
+title: "EchoAPI Protocol"
+---
+# Protocol Overview
+
+Welcome to the protocol documentation for the real-time communication system behind the application. This protocol defines how clients and servers exchange data using a combination of **WebSocket** and **REST** APIs.
+
+## What This API Does
+
+The protocol is the foundation for a real-time, secure, and privacy-focused messaging platform. It enables:
+
+- Cryptographic authentication using Ed25519 keys (no usernames, passwords, or emails)
+- End-to-end encrypted group messaging using [Messaging Layer Security (MLS)](https://datatracker.ietf.org/doc/html/rfc9420)
+- Live data delivery via a pub-sub system (`postie`)
+- Lightweight, per-user settings and reputation systems
+- Future federation support via shared identity models
+
+## WebSocket Message Format
+
+All messages sent via WebSocket follow a consistent envelope structure.
+
+<CodeGroup>
+```json Example
+{
+    "target": "messages",
+    "data": {
+        "action": "send",
+        "params": {}
+    }
+}
+```
+
+```json Schema
+{
+    "title": "Basic WS Message Format",
+    "$id": "/static/schemas/comms/basic-message.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "required": ["target", "data"],
+    "properties": {
+    "target": {
+    "type": "string"
+    },
+        "data": {
+        "type": "object",
+        "required": ["action", "data"],
+        "properties": {
+            "action": {
+                "type": "string"
+                },
+            "data": {
+                "type": "object"
+                }
+            }
+        }
+    }
+}
+```
+</CodeGroup>
+
+> This schema defines the structure for all messages sent over WebSocket. It enforces:
+> - A top-level `target` string field
+> - A `data` object containing an `action` and a `params` object
+> - All action names and targets are **dash-separated**
+
+## REST API Format
+
+While most functionality is WebSocket-based, some large-payload operations (e.g., media uploads, encrypted blob storage) use REST. These endpoints are documented in the [REST API section](/rest/index).
+
+---
+
+## Protocol Design Principles
+
+### Modular Targets
+
+All WebSocket actions are grouped into **targets**, each representing a logical category of functionality. This improves modularity and simplifies handler logic.
+
+### Cryptographic Identity
+
+There are no passwords or emails. Identity is tied to cryptographic key pairs:
+
+- **Ed25519**: Persistent user identity and authentication
+- **RSA**: Used for optional encryption and planned federation
+
+### Transparent End-to-End Encryption
+
+Group messaging channels use **Messaging Layer Security (MLS)** transparently. Each channel maintains a commit stream for MLS state updates. Clients only decrypt messages if they are valid group participants.
+
+### Pub-Sub System (`postie`)
+
+The `postie` target enables real-time updates through a pub-sub architecture. This includes:
+
+- Status notifications
+- Channel update broadcasts
+- Typing indicators and ephemeral state
+
+### Message Size & Boundaries
+
+WebSocket payloads are kept lightweight (typically under 1 MB). Media and file transfer are handled exclusively through the REST API to preserve performance.
+
+### Encrypted State Storage
+
+User metadata (settings, preferences, etc.) is stored as an **encrypted blob**, retrievable using the `users/get-self` action. This ensures privacy and demonstrates advanced crypto handling.
+
+---
+
+## How to Use This Documentation
+
+Use the sidebar to navigate protocol **targets**. Each target has its own page, and all actions are broken out into subpages.
+
+This documentation covers all communications between the client and server. For sake of organisational sanity, pages are
+organised from the perspective of incoming actions to the server unless explicit stated otherwise. This also means that
+responses to atomic client actions are covered in their respective pages.
+
+Want to jump straight in?
+
+| Target                           | Description                              |
+|----------------------------------|------------------------------------------|
+| [`auth`](/protocol/auth/index)   | Authentication and session handling.     |
+| [`users`](/protocol/users)       | Profile access, updates, and reputation. |
+| [`guilds`](/protocol/guilds)     | Guild (server) creation and management.  |
+| [`channels`](/protocol/channels) | Channel creation, updates, and listing.  |
+| [`messages`](/protocol/messages) | Messaging actions including reactions.   |
+| [`invites`](/protocol/invites)   | Guild invite management.                 |
+| [`postie`](/protocol/postie)     | Pub/sub channel and state updates.       |
+| [`admin`](/protocol/admin)       | Reserved for administrative features.    |
+

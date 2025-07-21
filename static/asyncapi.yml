@@ -1,0 +1,56 @@
+asyncapi: '3.0.0'
+info:
+  title: Echo API
+  version: '1.0.0'
+  description: Test
+    Project Echo client-server communications.
+  contact:
+    name: Kyle
+    email: kylepannan@gmail.com 
+
+servers:
+  production:
+    protocol: wss
+    description: Main production server
+    host: "echo.dafox.au"
+
+defaultContentType: application/json
+
+channels:
+
+
+
+components:
+  messages:
+    auth/signin-start:
+      description: Ping initiate
+      payload:
+        type: object
+        properties:
+          event:
+            type: string
+            const: ping
+
+  schemas:
+    messages.SigninStart:
+      type: object
+      properties:
+        target:
+          type: string
+          const: auth
+        data:
+          type: object
+          properties:
+            action:
+              type: string
+              const: signin-start
+            params:
+              type: object
+              properties:
+                sk:
+                  type: string
+                  format: base64
+                ek:
+                  type: string
+                  format: base64
+

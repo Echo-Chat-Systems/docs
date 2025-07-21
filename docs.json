@@ -1,0 +1,84 @@
+{
+    "$schema": "https://mintlify.com/docs.json",
+    "theme": "mint",
+    "name": "Echo API",
+    "description": "Echo API Official Documentation",
+    "colors": {
+        "primary": "#ff0000"
+    },
+    "navigation": {
+        "dropdowns": [
+            {
+                "dropdown": "Articles",
+                "icon": "book",
+                "description": "Generalised articles",
+                "groups": [
+                    {
+                        "group": "Getting Started",
+                        "pages": [
+                            "index"
+                        ]
+                    }
+                ]
+            },
+            {
+                "dropdown": "Protocol",
+                "description": "Protocol Specifications",
+                "groups": [
+                    {
+                        "group": "Home",
+                        "pages": [
+                            "protocol/index"
+                        ]
+                    },
+                    {
+                        "group": "Definitions",
+                        "pages": [
+                            {
+                                "group": "Crypto",
+                                "pages": [
+                                    "protocol/definitions/crypto/keys"
+                                ]
+                            },
+                            {
+                                "group": "Users",
+                                "pages": [
+                                    "protocol/definitions/users/identity",
+                                    "protocol/definitions/users/data",
+                                    "protocol/definitions/users/reputation"
+                                ]
+                            },
+                            {
+                                "group": "Meta",
+                                "pages": [
+                                    "protocol/definitions/meta/origin"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "group": "Targets",
+                        "pages": [
+                            {
+                                "group": "Auth",
+                                "pages": [
+                                    "protocol/targets/auth/index",
+                                    "protocol/targets/auth/signin",
+                                    "protocol/targets/auth/signout",
+                                    "protocol/targets/auth/signup"
+                                ]
+                            },
+                            {
+                                "group": "Users",
+                                "pages": [
+                                    "protocol/targets/users/index",
+                                    "protocol/targets/users/get"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

@@ -1,0 +1,82 @@
+---
+title: User Identity
+description: How users are identified and authenticated in the protocol.
+---
+
+# User Identity
+
+This page outlines how users are uniquely identified in the protocol, and the reasoning behind using cryptographic keys instead of traditional identifiers such as usernames or passwords.
+
+Required knowledge:
+- [Keys](/protocol/auth/keys)
+
+## Identity Through Public Keys
+
+Each user is uniquely identified by their [`sk`](/protocol/auth/keys#signing-key). This key acts as their permanent identity on the network. When a user connects or interacts with the system, they prove control over this key by signing challenges or payloads.
+
+This replaces the need for user IDs, usernames, or email addresses as a core identity mechanism.
+
+---
+
+## Why Not Use Emails or Usernames?
+
+This system deliberately avoids email-password or username-password logins for several reasons:
+
+### Decentralization
+
+- There's no need for a central authority to issue or verify accounts.
+- Users can generate their identity locally, even offline.
+
+### Security
+
+- Passwords are inherently weak — they can be reused, guessed, or leaked.
+- Public-key auth ensures only the holder of the private key can act as a user.
+
+### Privacy
+
+- No personal information is required to create or use an identity.
+- Even the server does not need to know who you "are" — just that you control your keys.
+
+---
+
+## Example
+
+Here’s how a user might authenticate:
+
+1. Client generates a keypair:
+```json
+{
+    "signing-key": "...",
+    "encryption-key": "..."
+}
+```
+
+2. Client sends their public keys to the server using `signin-start`.
+
+3. Server issues a signed challenge.
+
+4. Client signs the challenge using their private signing key and returns the result.
+
+5. Server verifies the signature and issues a session token.
+
+---
+
+## Key Ownership = Identity
+
+In this system, **identity is not what you know (a password)** — it’s **what you own** (a keypair).
+
+If a user loses their private keys, they lose access to their identity and must start fresh. For this reason, secure client-side storage and optional key backup/export features are essential at the UI level.
+
+---
+
+## Summary
+
+| Traditional Identity     | Cryptographic Identity        |
+|--------------------------|-------------------------------|
+| Email + Password         | Signing + Encryption Keys     |
+| Centralized login server | Trustless, key-based auth     |
+| Can be faked or stolen   | Tied to possession of keys    |
+| Leaks personal info      | Preserves privacy             |
+
+The result is a more secure, decentralized, and privacy-preserving identity model that aligns with the protocol’s design goals.
+

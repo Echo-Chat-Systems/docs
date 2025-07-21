@@ -1,0 +1,21 @@
+{
+    "title": "Signin Challenge Params Schema",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "/static/schemas/comms/auth/signin/signin-challenge.json",
+    "type": "object",
+    "required": [
+        "sign-challenge",
+        "encrypt-challenge"
+    ],
+    "properties": {
+        "sign-challenge": {
+            "type": "string",
+            "minLength": 128,
+            "maxLength": 128
+        },
+        "encrypt-challenge": {
+            "type": "string",
+            "format": "base64"
+        }
+    }
+}

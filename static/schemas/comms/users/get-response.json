@@ -1,0 +1,15 @@
+{
+    "title": "Get Response Params Schema",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "/static/schemas/comms/users/get-response.json",
+    "type": "object",
+    "required": [
+        "user"
+    ],
+    "properties": {
+        "user": {
+            "type": "object",
+            "$ref": "/static/schemas/user/public-user.json"
+        }
+    }
+}

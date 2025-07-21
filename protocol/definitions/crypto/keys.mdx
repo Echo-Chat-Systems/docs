@@ -1,0 +1,99 @@
+---
+title: "Cryptographic Keys"
+---
+
+# Cryptographic Keys
+
+This page defines the terminology used throughout the documentation to refer to user identity and key cryptographic material.
+
+All users in the system are identified and authenticated using cryptographic key pairs. These keys are central to user verification, end-to-end encryption, and identity management.
+
+---
+
+## Terms and Definitions
+
+### `signing-key`
+
+The user's **Ed25519** public key used to **verify signatures**. This key serves as the user's **identity** within the protocol.
+
+**Referred to as `sk` for short.**
+
+- Private portion is kept secure by the client.
+- Public portion is distributed freely and used for verification.
+- Used in signing WebSocket actions and verifying reputation statements.
+
+### `encryption-key`
+
+The user's **RSA** or public key used for various secure key exchanges and low security system messages.
+
+**Referred to as `ek` for short**
+
+- Private portion is stored alongside the [*signing-key*](#signing-key)
+- Used to securely initiate a diffie-hellman key exchange.
+- Used to broadcast system-messages to target users.
+- Publicly advertised in the user's profile.
+
+### `pubkeys`
+
+The set of both public keys belonging to a user:
+
+- `signing-key` (Ed25519)
+- `encryption-key` (RSA)
+
+The term `pubkeys` is used throughout the protocol to refer to this public key bundle.
+
+<CodeGroup>
+```json Example
+{
+    "sk": "BASE64/HEX_STRING",
+    "ek": "BASE64/HEX_STRING"
+}
+```
+```json Schema
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "/static/schemas/auth/keypair.json",
+    "title": "Keypair Schema",
+    "type": "object",
+    "properties": {
+        "sk": {
+            "type": "string",
+            "format": "base64"
+        },
+        "ek": {
+            "type": "string",
+            "format": "base64"
+        }
+    }
+}
+```
+</CodeGroup>
+
+
+### `keyset`
+
+The full keyset owned by a user, including **both public and private keys**:
+
+- `signing-key`: private + public (for identity and signature)
+- `encryption-key`: private + public (for decryption)
+
+The `keyset` must be **stored securely** on the client device and never transmitted to the server. Compromise of the `keyset` allows full account impersonation.
+
+---
+
+## Key Rotation
+
+There is no circumstance where a user's [`pubkeys`](#pubkeys) can be rotated whatsoever. This is a deliberate design
+decision meant to enforce security.
+
+For this reason, it is absolutely **crucial** for users to store their keys in a secure, redundant fashion. A key handler
+system has been implemented in [EchoLib](https://github.com/Echo-Chat-Systems/EchoLib) to securely store user keys in an
+encrypted file locally.
+
+---
+
+## Related
+
+- [User Identity](/definitions/users/identity)
+- [Encryption Principles](/protocol/encryption)
+- [Signing Actions](/protocol/auth/signin)
