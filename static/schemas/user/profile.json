@@ -1,6 +1,6 @@
 {
     "title": "User Profile Schema",
-    "$id": "/static/schemas/auth/user/profile.json",
+    "$id": "/static/schemas/user/profile.json",
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "type": "object",
     "required": [

@@ -168,9 +168,7 @@ See [User Data](/protocol/definitions/users/data) for contents of `user` object.
     "data": {
         "action": "signin-complete",
         "params": {
-            "status": 0,
             "user": {},
-            "msg": ""
         }
     }
 }
@@ -181,22 +179,21 @@ See [User Data](/protocol/definitions/users/data) for contents of `user` object.
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "/static/schemas/comms/auth/signin/signin-complete.json",
     "type": "object",
+    "required": [
+        "status",
+        "user"
+    ],
     "properties": {
-        "status": {
-            "type": "integer"
-        },
         "user": {
             "type": "object",
             "$ref": "/static/schemas/user/private-user.json"
-        },
-        "ref": {
-            "type": "string",
-            "format": "uuid"
         }
     }
 }
 ```
 </CodeGroup>
+
+<Danger>If the signin fails, the server will respond with a generic [Error Message](/protocol/targets/error)</Danger>
 
 ---
 
@@ -205,3 +202,4 @@ See [User Data](/protocol/definitions/users/data) for contents of `user` object.
 - No session tokens are used — the connection is tied to the successful authentication over the WebSocket.
 - Each signin must be completed in order: no skipping steps.
 - A challenge expires after a short timeout; clients must retry with a new `signin-start` if it expires.
+- Each connection may only have **one** active signin attempt at any given time.

@@ -26,8 +26,8 @@ Registers a new user on the server. This is a one-time operation per identity. T
 
 ### Fields
 
-- `keys`:
-- `profile`: A basic profile object. See [`/protocol/definitions/users/data`](/protocol/definitions/users/data) for field details.
+- `keys`: A public keypair. See [`pubkeys`](/protocol/definitions/crypto/keys#pubkeys) for field details
+- `profile`: A basic profile object. See [`/protocol/definitions/users/data#profile`](/protocol/definitions/users/data) for field details.
 
 ---
 
@@ -35,31 +35,15 @@ Registers a new user on the server. This is a one-time operation per identity. T
 
 ```json
 {
-"target": "auth",
-"data": {
-"action": "signup",
-"status": "ok",
-"user-id": "<public-user-id>"
-}
-}
-```
-
----
-
-## 📥 Server → Client (Failure)
-
-```json
-{
-"target": "auth",
-"data": {
-"action": "signup",
-"status": "error",
-"error": "key-already-registered"
-}
+    "target": "auth",
+    "data": {
+        "action": "signup",
+        "data":{
+            "user": {  ...  }
+        }
+    }
 }
 ```
-
-> Other possible errors include `invalid-keys`, `profile-too-large`, and `malformed-request`.
 
 ---
 

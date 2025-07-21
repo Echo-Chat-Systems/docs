@@ -10,7 +10,7 @@ This page outlines how users are uniquely identified in the protocol, and the re
 Required knowledge:
 - [Keys](/protocol/auth/keys)
 
-## 🔑 Identity Through Public Keys
+## Identity Through Public Keys
 
 Each user is uniquely identified by their [`sk`](/protocol/auth/keys#signing-key). This key acts as their permanent identity on the network. When a user connects or interacts with the system, they prove control over this key by signing challenges or payloads.
 
@@ -18,28 +18,28 @@ This replaces the need for user IDs, usernames, or email addresses as a core ide
 
 ---
 
-## ❓ Why Not Use Emails or Usernames?
+## Why Not Use Emails or Usernames?
 
 This system deliberately avoids email-password or username-password logins for several reasons:
 
-### ✅ Decentralization
+### Decentralization
 
 - There's no need for a central authority to issue or verify accounts.
 - Users can generate their identity locally, even offline.
 
-### ✅ Security
+### Security
 
 - Passwords are inherently weak — they can be reused, guessed, or leaked.
 - Public-key auth ensures only the holder of the private key can act as a user.
 
-### ✅ Privacy
+### Privacy
 
 - No personal information is required to create or use an identity.
 - Even the server does not need to know who you "are" — just that you control your keys.
 
 ---
 
-## 🧪 Example
+## Example
 
 Here’s how a user might authenticate:
 
@@ -61,7 +61,7 @@ Here’s how a user might authenticate:
 
 ---
 
-## 🔒 Key Ownership = Identity
+## Key Ownership = Identity
 
 In this system, **identity is not what you know (a password)** — it’s **what you own** (a keypair).
 
@@ -69,7 +69,7 @@ If a user loses their private keys, they lose access to their identity and must 
 
 ---
 
-## 🧭 Summary
+## Summary
 
 | Traditional Identity     | Cryptographic Identity        |
 |--------------------------|-------------------------------|

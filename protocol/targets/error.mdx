@@ -1,0 +1,23 @@
+# Generic Error Message
+
+This structure defines the format for all generic error messages returned by the server when an action fails or encounters a problem. All error responses use the `error` target and `error` action. They include the original client-sent message as context and a descriptive message string.
+
+## Error Message Structure
+
+<CodeGroup>
+```json Example
+
+```
+```json Schema
+
+```
+</CodeGroup>
+
+### Fields
+
+| Field            | Description                                                      | Reference                             |
+|------------------|------------------------------------------------------------------|---------------------------------------|
+| `target`         | Always the string `"error"`                                      | –                                     |
+| `data.action`    | Always the string `"error"`                                      | –                                     |
+| `params.source`  | The original message sent by the client that caused this error   | [Message Structure](/protocol/format) |
+| `params.message` | A human-readable error message string explaining what went wrong | –                                     |

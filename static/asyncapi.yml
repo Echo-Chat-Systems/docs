@@ -17,31 +17,12 @@ servers:
 defaultContentType: application/json
 
 channels:
-  meta:
-    description: Server metadata.
-    messages:
-      ping:
-        $ref: '#/components/messages/ping'
-  auth:
-    description: Authentication related messages.
-    messages:
-      signin-initiate:
-        payload:
-          type: object
-          $ref: "/schemas/comms/auth/signin/signin-start.json"
-operations:
-  ping:
-    action: send 
-    channel: 
-      $ref: '#/channels/meta'
-    reply:
-      channel:
-        $ref: '#/channels/meta'
-    
+
+
 
 components:
   messages:
-    ping:
+    auth/signin-start:
       description: Ping initiate
       payload:
         type: object
@@ -49,11 +30,27 @@ components:
           event:
             type: string
             const: ping
-    pong: 
-      description: Pong response
-      payload:
-        type: object
-        properties:
-          event:
-            type: string
-            const: pong
+
+  schemas:
+    messages.SigninStart:
+      type: object
+      properties:
+        target:
+          type: string
+          const: auth
+        data:
+          type: object
+          properties:
+            action:
+              type: string
+              const: signin-start
+            params:
+              type: object
+              properties:
+                sk:
+                  type: string
+                  format: base64
+                ek:
+                  type: string
+                  format: base64
+

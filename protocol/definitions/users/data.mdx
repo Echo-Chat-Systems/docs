@@ -10,7 +10,7 @@ a user may be represented in a **profile**, as a **public-user**, or as a **priv
 
 ---
 
-## `profile`
+## Profile Structure
 
 A user profile is a broadcast structure typically attached guild membership or public presence.
 
@@ -97,7 +97,8 @@ This form **does not include any identifiers** like keys or internal user IDs. I
 
 This structure is used when the system needs to share a verified user identity with others, such as message authors, guild owners, or moderators.
 
-```json
+<CodeGroup>
+```json Example
 {
     "origin": {  ...  },
     "keys": {  ...  },
@@ -105,23 +106,62 @@ This structure is used when the system needs to share a verified user identity w
     "rep": {  ...  },
 }
 ```
+```json Schema
+{
+    "title": "Public User Information Schema",
+    "$id": "/static/schemas/user/public-user.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema" ,
+    "type": "object",
+    "required": [
+        "origin",
+        "keys",
+        "profile",
+        "rep"
+    ],
+    "properties": {
+        "origin": {
+            "type": "object",
+            "$ref": "/static/schemas/meta/origin.json"
+        },
+        "keys": {
+            "type": "object",
+            "$ref": "/static/schemas/crypto/keypair.json"
+        },
+        "profile": {
+            "type": "object",
+            "$ref": "/static/schemas/user/profile.json"
+        },
+        "rep": {
+            "type": "array",
+            "contains": {
+                "type": "object",
+                "$ref": "/static/schemas/user/reputation/remark.json"
+            }
+        }
+    }
+}
+```
+</CodeGroup>
 
-References:
-- [`origin`](/protocol/definitions/meta/origin)
-- `keys` is [`pubkeys`](/protocol/definitions/crypto/keys#pubkeys)
-- [`profile`](#)
-- [`rep`](/protocol/definitions/users/reputation#rep-object)
+### Fields
 
+| Field     | Description                                 | Reference                                                  |
+|-----------|---------------------------------------------|------------------------------------------------------------|
+| `origin`  | User origin server details.                 | [`origin`](/protocol/definitions/meta/origin)              |
+| `keys`    | Object containing the action and parameters | [`pubkeys`](/protocol/definitions/crypto/keys#pubkeys)     |
+| `profile` | Always the string `"error"`                 | [`profile`](#profile-structure)                            |
+| `rep`     | Object containing the error details         | [`rep`](/protocol/definitions/users/reputation#rep-object) |
 
 This representation is visible to all clients and safe for sharing.
 
 ---
 
-## `private-user`
+## Private User Structure
 
 The internal structure for a logged-in user, visible only to the user and the server. Includes sensitive fields like settings.
 
-```json
+<CodeGroup>
+```json Example
 {
     "origin": {  ...  },
     "keys": {  ...  },
@@ -130,12 +170,55 @@ The internal structure for a logged-in user, visible only to the user and the se
     "settings": ""
 }
 ```
+```json Schema
+{
+    "title": "Private User Information Schema",
+    "$id": "/static/schemas/user/private-user.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema" ,
+    "type": "object",
+    "required": [
+        "origin",
+        "keys",
+        "profile",
+        "rep"
+    ],
+    "properties": {
+        "origin": {
+            "type": "object",
+            "$ref": "/static/schemas/meta/origin.json"
+        },
+        "keys": {
+            "type": "object",
+            "$ref": "/static/schemas/crypto/keypair.json"
+        },
+        "profile": {
+            "type": "object",
+            "$ref": "/static/schemas/user/profile.json"
+        },
+        "rep": {
+            "type": "object",
+            "$ref": "/static/schemas/user/reputation/rep.json"
+        }
+    }
+}
+```
+</CodeGroup>
 
 This form should never be shared directly with other clients.
 
+### Fields
+
+| Field      | Description                                                   | Reference                                                  |
+|------------|---------------------------------------------------------------|------------------------------------------------------------|
+| `origin`   | User origin server details.                                   | [`origin`](/protocol/definitions/meta/origin)              |
+| `keys`     | Object containing the action and parameters                   | [`pubkeys`](/protocol/definitions/crypto/keys#pubkeys)     |
+| `profile`  | Always the string `"error"`                                   | [`profile`](#profile-structure)                            |
+| `rep`      | Object containing the error details                           | [`rep`](/protocol/definitions/users/reputation#rep-object) |
+| `settings` | Encrypted b64 encoded string contianing user roaming settings | -                                                          |
+
 ---
 
-## 🧬 Key Differences
+## Key Differences
 
 | Representation | Includes Profile | Includes Keys | Includes Settings | Visibility        |
 |----------------|------------------|---------------|-------------------|-------------------|
@@ -145,7 +228,7 @@ This form should never be shared directly with other clients.
 
 ---
 
-<Note>📌 Notes</Note>
+<Note>Notes</Note>
 
 - All user objects must include `pubkeys` in any authenticated or signed context.
 - The `settings` object is an E2EE user-controlled blob.
@@ -153,7 +236,7 @@ This form should never be shared directly with other clients.
 
 ---
 
-## 📚 See Also
+## See Also
 
 - [`/definitions/crypto/keys`](/definitions/crypto/keys)
 - [`/protocol/auth/signin`](/protocol/auth/signin)
