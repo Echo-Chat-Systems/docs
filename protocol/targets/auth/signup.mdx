@@ -1,5 +1,5 @@
 ---
-title: signup
+title: Signup
 description: Registers a new user with a keypair and basic profile.
 ---
 
@@ -11,7 +11,8 @@ Registers a new user on the server. This is a one-time operation per identity. T
 
 ## Client → Server
 
-```json
+<CodeGroup>
+```json Example
 {
     "target": "auth",
     "data": {
@@ -23,31 +24,73 @@ Registers a new user on the server. This is a one-time operation per identity. T
     }
 }
 ```
+```json Schema
+{
+    "title": "Signup Params Schema",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "/static/schemas/comms/auth/signup.json",
+    "type": "object",
+    "required": [
+        "profile", "keys", "sig"
+    ],
+    "properties": {
+        "sig": {
+            "type": "string",
+            "format": "base64"
+        },
+        "keys": {
+            "type": "object",
+            "$ref": "/static/schemas/crypto/keypair.json"
+        },
+        "profile": {
+            "type": "object",
+            "$ref": "/static/schemas/user/profile.json"
+        }
+    }
+}
+```
+</CodeGroup>
 
 ### Fields
 
-- `keys`: A public keypair. See [`pubkeys`](/protocol/definitions/crypto/keys#pubkeys) for field details
-- `profile`: A basic profile object. See [`/protocol/definitions/users/data#profile`](/protocol/definitions/users/data) for field details.
+| Field     | Description                                      | Reference                                                       |
+|-----------|--------------------------------------------------|-----------------------------------------------------------------|
+| `sig`     | Base64 encoded signature of `keys` and `profile` | -                                                               |
+| `keys`    | User-generated public keypair                    | [`pubkeys`](/protocol/definitions/crypto/keys#pubkeys)          |
+| `profile` | User public facing profile                       | [`profile`](/protocol/definitions/users/data#profile-structure) |
 
 ---
 
 ## Server → Client (Success)
 
-```json
+```json Example
 {
     "target": "auth",
     "data": {
         "action": "signup",
-        "data":{
+        "params":{
             "user": {  ...  }
         }
     }
 }
 ```
 
+| Field  | Description       | Reference                                                                 |
+|--------|-------------------|---------------------------------------------------------------------------|
+| `user` | Private user data | [`private-user`](/protocol/definitions/users/data#private-user-structure) |
+
 ---
 
-## 🛡️ Security Notes
+<Danger>Errors</Danger>
+
+| Message          | Description                                    | Possible Causes                                                           |
+|------------------|------------------------------------------------|---------------------------------------------------------------------------|
+| `key-used`       | This key has already been registered.          | The public key is already associated with an existing account.            |
+| `invalid-proof`  | Provided proof of key ownership is invalid.    | Signature is missing or does not verify against the provided public key.  |
+
+---
+
+<Note>Notes</Note>
 
 - No passwords or emails are used.
 - Identity is derived solely from the cryptographic keys.
@@ -55,7 +98,7 @@ Registers a new user on the server. This is a one-time operation per identity. T
 
 ---
 
-## 🔗 See Also
+## See Also
 
 - [`signin`](/protocol/auth/signin)
 - [`/protocol/definitions/users/data`](/protocol/definitions/users/data)

@@ -4,16 +4,22 @@
     "$id": "/static/schemas/comms/auth/signup.json",
     "type": "object",
     "required": [
-        "sk", "ek"
+        "keys",
+        "profile",
+        "sig"
     ],
     "properties": {
-        "sk": {
+        "sig": {
             "type": "string",
             "format": "base64"
         },
-        "ek": {
-            "type": "string",
-            "format": "base64"
+        "keys": {
+            "type": "object",
+            "$ref": "/static/schemas/crypto/keypair.json"
+        },
+        "profile": {
+            "type": "object",
+            "$ref": "/static/schemas/user/profile.json"
         }
     }
 }

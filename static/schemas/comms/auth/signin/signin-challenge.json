@@ -5,8 +5,7 @@
     "type": "object",
     "required": [
         "sign-challenge",
-        "encrypt-challenge",
-        "ref"
+        "encrypt-challenge"
     ],
     "properties": {
         "sign-challenge": {
@@ -17,10 +16,6 @@
         "encrypt-challenge": {
             "type": "string",
             "format": "base64"
-        },
-        "ref": {
-            "type": "string",
-            "format": "uuid"
         }
     }
 }

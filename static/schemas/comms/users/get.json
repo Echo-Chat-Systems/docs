@@ -1,0 +1,15 @@
+{
+    "title": "Get Params Schema",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "/static/schemas/comms/users/get.json",
+    "type": "object",
+    "required": [
+        "id"
+    ],
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "base64"
+        }
+    }
+}

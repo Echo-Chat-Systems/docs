@@ -16,10 +16,6 @@
             "type": "string",
             "minLength": 128,
             "maxLength": 128
-        },
-        "ref": {
-            "type": "string",
-            "format": "uuid"
         }
     }
 }

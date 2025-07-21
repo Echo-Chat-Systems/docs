@@ -69,8 +69,7 @@ The server responds with a unique challenge string to be signed.
         "action": "signin-challenge",
         "params": {
             "sign-challenge": "",
-            "encrypt-challenge": "",
-            "ref": ""
+            "encrypt-challenge": ""
         }
     }
 }
@@ -83,8 +82,7 @@ The server responds with a unique challenge string to be signed.
     "type": "object",
     "required": [
         "sign-challenge",
-        "encrypt-challenge",
-        "ref"
+        "encrypt-challenge"
     ],
     "properties": {
         "sign-challenge": {
@@ -95,10 +93,6 @@ The server responds with a unique challenge string to be signed.
         "encrypt-challenge": {
             "type": "string",
             "format": "base64"
-        },
-        "ref": {
-            "type": "string",
-            "format": "uuid"
         }
     }
 }
@@ -118,8 +112,7 @@ The client signs the challenge using its **private key** and returns the signatu
         "action": "signin-response",
         "params": {
             "signature": "",
-            "decrypted": "",
-            "ref": ""
+            "decrypted": ""
         }
     }
 }
@@ -143,10 +136,6 @@ The client signs the challenge using its **private key** and returns the signatu
             "type": "string",
             "minLength": 128,
             "maxLength": 128
-        },
-        "ref": {
-            "type": "string",
-            "format": "uuid"
         }
     }
 }
@@ -193,7 +182,17 @@ See [User Data](/protocol/definitions/users/data) for contents of `user` object.
 ```
 </CodeGroup>
 
-<Danger>If the signin fails, the server will respond with a generic [Error Message](/protocol/targets/error)</Danger>
+---
+
+<Danger>If at any point the signin fails, the server will return one of the following [Error Messages](/protocol/targets/error)</Danger>
+
+| Message             | Description                                                             | Possible Causes                                                                  |
+|---------------------|-------------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| `invalid-key`       | The provided public key is malformed or unsupported.                    | Public key does not match expected format (e.g. not Ed25519 / invalid base64).   |
+| `already-started`   | A sign-in session has already been initiated for this key.              | Calling `signin-start` again before completing the previous session.             |
+| `not-started`       | No active sign-in session found for this key.                           | Calling `signin-challenge`, `signin-response`, or `signin-complete` prematurely. |
+| `challenge-failed`  | One or more cryptographic challenges failed verification.               | Incorrect signing/encryption of challenge payloads.                              |
+| `expired`           | The sign-in session has expired and is no longer valid.                 | Delay between steps exceeded server timeout.                                     |
 
 ---
 

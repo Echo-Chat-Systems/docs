@@ -1,5 +1,5 @@
 ---
-title: signout
+title: Signout
 description: Signs the user out of the current session.
 ---
 
@@ -11,7 +11,7 @@ Ends the user's current authenticated session. This action should be called when
 
 ## Client → Server
 
-```json
+```json Example
 {
     "target": "auth",
     "data": {
@@ -24,9 +24,11 @@ Ends the user's current authenticated session. This action should be called when
 
 ---
 
-## Server → Client (Success)
+## Server → Client
 
-```json
+In the event the signout completes, the following message is sent to the client. If the signout fails the appropriate [error message](/protocol/targets/error) is sent.
+
+```json Example
 {
     "target": "auth",
     "data": {
@@ -40,30 +42,21 @@ Ends the user's current authenticated session. This action should be called when
 
 ---
 
-## Server → Client (Failure)
+<Danger>Errors</Danger>
 
-```json
-{
-    "target": "error",
-    "data": {
-        "action": "error",
-        "params": {
-            "status": 1,
-            "message": "not-signed-in"
-        }
-    }
-}
-```
+| Message         | Description                            | Possible Causes                                           |
+|-----------------|----------------------------------------|-----------------------------------------------------------|
+| `not-signed-in` | Cannot sign out because not signed in. | The user attempted to sign out without an active session. |
 
 ---
 
 <Note>Notes</Note>
 - This only affects the **current connection** or session context.
 - No permanent user data is deleted or modified.
-- Servers may optionally broadcast a `session-ended` pubsub event if session tracking is implemented.
+- Servers broadcast a `session-ended` postie event for status updates.
 
 ---
 
-## 🔗 See Also
+## See Also
 
 - [`signin`](/protocol/auth/signin)

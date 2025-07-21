@@ -91,9 +91,25 @@ A user profile is a broadcast structure typically attached guild membership or p
 
 This form **does not include any identifiers** like keys or internal user IDs. It's purely decorative and user-controlled.
 
+### Fields
+
+| Field         | Description                                           | Reference |
+|---------------|-------------------------------------------------------|-----------|
+| `username`    | User’s display name (required)                        | –         |
+| `tag`         | Numeric tag used to disambiguate usernames (required) | –         |
+| `pronouns`    | User-specified pronouns                               | –         |
+| `bio`         | Freeform biography text                               | –         |
+| `css`         | Optional CSS code used for profile theming            | –         |
+| `pfp`         | URI to the profile picture                            | –         |
+| `banner`      | URI to the profile banner                             | –         |
+| `timezone`    | User’s preferred timezone string                      | –         |
+| `status`      | Object describing the user’s current status           | –         |
+| `status.type` | Type of the status (e.g. "online", "away")            | –         |
+| `status.text` | Freeform status message                               | –         |
+
 ---
 
-## `public-user`
+## Public User Structure
 
 This structure is used when the system needs to share a verified user identity with others, such as message authors, guild owners, or moderators.
 
@@ -145,12 +161,12 @@ This structure is used when the system needs to share a verified user identity w
 
 ### Fields
 
-| Field     | Description                                 | Reference                                                  |
-|-----------|---------------------------------------------|------------------------------------------------------------|
-| `origin`  | User origin server details.                 | [`origin`](/protocol/definitions/meta/origin)              |
-| `keys`    | Object containing the action and parameters | [`pubkeys`](/protocol/definitions/crypto/keys#pubkeys)     |
-| `profile` | Always the string `"error"`                 | [`profile`](#profile-structure)                            |
-| `rep`     | Object containing the error details         | [`rep`](/protocol/definitions/users/reputation#rep-object) |
+| Field     | Description                   | Reference                                                  |
+|-----------|-------------------------------|------------------------------------------------------------|
+| `origin`  | User origin server details.   | [`origin`](/protocol/definitions/meta/origin)              |
+| `keys`    | User public keys              | [`pubkeys`](/protocol/definitions/crypto/keys#pubkeys)     |
+| `profile` | User profile                  | [`profile`](#profile-structure)                            |
+| `rep`     | User public reputation record | [`rep`](/protocol/definitions/users/reputation#rep-object) |
 
 This representation is visible to all clients and safe for sharing.
 
@@ -211,10 +227,10 @@ This form should never be shared directly with other clients.
 | Field      | Description                                                   | Reference                                                  |
 |------------|---------------------------------------------------------------|------------------------------------------------------------|
 | `origin`   | User origin server details.                                   | [`origin`](/protocol/definitions/meta/origin)              |
-| `keys`     | Object containing the action and parameters                   | [`pubkeys`](/protocol/definitions/crypto/keys#pubkeys)     |
-| `profile`  | Always the string `"error"`                                   | [`profile`](#profile-structure)                            |
-| `rep`      | Object containing the error details                           | [`rep`](/protocol/definitions/users/reputation#rep-object) |
-| `settings` | Encrypted b64 encoded string contianing user roaming settings | -                                                          |
+| `keys`     | User public keys                                              | [`pubkeys`](/protocol/definitions/crypto/keys#pubkeys)     |
+| `profile`  | User profile                                                  | [`profile`](#profile-structure)                            |
+| `rep`      | User public reputation record                                 | [`rep`](/protocol/definitions/users/reputation#rep-object) |
+| `settings` | Encrypted b64 encoded string containing user roaming settings | -                                                          |
 
 ---
 

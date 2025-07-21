@@ -6,49 +6,49 @@
 
 ## All WS Endpoints And Actions
 
-- `auth`
-  - `signin-start`
-  - `signin-challenge` (Server -> User)
-  - `signin-response`
-  - `signin-complete` (Server -> User)
-  - `signout`
-  - `signup`
-- `users`
-  - `get-profile` (Any public profile)
-  - `get-self` (All current user information including settings)
-  - `update-profile` (status is included)
-  - `rep-add` (adds a reputation remark to a specific profile)
-- `guilds`
-  - `create`
-  - `delete`
-  - `get`
-  - `update`
-  - `list` (guilds user has access to)
-- `invites` (guild invites)
-  - `create`
-  - `get`
-  - `update`
-  - `delete`
-  - `list` (list invites in a specified guild)
-  - `list-mine` (list pending invites addressed to this user)
-- `channels`
-  - `create`
-  - `delete`
-  - `get`
-  - `update`
-  - `list`
-- `messages`
-  - `send`
-  - `edit`
-  - `delete`
-  - `get-single`
-  - `get-many`
-  - `react-add`
-  - `react-remove`
-  - `react-get`
-  - `reacts-edit` (moderation endpoint)
-- `postie`
-  - `subscribe`
-  - `unsubscribe`
-  - `event` (Server -> Client)
-- `admin` (not implemented)
+✅
+
+| Target     | Action             | Description                                                               | Completed |
+|------------|--------------------|---------------------------------------------------------------------------|-----------|
+| `auth`     | `signin-start`     | Starts the sign-in flow by sending the user’s public key                  | ✅         |
+| ~          | `signin-challenge` | Server sends challenges for signing and encryption                        | ✅         |
+| ~          | `signin-response`  | User responds to the challenge using their keys                           | ✅         |
+| ~          | `signin-complete`  | Server confirms sign-in and sends session information                     | ✅         |
+| ~          | `signout`          | Signs out the current session                                             | ✅         |
+| ~          | `signup`           | Registers a new user with keys and basic profile info                     | ✅         |
+| `users`    | `get`              | Retrieves a public user by ID                                             |           |
+| ~          | `get-self`         | Retrieves full private user information including settings                |           |
+| ~          | `update-self`      | Updates user profile and status                                           |           |
+| ~          | `rep-add`          | Adds a reputation remark to a profile                                     |           |
+| ~          | `rep-del`          | Allows a user to delete a reputation remark they have previously made.    |           |
+| ~          | `rep-query`        | Allows a user to query what reputation remarks they have made in the past |           |
+| `guilds`   | `create`           | Creates a new guild                                                       |           |
+| ~          | `delete`           | Deletes a guild                                                           |           |
+| ~          | `get`              | Retrieves guild metadata                                                  |           |
+| ~          | `update`           | Updates guild information                                                 |           |
+| ~          | `list`             | Lists guilds the user has access to                                       |           |
+| `invites`  | `create`           | Creates an invite for a guild                                             |           |
+| ~          | `get`              | Retrieves a specific invite                                               |           |
+| ~          | `update`           | Updates an existing invite                                                |           |
+| ~          | `delete`           | Deletes an invite                                                         |           |
+| ~          | `list`             | Lists all invites for a specified guild                                   |           |
+| ~          | `list-mine`        | Lists all invites addressed to the current user                           |           |
+| `channels` | `create`           | Creates a new channel in a guild                                          |           |
+| ~          | `delete`           | Deletes a channel                                                         |           |
+| ~          | `get`              | Retrieves metadata for a single channel                                   |           |
+| ~          | `update`           | Updates channel metadata                                                  |           |
+| ~          | `list`             | Lists all channels in a guild                                             |           |
+| `messages` | `send`             | Sends a message to a channel                                              |           |
+| ~          | `edit`             | Edits a previously sent message                                           |           |
+| ~          | `delete`           | Deletes a message                                                         |           |
+| ~          | `get-single`       | Retrieves a specific message                                              |           |
+| ~          | `get-many`         | Retrieves multiple messages from a channel                                |           |
+| ~          | `react-add`        | Adds a reaction to a message                                              |           |
+| ~          | `react-remove`     | Removes a reaction from a message                                         |           |
+| ~          | `react-get`        | Retrieves reaction counts for a message                                   |           |
+| ~          | `reacts-edit`      | Moderation endpoint to alter reactions                                    |           |
+| `postie`   | `subscribe`        | Subscribes to a topic or data feed                                        |           |
+| ~          | `unsubscribe`      | Unsubscribes from a topic or data feed                                    |           |
+| ~          | `event`            | Server-sent event pushed to subscribed clients                            |           |
+| `admin`    | –                  | Reserved for future administrative commands                               |           |
+

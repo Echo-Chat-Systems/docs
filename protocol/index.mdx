@@ -71,22 +71,22 @@ While most functionality is WebSocket-based, some large-payload operations (e.g.
 
 ## Protocol Design Principles
 
-### 🧭 Modular Targets
+### Modular Targets
 
 All WebSocket actions are grouped into **targets**, each representing a logical category of functionality. This improves modularity and simplifies handler logic.
 
-### 🔐 Cryptographic Identity
+### Cryptographic Identity
 
 There are no passwords or emails. Identity is tied to cryptographic key pairs:
 
 - **Ed25519**: Persistent user identity and authentication
 - **RSA**: Used for optional encryption and planned federation
 
-### 🧪 Transparent End-to-End Encryption
+### Transparent End-to-End Encryption
 
 Group messaging channels use **Messaging Layer Security (MLS)** transparently. Each channel maintains a commit stream for MLS state updates. Clients only decrypt messages if they are valid group participants.
 
-### 📬 Pub-Sub System (`postie`)
+### Pub-Sub System (`postie`)
 
 The `postie` target enables real-time updates through a pub-sub architecture. This includes:
 
@@ -94,11 +94,11 @@ The `postie` target enables real-time updates through a pub-sub architecture. Th
 - Channel update broadcasts
 - Typing indicators and ephemeral state
 
-### 📦 Message Size & Boundaries
+### Message Size & Boundaries
 
 WebSocket payloads are kept lightweight (typically under 1 MB). Media and file transfer are handled exclusively through the REST API to preserve performance.
 
-### 🔐 Encrypted State Storage
+### Encrypted State Storage
 
 User metadata (settings, preferences, etc.) is stored as an **encrypted blob**, retrievable using the `users/get-self` action. This ensures privacy and demonstrates advanced crypto handling.
 

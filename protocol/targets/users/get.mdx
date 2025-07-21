@@ -1,0 +1,115 @@
+---
+title: "Get"
+---
+
+# `get`
+
+Retrieves a [**public user**](/protocol/definitions/users/data#public-user-structure) by their user ID (Ed25519 public key). This action does not require authentication and returns only non-sensitive information.
+
+## Overview
+
+The `get` action allows clients to fetch basic profile information about any user by providing their public signing key. It is intended for public display purposes (e.g., when viewing another user's profile).
+
+## Client → Server
+
+<CodeGroup>
+
+```json Example
+{
+    "target": "users",
+    "data":{
+        "action": "get",
+        "params":{
+            "id": "5eVuMCsPe53zQPLfDZHyaSMPaNWWsoiZ4XYXZ35J8sQj"
+        }
+    }
+}
+```
+```json Schema
+{
+    "title": "Get Params Schema",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "/static/schemas/comms/users/get.json",
+    "type": "object",
+    "required": [
+        "id"
+    ],
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "base64"
+        }
+    }
+}
+```
+
+</CodeGroup>
+
+### Fields
+
+| Field | Description                         | Reference                                       |
+|-------|-------------------------------------|-------------------------------------------------|
+| `id`  | The ID of the user being requested. | [`users`](/protocol/definitions/users/identity) |
+
+## Server → Client
+
+<CodeGroup>
+```json Example
+{
+    "target": "users",
+    "data": {
+        "action": "get",
+        "params": {
+            "user": {  ...  }
+        }
+    }
+}
+```
+```json Schema
+{
+    "title": "Get Response Params Schema",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "/static/schemas/comms/users/get-response.json",
+    "type": "object",
+    "required": [
+        "user"
+    ],
+    "properties": {
+        "user": {
+            "type": "object",
+            "$ref": "/static/schemas/user/public-user.json"
+        }
+    }
+}
+```
+</CodeGroup>
+
+### Fields
+
+| Field  | Description                | Reference                                                               |
+|--------|----------------------------|-------------------------------------------------------------------------|
+| `user` | User information returned. | [`public-user`](/protocol/definitions/users/data#public-user-structure) |
+
+---
+
+<Danger>Errors</Danger>
+
+| Message        | Description                                 | Possible Causes                                                       |
+|----------------|---------------------------------------------|-----------------------------------------------------------------------|
+| `not-found`    | The requested user could not be found.      | The user ID does not exist or is not known to the server.             |
+| `malformed-id` | The provided user ID is not a valid format. | The ID is the wrong length, not base64url, or not a valid public key. |
+
+---
+
+<Note>Notes</Note>
+
+- This action returns only public fields such as display name, avatar, status, and reputation.
+- If the user does not exist, an [`error`](../error) message will be returned with `message: "User not found"`.
+
+---
+
+## See Also
+
+- [`get-self`](/protocol/users/get-self)
+- [`update-profile`](/protocol/users/update-profile)
+- [`rep-add`](/protocol/users/rep-add)
