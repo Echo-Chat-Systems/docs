@@ -1,5 +1,5 @@
 ---
-title: "Signin"
+title: "signin"
 description: "Step-by-step process for secure Ed25519-based user authentication."
 ---
 
@@ -55,7 +55,15 @@ The client initiates the authentication flow by sending its **Ed25519 public key
 ```
 </CodeGroup>
 
----
+#### Parameters
+
+<ParamField body="sk" type="string" required>
+    User [Public Signing Key](/protocol/definitions/crypto/keys.mdx#signing-key).
+</ParamField>
+<ParamField body="ek" type="string" required>
+    User [Public Encryption Key](/protocol/definitions/crypto/keys.mdx#encryption-key).
+</ParamField>
+
 
 ### 2. `signin-challenge` *(Server → Client)*
 
@@ -98,7 +106,16 @@ The server responds with a unique challenge string to be signed.
 }
 ```
 </CodeGroup>
----
+
+#### Parameters
+
+<ParamField body="sign-challenge" type="string" required>
+    Random string the user must sign.
+</ParamField>
+<ParamField body="encrypt-challenge" type="string" required>
+    Random string encrypted using the users public `ek`.
+</ParamField>
+
 
 ### 3. `signin-response`
 
@@ -142,13 +159,20 @@ The client signs the challenge using its **private key** and returns the signatu
 ```
 </CodeGroup>
 
----
+#### Parameters
+
+<ParamField body="signature" type="string" required>
+    Signature of `sign-challenge` calculated using user private `sk`.
+</ParamField>
+<ParamField body="decrypted" type="string" required>
+    Decrypted contents of `encrypt-challenge` using user private `ek`.
+</ParamField>
+
+
 
 ### 4. `signin-complete` *(Server → Client)*
 
 If the signature is valid, the server returns the authenticated user profile and session metadata.
-
-See [User Data](/protocol/definitions/users/data) for contents of `user` object.
 
 <CodeGroup>
 ```json Example
@@ -181,6 +205,12 @@ See [User Data](/protocol/definitions/users/data) for contents of `user` object.
 }
 ```
 </CodeGroup>
+
+#### Parameters
+
+<ParamField body="user" type="object" required>
+    [Private User Object](/protocol/definitions/users/data.mdx#private-user-structure).
+</ParamField>
 
 ---
 

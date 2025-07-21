@@ -1,0 +1,77 @@
+---
+title: "get-self"
+---
+
+# `get-self`
+
+Retrieves the full profile of the currently authenticated user. This action does not require a user ID, as it infers identity from the current session or connection state.
+
+## Overview
+
+This action allows a client to retrieve their own profile, including metadata such as public keys, display name, and account settings. It is primarily used during client startup after authentication is complete, or when refreshing local user state.
+
+---
+
+## Client → Server
+
+```json Example
+
+```
+```json Schema
+
+```
+
+
+<CodeGroup>
+
+</CodeGroup>
+
+### Parameters
+
+| Field            | Description                                  | Reference                  |
+|------------------|----------------------------------------------|----------------------------|
+
+
+---
+
+## Server → Client
+
+
+```json Example
+
+```
+```json Schema
+
+```
+<CodeGroup>
+
+</CodeGroup>
+
+### Parameters
+
+| Field                  | Description                                 | Reference            |
+|------------------------|---------------------------------------------|----------------------|
+
+---
+
+<Danger>Errors</Danger>
+
+| Message          | Description                                | Possible Causes                  |
+|------------------|--------------------------------------------|----------------------------------|
+| `unauthorized`   | No active session or invalid credentials   | The client has not authenticated |
+
+---
+
+<Note>Notes</Note>
+
+- This action is only available to authenticated clients.
+- The response is always scoped to the current session's user identity.
+- You can treat this as a canonical source of truth for client-side user initialization.
+
+---
+
+## See Also
+
+- [users/get](/protocol/users/get)
+- [auth/signin-complete](/protocol/auth/signin)
+- [auth/signout](/protocol/auth/signout)

@@ -1,5 +1,5 @@
 ---
-title: Signup
+title: signup
 description: Registers a new user with a keypair and basic profile.
 ---
 
@@ -51,13 +51,17 @@ Registers a new user on the server. This is a one-time operation per identity. T
 ```
 </CodeGroup>
 
-### Fields
+### Parameters
 
-| Field     | Description                                      | Reference                                                       |
-|-----------|--------------------------------------------------|-----------------------------------------------------------------|
-| `sig`     | Base64 encoded signature of `keys` and `profile` | -                                                               |
-| `keys`    | User-generated public keypair                    | [`pubkeys`](/protocol/definitions/crypto/keys#pubkeys)          |
-| `profile` | User public facing profile                       | [`profile`](/protocol/definitions/users/data#profile-structure) |
+<ParamField body="sig" type="string" required>
+    Base64 encoded signature of `keys` and `profile`
+</ParamField>
+<ParamField body="keys" type="object" required>
+    User-generated public [keypair](/protocol/definitions/crypto/keys#pubkeys)
+</ParamField>
+<ParamField body="profile" type="object" required>
+    User public facing [`profile`](/protocol/definitions/users/data#profile-structure)
+</ParamField>
 
 ---
 
@@ -75,11 +79,11 @@ Registers a new user on the server. This is a one-time operation per identity. T
 }
 ```
 
-| Field  | Description       | Reference                                                                 |
-|--------|-------------------|---------------------------------------------------------------------------|
-| `user` | Private user data | [`private-user`](/protocol/definitions/users/data#private-user-structure) |
+### Parameters
 
----
+<ParamField body="user" type="object" required>
+    Private [user data](/protocol/definitions/users/data#private-user-structure)
+</ParamField>
 
 <Danger>Errors</Danger>
 
