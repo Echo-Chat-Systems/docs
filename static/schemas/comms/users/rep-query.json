@@ -1,0 +1,15 @@
+﻿{
+    "title": "Reputation Query Params Schema",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "/static/schemas/comms/users/rep-query.json",
+    "type": "object",
+    "required": [
+        "pg"
+    ],
+    "properties": {
+        "pg": {
+            "type": "integer",
+            "minimum": 0
+        }
+    }
+}

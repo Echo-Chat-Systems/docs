@@ -1,0 +1,88 @@
+﻿---
+title: "rep-query"
+---
+
+# `rep-query`
+
+Allows a user to query all reputation remarks they have made in the past.
+
+## Overview
+
+Brief action overview.
+
+---
+
+## Client → Server
+
+<CodeGroup>
+```json Example
+{
+    "target": "users",
+    "data": {
+        "action": "rep-query",
+        "params": {
+            "pg": 0
+        }
+    }
+}
+```
+```json Schema
+{
+    "title": "Reputation Query Params Schema",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "/static/schemas/comms/users/rep-query.json",
+    "type": "object",
+    "required": [
+        "pg"
+    ],
+    "properties": {
+        "pg": {
+            "type": "integer",
+            "minimum": 0
+        }
+    }
+}
+```
+</CodeGroup>
+
+### Parameters
+
+<ParamField body="pg" type="integer">
+    Page number. Default = `0`
+</ParamField>
+
+## Server → Client
+
+<CodeGroup>
+```json Example
+
+```
+```json Schema
+
+```
+</CodeGroup>
+
+### Parameters
+
+<ParamField body="NAME" type="TYPE" required>
+    CONTENT
+</ParamField>
+
+
+<Danger>Errors</Danger>
+
+| Message         | Description                            | Possible Causes                                           |
+|-----------------|----------------------------------------|-----------------------------------------------------------|
+| `not-signed-in` | Cannot sign out because not signed in. | The user attempted to sign out without an active session. |
+
+---
+
+<Note>Notes</Note>
+
+NOTES
+
+---
+
+## See Also
+
+OTHER PAGES
