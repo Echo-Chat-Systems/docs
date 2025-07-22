@@ -163,10 +163,10 @@ This structure is used when the system needs to share a verified user identity w
 
 | Field     | Description                   | Reference                                                  |
 |-----------|-------------------------------|------------------------------------------------------------|
-| `origin`  | User origin server details.   | [`origin`](/protocol/definitions/meta/origin)              |
-| `keys`    | User public keys              | [`pubkeys`](/protocol/definitions/crypto/keys#pubkeys)     |
+| `origin`  | User origin server details.   | [`origin`](/protocol/definitions/meta/origin.mdx)              |
+| `keys`    | User public keys              | [`pubkeys`](/protocol/definitions/crypto/keys.mdx#pubkeys)     |
 | `profile` | User profile                  | [`profile`](#profile-structure)                            |
-| `rep`     | User public reputation record | [`rep`](/protocol/definitions/users/reputation#rep-object) |
+| `rep`     | User public reputation record | [`rep`](/protocol/definitions/users/reputation.mdx#rep-object) |
 
 This representation is visible to all clients and safe for sharing.
 
@@ -224,13 +224,13 @@ This form should never be shared directly with other clients.
 
 ### Fields
 
-| Field      | Description                                                   | Reference                                                  |
-|------------|---------------------------------------------------------------|------------------------------------------------------------|
-| `origin`   | User origin server details.                                   | [`origin`](/protocol/definitions/meta/origin)              |
-| `keys`     | User public keys                                              | [`pubkeys`](/protocol/definitions/crypto/keys#pubkeys)     |
-| `profile`  | User profile                                                  | [`profile`](#profile-structure)                            |
-| `rep`      | User public reputation record                                 | [`rep`](/protocol/definitions/users/reputation#rep-object) |
-| `settings` | Encrypted b64 encoded string containing user roaming settings | -                                                          |
+| Field      | Description                                                   | Reference                                                      |
+|------------|---------------------------------------------------------------|----------------------------------------------------------------|
+| `origin`   | User origin server details.                                   | [`origin`](/protocol/definitions/meta/origin.mdx)              |
+| `keys`     | User public keys                                              | [`pubkeys`](/protocol/definitions/crypto/keys.mdx#pubkeys)     |
+| `profile`  | User profile                                                  | [`profile`](#profile-structure)                                |
+| `rep`      | User public reputation record                                 | [`rep`](/protocol/definitions/users/reputation.mdx#rep-object) |
+| `settings` | Encrypted b64 encoded string containing user roaming settings | -                                                              |
 
 ---
 

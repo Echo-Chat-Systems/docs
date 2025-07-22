@@ -57,10 +57,10 @@ Registers a new user on the server. This is a one-time operation per identity. T
     Base64 encoded signature of `keys` and `profile`
 </ParamField>
 <ParamField body="keys" type="object" required>
-    User-generated public [keypair](/protocol/definitions/crypto/keys#pubkeys)
+    User-generated public [keypair](/protocol/definitions/crypto/keys.mdx#pubkeys)
 </ParamField>
 <ParamField body="profile" type="object" required>
-    User public facing [`profile`](/protocol/definitions/users/data#profile-structure)
+    User public facing [`profile`](/protocol/definitions/users/data.mdx#profile-structure)
 </ParamField>
 
 ---
@@ -82,7 +82,7 @@ Registers a new user on the server. This is a one-time operation per identity. T
 ### Parameters
 
 <ParamField body="user" type="object" required>
-    Private [user data](/protocol/definitions/users/data#private-user-structure)
+    Private [user data](/protocol/definitions/users/data.mdx#private-user-structure)
 </ParamField>
 
 <Danger>Errors</Danger>
@@ -104,6 +104,6 @@ Registers a new user on the server. This is a one-time operation per identity. T
 
 ## See Also
 
-- [`signin`](/protocol/auth/signin)
-- [`/protocol/definitions/users/data`](/protocol/definitions/users/data)
-- [`/protocol/definitions/crypto/keys`](/protocol/definitions/crypto/keys)
+- [`signin`](/protocol/targets/auth/signin.mdx)
+- [`/protocol/definitions/users/data`](/protocol/definitions/users/data.mdx)
+- [`/protocol/definitions/crypto/keys`](/protocol/definitions/crypto/keys.mdx)

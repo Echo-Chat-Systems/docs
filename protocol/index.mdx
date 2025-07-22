@@ -65,7 +65,8 @@ All messages sent via WebSocket follow a consistent envelope structure.
 
 ## REST API Format
 
-While most functionality is WebSocket-based, some large-payload operations (e.g., media uploads, encrypted blob storage) use REST. These endpoints are documented in the [REST API section](/rest/index).
+While most functionality is WebSocket-based, some large-payload operations (e.g., media uploads, encrypted blob storage)
+use REST. These endpoints are documented in the [REST API section](/protocol/rest/index.mdx).
 
 ---
 
@@ -114,14 +115,15 @@ responses to atomic client actions are covered in their respective pages.
 
 Want to jump straight in?
 
-| Target                           | Description                              |
-|----------------------------------|------------------------------------------|
-| [`auth`](/protocol/auth/index)   | Authentication and session handling.     |
-| [`users`](/protocol/users)       | Profile access, updates, and reputation. |
-| [`guilds`](/protocol/guilds)     | Guild (server) creation and management.  |
-| [`channels`](/protocol/channels) | Channel creation, updates, and listing.  |
-| [`messages`](/protocol/messages) | Messaging actions including reactions.   |
-| [`invites`](/protocol/invites)   | Guild invite management.                 |
-| [`postie`](/protocol/postie)     | Pub/sub channel and state updates.       |
-| [`admin`](/protocol/admin)       | Reserved for administrative features.    |
+| Target                                             | Description                              |
+|----------------------------------------------------|------------------------------------------|
+| [`auth`](/protocol/targets/auth/index.mdx)         | Authentication and session handling.     |
+| [`users`](/protocol/targets/users/index.mdx)       | Profile access, updates, and reputation. |
+| [`social`](/protocol/targets/social/index.mdx)     |                                          |
+| [`guilds`](/protocol/targets/guilds/index.mdx)     | Guild (server) creation and management.  |
+| [`channels`](/protocol/targets/channels/index.mdx) | Channel creation, updates, and listing.  |
+| [`messages`](/protocol/targets/messages/index.mdx) | Messaging actions including reactions.   |
+| [`invites`](/protocol/targets/invites/index.mdx)   | Guild invite management.                 |
+| [`postie`](/protocol/targets/postie/index.mdx)     | Pub/sub channel and state updates.       |
+| [`admin`](/protocol/targets/admin/index.mdx)       | Reserved for administrative features.    |
 
