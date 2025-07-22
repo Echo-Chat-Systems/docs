@@ -47,6 +47,10 @@ Each remark is a JSON object **signed by its issuer**. A single remark looks lik
                 },
                 "comment": {
                     "type": "string"
+                },
+                "timestamp": {
+                    "type": "string",
+                    "format": "datetime"
                 }
             },
             "required": [
@@ -60,14 +64,16 @@ Each remark is a JSON object **signed by its issuer**. A single remark looks lik
             "bSNvOjhOUjVGYS4lKyNqUEpJeURBWQ==": {
                 "direction": 1,
                 "user": "M2NMU0ovaWUpN2ZxIjRmWC5AUVpiWA==",
-                "comment": "Great user, very helpful!"
+                "comment": "Great user, very helpful!",
+                "timestamp": "2025/22/07 1539h"
             }
         },
         {
             "RXI0TVMkTTtCYE5pLVh+SFlLbWA9RE5e": {
                 "direction": -1,
                 "user": "dDMtMlRheyVPWS9FV15nOEAuXHNCNy1s",
-                "comment": "Had a bad experience, would not recommend."
+                "comment": "Had a bad experience, would not recommend.",
+                "timestamp": "2025/22/07 1539h"
             }
         }
     ]
@@ -77,20 +83,24 @@ Each remark is a JSON object **signed by its issuer**. A single remark looks lik
 
 ### Fields
 
-<ParamField body="sig" type="string">
+<ParamField body="sig" type="string" required>
     The actual signature value of the remark as calculated by the user.
 </ParamField>
 
-<ParamField body="dir" type="int">
+<ParamField body="dir" type="int" required>
     Direction of the remark. `1` = positive, `-1` = negative, `0` = neutral.
 </ParamField>
 
-<ParamField body="com" type="string">
+<ParamField body="com" type="string" required>
     A short comment explaining the remark. Optional.
 </ParamField>
 
-<ParamField body="usr" type="string">
+<ParamField body="usr" type="string" required>
     The public signing key of the user who issued the remark.
+</ParamField>
+
+<ParamField body="timestamp" type="string" required>
+    The date and time the remark was made.
 </ParamField>
 
 Each remark **must be signed** using the issuer's signing key. The hash of the remark and its signature is used as the unique `sig` key.

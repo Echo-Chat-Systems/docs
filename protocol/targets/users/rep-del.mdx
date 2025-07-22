@@ -1,0 +1,68 @@
+﻿---
+title: "rep-del"
+---
+
+# `rep-del`
+
+Removes an existing public rep remark from another user. Used to allow editing or removal of old and inaccurate remarks.
+
+## Overview
+
+This action allows a user to remove an existing reputation remark they have made against another user. Reputation
+remarks are immutable, meaning that this action allows the closest thing to editing an existing remark available.
+
+---
+
+## Client → Server
+
+<CodeGroup>
+```json Example
+{
+    "target": "user",
+    "data": {
+        "action": "rep-del",
+        "params": {
+            "user": ""
+        }
+    }
+}
+```
+```json Schema
+{
+    "title": "Reputation Delete Params Schema",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "/static/schemas/comms/users/rep-del.json",
+    "type": "object",
+    "required": [
+        "user"
+    ],
+    "properties": {
+        "user": {
+            "type": "string"
+        }
+    }
+}
+```
+</CodeGroup>
+
+### Parameters
+
+<ParamField body="user" type="string" required>
+    [User ID](/protocol/definitions/users/identity.mdx) of target user.
+</ParamField>
+
+## Server → Client
+
+On success, the server returns a [generic acknowledgment](/protocol/targets/generic-ack.mdx).
+
+<Danger>Errors</Danger>
+
+| Message     | Description                                            | Possible Causes |
+|-------------|--------------------------------------------------------|-----------------|
+| `not-found` | Current user does not have any remarks on target user. |                 |
+
+---
+
+<Note>Notes</Note>
+
+- The active user must have an existing remark on the target user.

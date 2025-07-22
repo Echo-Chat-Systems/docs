@@ -21,6 +21,10 @@
                 },
                 "comment": {
                     "type": "string"
+                },
+                "timestamp": {
+                    "type": "string",
+                    "format": "datetime"
                 }
             },
             "required": [
