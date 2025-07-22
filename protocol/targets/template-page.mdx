@@ -1,0 +1,88 @@
+﻿---
+title: "ACTION NAME"
+---
+
+# `action name`
+
+What this action does.
+
+## Overview
+
+Brief action overview.
+
+---
+
+## Client → Server
+
+<CodeGroup>
+```json Example
+
+```
+```json Schema
+
+```
+</CodeGroup>
+
+### Parameters
+
+<ParamField body="NAME" type="TYPE" required>
+    CONTENT
+</ParamField>
+
+## Server → Client
+
+On success, the server returns a [generic acknowledgment](/protocol/targets/generic-ack.mdx).
+
+<Danger>Errors</Danger>
+
+| Message             | Description                                              | Possible Causes                                                              |
+|---------------------|----------------------------------------------------------|------------------------------------------------------------------------------|
+| `invalid-signature` | The remark's signature could not be verified.            | The `sig` field is missing, malformed, or does not match the remark payload. |
+| `invalid-target`    | The specified target user is invalid or unknown.         | The `usr` field refers to a nonexistent or malformed public key.             |
+| `duplicate-remark`  | A remark from this sender to this target already exists. | The sender has previously submitted a remark for this user.                  |
+
+
+
+
+
+
+OR
+
+
+
+
+## Server → Client
+
+<CodeGroup>
+```json Example
+
+```
+```json Schema
+
+```
+</CodeGroup>
+
+### Parameters
+
+<ParamField body="NAME" type="TYPE" required>
+    CONTENT
+</ParamField>
+
+
+<Danger>Errors</Danger>
+
+| Message         | Description                            | Possible Causes                                           |
+|-----------------|----------------------------------------|-----------------------------------------------------------|
+| `not-signed-in` | Cannot sign out because not signed in. | The user attempted to sign out without an active session. |
+
+---
+
+<Note>Notes</Note>
+
+NOTES
+
+---
+
+## See Also
+
+OTHER PAGES
