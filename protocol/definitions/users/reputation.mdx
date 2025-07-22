@@ -77,12 +77,21 @@ Each remark is a JSON object **signed by its issuer**. A single remark looks lik
 
 ### Fields
 
-| Field | Type           | Description                                                              |
-|-------|----------------|--------------------------------------------------------------------------|
-| `sig` | `string`       | The actual signature value of the remark as calculated by the user.      |
-| `dir` | `-1 \| 0 \| 1` | Direction of the remark. `1` = positive, `-1` = negative, `0` = neutral. |
-| `com` | `string`       | A short comment explaining the remark. Optional.                         |
-| `usr` | `string`       | The public signing key of the user who issued the remark.                |
+<ParamField body="sig" type="string">
+    The actual signature value of the remark as calculated by the user.
+</ParamField>
+
+<ParamField body="dir" type="int">
+    Direction of the remark. `1` = positive, `-1` = negative, `0` = neutral.
+</ParamField>
+
+<ParamField body="com" type="string">
+    A short comment explaining the remark. Optional.
+</ParamField>
+
+<ParamField body="usr" type="string">
+    The public signing key of the user who issued the remark.
+</ParamField>
 
 Each remark **must be signed** using the issuer's signing key. The hash of the remark and its signature is used as the unique `sig` key.
 
