@@ -1,0 +1,90 @@
+﻿---
+title: "rep-add"
+---
+
+# `rep-add`
+
+Adds a new signed public reputation remark to another user. This is used to signal positive, negative, or neutral trust toward a given user identity.
+
+## Overview
+
+This action allows clients to append a new reputation remark to another user's public reputation history. All remarks are signed using the sender's signing key and are publicly visible. This feature provides a decentralized way to evaluate trustworthiness over time.
+
+---
+
+## Client → Server
+
+<CodeGroup>
+```json Example
+{
+    "target": "users",
+    "data": {
+        "action": "rep-add",
+        "params": {
+            "user": "",
+            "remark": {  ...  }
+        }
+    }
+}
+```
+```json Schema
+{
+    "title": "Rep Add Params Schema",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "/static/schemas/comms/users/rep-add.json",
+    "type": "object",
+    "required": [
+        "user"
+    ],
+    "properties": {
+        "user": {
+            "type": "string",
+            "format": "base64"
+        },
+        "remark": {
+            "type": "object",
+            "$ref": "/static/schemas/user/reputation/remark.json"
+        }
+    }
+}
+```
+</CodeGroup>
+
+### Parameters
+
+<ParamField body="user" type="string" required>
+    Target [user id](/protocol/definitions/users/identity.mdx).
+</ParamField>
+<ParamField>
+    [Remark](/protocol/definitions/users/reputation.mdx#remark-structure) to add.
+</ParamField>
+
+
+## Server → Client
+
+On success, the server returns a [generic acknowledgment](/protocol/targets/generic-ack.mdx).
+
+<Danger>Errors</Danger>
+
+| Message             | Description                                              | Possible Causes                                                              |
+|---------------------|----------------------------------------------------------|------------------------------------------------------------------------------|
+| `invalid-signature` | The remark's signature could not be verified.            | The `sig` field is missing, malformed, or does not match the remark payload. |
+| `invalid-target`    | The specified target user is invalid or unknown.         | The `usr` field refers to a nonexistent or malformed public key.             |
+| `duplicate-remark`  | A remark from this sender to this target already exists. | The sender has previously submitted a remark for this user.                  |
+
+---
+
+<Note>Notes</Note>
+
+- Reputation remarks are immutable and must be signed before submission.
+- Servers may throttle or reject submissions that appear spammy or malicious.
+- Only one remark per user per sender is allowed. Submitting another will overwrite the old one.
+
+---
+
+## See Also
+
+- [`get`](/protocol/targets/users/get.mdx)
+- [`get-self`](/protocol/targets/users/get-self.mdx)
+- [`update`](/protocol/targets/users/update.mdx)
+- [`signup`](/protocol/targets/auth/signup.mdx)

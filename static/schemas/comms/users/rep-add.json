@@ -1,0 +1,19 @@
+﻿{
+    "title": "Rep Add Params Schema",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "/static/schemas/comms/users/rep-add.json",
+    "type": "object",
+    "required": [
+        "user"
+    ],
+    "properties": {
+        "user": {
+            "type": "string",
+            "format": "base64"
+        },
+        "remark": {
+            "type": "object",
+            "$ref": "/static/schemas/user/reputation/remark.json"
+        }
+    }
+}

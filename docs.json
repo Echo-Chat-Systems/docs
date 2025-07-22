@@ -73,7 +73,8 @@
                                 "pages": [
                                     "protocol/targets/users/index",
                                     "protocol/targets/users/get",
-                                    "protocol/targets/users/get-self"
+                                    "protocol/targets/users/get-self",
+                                    "protocol/targets/users/rep-add"
                                 ]
                             }
                         ]
