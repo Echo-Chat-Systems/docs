@@ -8,57 +8,65 @@ Retrieves the full profile of the currently authenticated user. This action does
 
 ## Overview
 
-This action allows a client to retrieve their own profile, including metadata such as public keys, display name, and account settings. It is primarily used during client startup after authentication is complete, or when refreshing local user state.
+This action allows a client to retrieve all of their private user information. It is primarily used during client startup after authentication is complete, or when refreshing local user state.
 
 ---
 
 ## Client → Server
 
 ```json Example
-
+{
+    "target": "users",
+    "data": {
+        "action": "get-self",
+        "params": {}
+    }
+}
 ```
-```json Schema
 
-```
-
-
-<CodeGroup>
-
-</CodeGroup>
-
-### Parameters
-
-| Field            | Description                                  | Reference                  |
-|------------------|----------------------------------------------|----------------------------|
-
+> This action has no parameters.
 
 ---
 
 ## Server → Client
 
-
-```json Example
-
-```
-```json Schema
-
-```
 <CodeGroup>
 
+```json Example
+{
+    "target": "users",
+    "data": {
+        "action": "get-self",
+        "params": {
+            "user": {  ...  }
+        }
+    }
+}
+```
+```json Schema
+{
+    "title": "Get-Self Response Params Schema",
+    "$id": "/static/schemas/user/private-user.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema" ,
+    "type": "object",
+    "required": [
+        "user"
+    ],
+    "properties": {
+        "user": {
+            "type": "object",
+            "$ref": "/static/schemas/user/private-user.json"
+        }
+    }
+}
+```
 </CodeGroup>
 
 ### Parameters
 
-| Field                  | Description                                 | Reference            |
-|------------------------|---------------------------------------------|----------------------|
-
----
-
-<Danger>Errors</Danger>
-
-| Message          | Description                                | Possible Causes                  |
-|------------------|--------------------------------------------|----------------------------------|
-| `unauthorized`   | No active session or invalid credentials   | The client has not authenticated |
+<ParamField body="user" type="object" required>
+    [Private User Object](/protocol/definitions/users/data.mdx#private-user-structure)
+</ParamField>
 
 ---
 
@@ -72,6 +80,6 @@ This action allows a client to retrieve their own profile, including metadata su
 
 ## See Also
 
-- [users/get](/protocol/users/get)
-- [auth/signin-complete](/protocol/auth/signin)
-- [auth/signout](/protocol/auth/signout)
+- [users/get](/protocol/targets/users/get.mdx)
+- [auth/signin-complete](/protocol/targets/auth/signin.mdx)
+- [auth/signout](/protocol/targets/auth/signout.mdx)

@@ -1,0 +1,64 @@
+﻿---
+title: Generic Acknowledge
+---
+
+# Generic Acknowledge
+
+At many points throughout the application it is useful to have a generic acknowledge message to allow an actor to acknowledge
+that they have received and actioned a request without needing to return any data.
+
+## Structure
+
+```json Example
+{
+    "target": "",
+    "data": {
+        "action": "",
+        "params": {
+            "status": "ok"
+        }
+    }
+}
+```
+```json Schema
+{
+    "title": "Generic Acknowledge Message Format",
+    "$id": "/static/schemas/comms/generic-ack.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "required": ["target", "data"],
+    "properties": {
+        "target": {
+            "type": "string"
+        },
+        "data": {
+            "type": "object",
+            "required": ["action", "params"],
+            "properties": {
+                "action": {
+                    "type": "string"
+                },
+                "params": {
+                    "type": "object",
+                    "required": ["status"],
+                    "properties": {
+                        "status": {
+                            "type": "string",
+                            "const": "ok"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+<ParamField body="target" type="string" required>
+    Target of the message being acknowledged.
+</ParamField>
+<ParamField body="action" type="string" required>
+    Action of the message being acknowledged.
+</ParamField>

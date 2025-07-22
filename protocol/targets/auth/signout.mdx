@@ -15,7 +15,8 @@ Ends the user's current authenticated session. This action should be called when
 {
     "target": "auth",
     "data": {
-        "action": "signout"
+        "action": "signout",
+        "params": {}
     }
 }
 ```
@@ -26,19 +27,9 @@ Ends the user's current authenticated session. This action should be called when
 
 ## Server → Client
 
-In the event the signout completes, the following message is sent to the client. If the signout fails the appropriate [error message](/protocol/targets/error) is sent.
+In the event the signout completes, A [generic acknowledgment](/protocol/targets/generic-ack.mdx) is sent to the client.
+If the signout fails the appropriate [error message](/protocol/targets/error.mdx) is sent.
 
-```json Example
-{
-    "target": "auth",
-    "data": {
-        "action": "signout",
-        "params": {
-            "status": "ok"
-        }
-    }
-}
-```
 
 ---
 

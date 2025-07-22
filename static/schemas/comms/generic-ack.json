@@ -1,0 +1,31 @@
+﻿{
+    "title": "Generic Acknowledge Message Format",
+    "$id": "/static/schemas/comms/generic-ack.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "required": ["target", "data"],
+    "properties": {
+        "target": {
+            "type": "string"
+        },
+        "data": {
+            "type": "object",
+            "required": ["action", "params"],
+            "properties": {
+                "action": {
+                    "type": "string"
+                },
+                "params": {
+                    "type": "object",
+                    "required": ["status"],
+                    "properties": {
+                        "status": {
+                            "type": "string",
+                            "const": "ok"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

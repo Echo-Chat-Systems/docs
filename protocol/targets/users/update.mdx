@@ -1,0 +1,74 @@
+﻿---
+title: "update"
+---
+
+# `update`
+
+Updates the authenticated user's profile or settings. This action allows a user to modify any or all of their private user data
+bar their keys.
+
+## Overview
+
+The `update` action is used by clients to persist profile or settings changes. Only the authenticated user can update their own information.
+All changes are subject to server-side validation and may be rejected if invalid.
+
+---
+
+## Client → Server
+
+<CodeGroup>
+```json Example
+{
+    "target": "users",
+    "data": {
+        "action": "update",
+        "params": {
+            "user": {  ...  }
+        }
+    }
+}
+```
+```json Schema
+{
+    "title": "Update Params Schema",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "/static/schemas/comms/users/update.json",
+    "type": "object",
+    "required": [
+
+    ],
+    "properties": {
+        "user": {
+            "type": "object",
+            "$ref": "/static/schemas/user/private-user.json"
+        }
+    }
+}
+```
+</CodeGroup>
+
+### Parameters
+
+<ParamField body="user" type="object" required>
+    [Private User Object](/protocol/definitions/users/data.mdx#private-user-structure)
+</ParamField>
+
+---
+
+## Server → Client
+
+Response format is a [generic acknowledgement](/protocol/targets/generic-ack.mdx)
+
+---
+
+## Notes
+
+- Any fields omitted from the request are left unchanged.
+- The `settings` blob is never parsed by the server; it is stored as-is and should be encrypted by the client.
+
+---
+
+## See Also
+
+- [users/get-self](/protocol/targets/users/get-self.mdx)
+- [auth/signin-complete](/protocol/targets/auth/signin.mdx)

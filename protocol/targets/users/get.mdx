@@ -45,11 +45,11 @@ The `get` action allows clients to fetch basic profile information about any use
 
 </CodeGroup>
 
-### Fields
+### Properties
 
-| Field | Description                         | Reference                                           |
-|-------|-------------------------------------|-----------------------------------------------------|
-| `id`  | The ID of the user being requested. | [`users`](/protocol/definitions/users/identity.mdx) |
+<ParamField body="id" type="string" required>
+    [User](/protocol/definitions/users/identity.mdx) id.
+</ParamField>
 
 ## Server → Client
 
@@ -84,11 +84,11 @@ The `get` action allows clients to fetch basic profile information about any use
 ```
 </CodeGroup>
 
-### Fields
+### Parameters
 
-| Field  | Description                | Reference                                                                   |
-|--------|----------------------------|-----------------------------------------------------------------------------|
-| `user` | User information returned. | [`public-user`](/protocol/definitions/users/data.mdx#public-user-structure) |
+<ParamField body="user" type="object" required>
+    [Public User](/protocol/definitions/users/data.mdx#public-user-structure) requested.
+</ParamField>
 
 ---
 
@@ -97,7 +97,6 @@ The `get` action allows clients to fetch basic profile information about any use
 | Message        | Description                                 | Possible Causes                                                       |
 |----------------|---------------------------------------------|-----------------------------------------------------------------------|
 | `not-found`    | The requested user could not be found.      | The user ID does not exist or is not known to the server.             |
-| `malformed-id` | The provided user ID is not a valid format. | The ID is the wrong length, not base64url, or not a valid public key. |
 
 ---
 
