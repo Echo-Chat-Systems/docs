@@ -1,3 +1,114 @@
 ---
-title: "EchoAPI Home"
+title: Echo-Chat Documentation
 ---
+
+# Welcome to Echo-Chat
+
+_Echo-Chat_ is a fully open-source, decentralized real-time messaging protocol and reference application stack. Built
+with privacy, freedom, and extensibility in mind, Echo-Chat enables anyone to host their own chat server, build custom
+clients, or contribute new ideas to the core protocol—without needing permission from a central authority.
+
+This documentation hub is your gateway to understanding how Echo-Chat works from the ground up, and how you can extend
+or build on top of it.
+
+---
+
+## Why Echo-Chat?
+
+Modern chat applications often rely on closed platforms, opaque architectures, and centralized infrastructure. Echo-Chat is different:
+
+- **Open Source**: Every layer of the system—from the WebSocket protocol to the UI—is open and auditable.
+- **Decentralized**: Each Echo-Chat server is a sovereign instance, capable of interop with others, or operating in isolation if desired.
+- **Client-Agnostic**: Clients interact with servers via a clear, schema-driven WebSocket protocol. There is no vendor lock-in.
+- **Privacy First**: No global user identifiers, emails, or phone numbers. All authentication is cryptographic.
+- **Designed for Extendability**: Future-proof and modular. You can build custom bots, moderation tools, or entire new interfaces.
+
+---
+
+## How the Protocol Works
+
+Echo-Chat is built around a concise and highly structured **WebSocket protocol**. Clients and servers exchange messages
+in a predictable, schema-validated format.
+
+Each message sent over the wire follows a universal structure:
+
+```json
+{
+  "target": "string",
+  "data": {
+    "action": "string",
+    "params": {}
+  }
+}
+```
+
+This format ensures:
+
+- **Clean parsing logic** on both client and server sides.
+- **Microservice-friendly** design, where messages can be routed and processed by subsystems or worker pools.
+- **Readable and debuggable** communication for developers.
+- **Expandable** namespaces for future actions and feature sets.
+
+For a full breakdown of the message format, see [Basic WS Message Format](/protocol/format.mdx).
+
+---
+
+## Decentralization Philosophy
+
+Echo-Chat doesn’t rely on a central authority to define usernames, verify identities, or store your data. Instead:
+
+- **Users are identified by public keys**, not usernames.
+- **Servers can issue optional signed attestations** (certificates) to track reputations or verify user info.
+- **User settings and customisations are stored client-side**, optionally uploaded as encrypted blobs.
+- **Federation is opt-in**—you choose whether your server communicates with others or remains isolated.
+
+This approach lets communities, organizations, and individuals choose the level of autonomy and privacy they want.
+
+---
+
+## Components You Can Build
+
+Echo-Chat is not just a reference implementation. It’s a **platform**. You can build:
+
+- ✅ **Custom clients** (desktop, mobile, terminal-based, etc.)
+- ✅ **Alternate servers** with custom logic, moderation, or federation models
+- ✅ **Middleware** for bots, logging, analytics, or anti-abuse
+- ✅ **Gateways and bridges** to other chat systems
+- ✅ **Tooling** for admins or end-users
+
+All of this is enabled by a stable, transparent, schema-validated protocol.
+
+---
+
+## Start Exploring the Protocol
+
+To begin implementing your own Echo-Chat-compatible tool or service, head over to the [Protocol Reference](/protocol). You’ll find:
+
+- 📜 Message schemas
+- ⚡ Action definitions
+- 🔐 Authentication flows
+- 💬 Messaging and channel systems
+- 👥 User profiles and reputation
+
+Everything is documented with detailed examples, tables, and validation rules.
+
+---
+
+## Contribution & Community
+
+Echo-Chat thrives on transparency and collaboration. Contributions are welcomed to all parts of the client(s), server, documentation, and protocol.
+
+Whether you're building your own client or helping improve the spec, your input shapes the future of decentralized communication.
+
+- [Project GitHub](https://github.com/Echo-Chat-Systems/echo-chat)
+- [Contribution Guide](/articles/contributing)
+
+---
+
+## Summary
+
+Echo-Chat is more than a chat app. It’s a protocol for **freedom-respecting**, **verifiable**, and **modular**
+real-time communication. Whether you're hosting your own private network or building interoperable software,
+Echo-Chat gives you the foundation to do it right—with full control.
+
+Ready to dive in? [Explore the protocol →](/protocol)
