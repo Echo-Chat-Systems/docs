@@ -6,7 +6,16 @@
     "colors": {
         "primary": "#ff0000"
     },
-    "content": "",
+    "pages": [
+        {
+            "name": "Articles",
+            "path": "/articles"
+        },
+        {
+            "name": "Protocol",
+            "path": "/protocol"
+        }
+    ],
     "navigation": {
         "dropdowns": [
             {

@@ -2,7 +2,7 @@
 title: "Generic Error"
 ---
 
-import { Schema} from "/snippets/components.jsx";
+import {Schema, Tester} from '/old/snippets/components.jsx';
 
 # Generic Error Message
 
@@ -34,10 +34,24 @@ Any target or action combination is able to return the following errors when app
     }
 }
 ```
+```json Eg2
+   ballin
+```
 </CodeGroup>
 
-<Schema path="/error.json" />
-
+<Schema path="/comms/error.json">
+```json Example
+{
+    "target": "error",
+    "data": {
+        "action": "",
+        "params": {
+            "source": {}
+        }
+    }
+}
+```
+</Schema>
 
 ### Fields
 
