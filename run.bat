@@ -1,1 +1,1 @@
-mint dev --port 8100
+mint dev --port 8100 --debug

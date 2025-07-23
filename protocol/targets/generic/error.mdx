@@ -1,4 +1,16 @@
+---
+title: "Generic Error"
+---
+
+export function Tester(){
+    return (<p>
+        Test deez nutz!
+    </p>)
+}
+
 # Generic Error Message
+
+<Tester>Why is this not working?</Tester>
 
 This structure defines the format for all generic error messages returned by the server when an action fails or encounters a problem. All error responses use the `error` target and `error` action. They include the original client-sent message as context and a descriptive message string.
 
@@ -28,24 +40,10 @@ Any target or action combination is able to return the following errors when app
     }
 }
 ```
-```json Schema
-{
-    "title": "Error Params Schema",
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "/static/schemas/comms/error.json",
-    "type": "object",
-    "required": [
-        "source"
-    ],
-    "properties": {
-        "source": {
-            "type": "object",
-            "$ref": "/static/schemas/comms/basic-message.json"
-        }
-    }
-}
-```
 </CodeGroup>
+
+<Schema path="/error.json" />
+
 
 ### Fields
 

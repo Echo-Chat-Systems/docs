@@ -6,6 +6,7 @@
     "colors": {
         "primary": "#ff0000"
     },
+    "content": "",
     "navigation": {
         "dropdowns": [
             {
@@ -59,6 +60,13 @@
                     {
                         "group": "Targets",
                         "pages": [
+                            {
+                                "group": "Generics",
+                                "pages": [
+                                    "protocol/targets/generic/acknowledge",
+                                    "protocol/targets/generic/error"
+                                ]
+                            },
                             {
                                 "group": "Auth",
                                 "pages": [
