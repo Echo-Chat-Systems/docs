@@ -39,7 +39,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
-          cache-dependency-path: source/package-lock.json
+          cache-dependency-path: /source/package-lock.json
           cache: yarn
           
       - name: Install dependencies
