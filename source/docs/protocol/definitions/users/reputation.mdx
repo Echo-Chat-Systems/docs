@@ -1,0 +1,108 @@
+---
+title: User Reputation
+description: A decentralized, user-controlled reputation system.
+---
+
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+
+# User Reputation
+
+The reputation system is a **community self-moderation mechanism** built around **signed remarks**. Each user may issue feedback about other users by signing a `remark` object, which is stored under the target user's public record.
+
+---
+
+## Remark Structure
+
+Each remark is a JSON object **signed by its issuer**. A single remark looks like this:
+
+Each remark **must be signed** using the issuer's signing key. The hash of the remark and its signature is used as the unique `sig` key.
+
+
+<SchemaExample path="/user/reputation/remark.json">
+```json Example
+{
+    "sig": {
+        "dir": 1,
+        "com": "Helpful in tech support.",
+        "usr": "pubkey-of-issuer"
+    }
+}
+```
+</SchemaExample>
+
+<ParamsList>
+
+    <Param name="sig" type="string" required>
+        The actual signature value of the remark as calculated by the user.
+    </Param>
+
+    <Param name="dir" type="int" required>
+        Direction of the remark. `1` = positive, `-1` = negative, `0` = neutral.
+    </Param>
+
+    <Param name="com" type="string" required>
+        A short comment explaining the remark. Optional.
+    </Param>
+
+    <Param name="usr" type="string" required>
+        The public signing key of the user who issued the remark.
+    </Param>
+
+    <Param name="timestamp" type="string" required>
+        The date and time the remark was made.
+    </Param>
+</ParamsList>
+
+
+---
+
+## Rep Object
+
+A user’s `rep` object contains both a `points` tally and a set of signed remarks. The `remarks` are stored in a flat JSON object, using the **remark's signature** as the key:
+
+<SchemaExample path="/user/reputation/rep.json">
+```json Example
+{
+    "rep": {
+        "points": 100,
+        "remarks": {
+            "b2a1f...": {
+                "dir": 1,
+                "com": "Great community help.",
+                "usr": "abc123..."
+            },
+            "e3d8c...": {
+                "dir": -1,
+                "com": "Spammed a channel.",
+                "usr": "xyz456..."
+            }
+        }
+    }
+}
+```
+</SchemaExample>
+
+---
+
+## Rules for Modification
+
+- **Servers must never remove or modify remarks.**
+- **Only the original issuer** (`usr`) of a remark may revoke or replace it.
+- All changes to remarks must be cryptographically signed and verified.
+- This ensures transparency, accountability, and user control.
+
+---
+
+## Reputation Score
+
+The `points` field is a cached integer representing the **net sum** of all directional values (`dir`) in the `remarks`. It exists for convenience and fast UI rendering but **must not be treated as authoritative**.
+
+Clients may choose to calculate the actual score from `remarks` to verify correctness.
+
+---
+
+## Social Function
+
+Reputation is not just a number — it's a **living social record** of how a user is viewed by their peers. This empowers community-driven moderation without requiring centralized bans or hidden reports.

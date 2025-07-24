@@ -3,6 +3,8 @@ title: Origin
 description: Describes the original source of any given data or action.
 ---
 
+import {SchemaExample} from "@site/src/components/SchemaExample";
+
 # Origin
 
 The `origin` object is a lightweight structure that describes **where** a piece of data or request **originated** from. While currently included for metadata and audit purposes, it is designed to support **future federation and multi-server communication**.
@@ -13,35 +15,14 @@ The `origin` object is a lightweight structure that describes **where** a piece 
 
 An origin has two fields:
 
-<CodeGroup>
+<SchemaExample path="/meta/origin.json">
 ```json Example
 {
     "host": "example.com",
     "port": 443
 }
 ```
-```json Schema
-{
-    "title": "Origin Information Schema",
-    "$id": "/static/schemas/meta/origin.json",
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "type": "object",
-    "required": [
-        "host", "port"
-    ],
-    "properties": {
-        "host": {
-            "type": "string",
-            "format": "url"
-        },
-        "port": {
-            "type": "integer"
-        }
-    }
-}
-```
-</CodeGroup>
-
+</SchemaExample>
 
 ---
 
@@ -61,11 +42,3 @@ At present, the `origin` field is **informational only** and should not be trust
 
 - It is verified by a **trusted server signature**, or
 - The enclosing object is part of a **signed and authenticated context**
-
----
-
-## See Also
-
-- [`/protocol/definitions/users/data`](/protocol/definitions/users/data.mdx)
-- [`/protocol/definitions/users/reputation`](/protocol/definitions/users/reputation.mdx)
-- [`/protocol/definitions/crypto/keys`](/protocol/definitions/crypto/keys.mdx)

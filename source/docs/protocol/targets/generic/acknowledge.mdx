@@ -2,6 +2,10 @@
 title: "Generic Acknowledge"
 ---
 
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+
 # Generic Acknowledge
 
 At many points throughout the application it is useful to have a generic acknowledge message to allow an actor to acknowledge
@@ -9,6 +13,7 @@ that they have received and actioned a request without needing to return any dat
 
 ## Structure
 
+<SchemaExample path="/comms/generic-ack.json">
 ```json Example
 {
     "target": "",
@@ -20,45 +25,13 @@ that they have received and actioned a request without needing to return any dat
     }
 }
 ```
-```json Schema
-{
-    "title": "Generic Acknowledge Message Format",
-    "$id": "/static/schemas/comms/generic-ack.json",
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "type": "object",
-    "required": ["target", "data"],
-    "properties": {
-        "target": {
-            "type": "string"
-        },
-        "data": {
-            "type": "object",
-            "required": ["action", "params"],
-            "properties": {
-                "action": {
-                    "type": "string"
-                },
-                "params": {
-                    "type": "object",
-                    "required": ["status"],
-                    "properties": {
-                        "status": {
-                            "type": "string",
-                            "const": "ok"
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-```
+</SchemaExample>
 
-### Parameters
-
-<ParamField body="target" type="string" required>
-    Target of the message being acknowledged.
-</ParamField>
-<ParamField body="action" type="string" required>
-    Action of the message being acknowledged.
-</ParamField>
+<ParamsList>
+    <Param name="target" type="string" required>
+        Target of the message being acknowledged.
+    </Param>
+    <Param name="action" type="string" required>
+        Action of the message being acknowledged.
+    </Param>
+</ParamsList>

@@ -2,6 +2,10 @@
 title: "get"
 ---
 
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+
 # `get`
 
 Retrieves a [**public user**](/protocol/definitions/users/data.mdx#public-user-structure) by their user ID (Ed25519 public key). This action does not require authentication and returns only non-sensitive information.
@@ -12,8 +16,7 @@ The `get` action allows clients to fetch basic profile information about any use
 
 ## Client → Server
 
-<CodeGroup>
-
+<SchemaExample path="/comms/users/get.json">
 ```json Example
 {
     "target": "users",
@@ -25,35 +28,18 @@ The `get` action allows clients to fetch basic profile information about any use
     }
 }
 ```
-```json Schema
-{
-    "title": "Get Params Schema",
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "/static/schemas/comms/users/get.json",
-    "type": "object",
-    "required": [
-        "id"
-    ],
-    "properties": {
-        "id": {
-            "type": "string",
-            "format": "base64"
-        }
-    }
-}
-```
+</SchemaExample>
 
-</CodeGroup>
+<ParamsList>
+    <Param name="id" type="string" required>
+        [User](/protocol/definitions/users/identity.mdx) id.
+    </Param>
+</ParamsList>
 
-### Properties
-
-<ParamField body="id" type="string" required>
-    [User](/protocol/definitions/users/identity.mdx) id.
-</ParamField>
 
 ## Server → Client
 
-<CodeGroup>
+<SchemaExample path="/comms/users/get-response.json">
 ```json Example
 {
     "target": "users",
@@ -65,34 +51,15 @@ The `get` action allows clients to fetch basic profile information about any use
     }
 }
 ```
-```json Schema
-{
-    "title": "Get Response Params Schema",
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "/static/schemas/comms/users/get-response.json",
-    "type": "object",
-    "required": [
-        "user"
-    ],
-    "properties": {
-        "user": {
-            "type": "object",
-            "$ref": "/static/schemas/user/public-user.json"
-        }
-    }
-}
-```
-</CodeGroup>
+</SchemaExample>
 
-### Parameters
+<ParamsList>
+    <Param name="user" type="object" required>
+        [Public User](/protocol/definitions/users/data.mdx#public-user-structure) requested.
+    </Param>
+</ParamsList>
 
-<ParamField body="user" type="object" required>
-    [Public User](/protocol/definitions/users/data.mdx#public-user-structure) requested.
-</ParamField>
-
----
-
-<Danger>Errors</Danger>
+## Errors
 
 | Message        | Description                                 | Possible Causes                                                       |
 |----------------|---------------------------------------------|-----------------------------------------------------------------------|
@@ -100,6 +67,6 @@ The `get` action allows clients to fetch basic profile information about any use
 
 ---
 
-<Note>Notes</Note>
+## Notes
 
 - This action returns only public fields such as display name, avatar, status, and reputation.

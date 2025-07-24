@@ -2,6 +2,10 @@
 title: "get-self"
 ---
 
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+
 # `get-self`
 
 Retrieves the full profile of the currently authenticated user. This action does not require a user ID, as it infers identity from the current session or connection state.
@@ -30,8 +34,7 @@ This action allows a client to retrieve all of their private user information. I
 
 ## Server → Client
 
-<CodeGroup>
-
+<SchemaExample path="/comms/users/get-self-response.json">
 ```json Example
 {
     "target": "users",
@@ -43,34 +46,16 @@ This action allows a client to retrieve all of their private user information. I
     }
 }
 ```
-```json Schema
-{
-    "title": "Get-Self Response Params Schema",
-    "$id": "/static/schemas/user/private-user.json",
-    "$schema": "https://json-schema.org/draft/2020-12/schema" ,
-    "type": "object",
-    "required": [
-        "user"
-    ],
-    "properties": {
-        "user": {
-            "type": "object",
-            "$ref": "/static/schemas/user/private-user.json"
-        }
-    }
-}
-```
-</CodeGroup>
+</SchemaExample>
 
-### Parameters
+<ParamsList>
+    <Param name="user" type="object" required>
+        [Private User Object](/protocol/definitions/users/data.mdx#private-user-structure)
+    </Param>
+</ParamsList>
 
-<ParamField body="user" type="object" required>
-    [Private User Object](/protocol/definitions/users/data.mdx#private-user-structure)
-</ParamField>
 
----
-
-<Note>Notes</Note>
+## Notes
 
 - This action is only available to authenticated clients.
 - The response is always scoped to the current session's user identity.

@@ -4,6 +4,10 @@ title: "rep-del"
 
 # `rep-del`
 
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+
 Removes an existing public rep remark from another user. Used to allow editing or removal of old and inaccurate remarks.
 
 ## Overview
@@ -15,7 +19,7 @@ remarks are immutable, meaning that this action allows the closest thing to edit
 
 ## Client → Server
 
-<CodeGroup>
+<SchemaExample path="/comms/users/rep-del.json">
 ```json Example
 {
     "target": "user",
@@ -27,35 +31,20 @@ remarks are immutable, meaning that this action allows the closest thing to edit
     }
 }
 ```
-```json Schema
-{
-    "title": "Reputation Delete Params Schema",
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "/static/schemas/comms/users/rep-del.json",
-    "type": "object",
-    "required": [
-        "user"
-    ],
-    "properties": {
-        "user": {
-            "type": "string"
-        }
-    }
-}
-```
-</CodeGroup>
+</SchemaExample>
 
-### Parameters
+<ParamsList>
+    <Param name="user" type="string" required>
+        [User ID](/protocol/definitions/users/identity.mdx) of target user.
+    </Param>
+</ParamsList>
 
-<ParamField body="user" type="string" required>
-    [User ID](/protocol/definitions/users/identity.mdx) of target user.
-</ParamField>
 
 ## Server → Client
 
 On success, the server returns a [generic acknowledgment](/protocol/targets/generic-ack.mdx).
 
-<Danger>Errors</Danger>
+## Errors
 
 | Message     | Description                                            | Possible Causes |
 |-------------|--------------------------------------------------------|-----------------|
@@ -63,6 +52,6 @@ On success, the server returns a [generic acknowledgment](/protocol/targets/gene
 
 ---
 
-<Note>Notes</Note>
+## Notes
 
 - The active user must have an existing remark on the target user.

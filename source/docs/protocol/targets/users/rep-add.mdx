@@ -2,6 +2,10 @@
 title: "rep-add"
 ---
 
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+
 # `rep-add`
 
 Adds a new signed public reputation remark to another user. This is used to signal positive, negative, or neutral trust toward a given user identity.
@@ -14,7 +18,7 @@ This action allows clients to append a new reputation remark to another user's p
 
 ## Client → Server
 
-<CodeGroup>
+<SchemaExample path="/comms/users/rep-add.json">
 ```json Example
 {
     "target": "users",
@@ -27,44 +31,22 @@ This action allows clients to append a new reputation remark to another user's p
     }
 }
 ```
-```json Schema
-{
-    "title": "Rep Add Params Schema",
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "/static/schemas/comms/users/rep-add.json",
-    "type": "object",
-    "required": [
-        "user"
-    ],
-    "properties": {
-        "user": {
-            "type": "string",
-            "format": "base64"
-        },
-        "remark": {
-            "type": "object",
-            "$ref": "/static/schemas/user/reputation/remark.json"
-        }
-    }
-}
-```
-</CodeGroup>
+</SchemaExample>
 
-### Parameters
-
-<ParamField body="user" type="string" required>
-    Target [user id](/protocol/definitions/users/identity.mdx).
-</ParamField>
-<ParamField>
-    [Remark](/protocol/definitions/users/reputation.mdx#remark-structure) to add.
-</ParamField>
-
+<ParamsList>
+    <Param name="user" type="string" required>
+        Target [user id](/protocol/definitions/users/identity.mdx).
+    </Param>
+    <Param name="remark" type="object">
+        [Remark](/protocol/definitions/users/reputation.mdx#remark-structure) to add.
+    </Param>
+</ParamsList>
 
 ## Server → Client
 
 On success, the server returns a [generic acknowledgment](/protocol/targets/generic-ack.mdx).
 
-<Danger>Errors</Danger>
+## Errors
 
 | Message             | Description                                              | Possible Causes                                                              |
 |---------------------|----------------------------------------------------------|------------------------------------------------------------------------------|
@@ -74,7 +56,7 @@ On success, the server returns a [generic acknowledgment](/protocol/targets/gene
 
 ---
 
-<Note>Notes</Note>
+## Notes
 
 - Reputation remarks are immutable and must be signed before submission.
 - Servers may throttle or reject submissions that appear spammy or malicious.

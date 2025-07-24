@@ -2,6 +2,8 @@
 title: "Cryptographic Keys"
 ---
 
+import {SchemaExample} from "@site/src/components/SchemaExample";
+
 # Cryptographic Keys
 
 This page defines the terminology used throughout the documentation to refer to user identity and key cryptographic material.
@@ -42,32 +44,14 @@ The set of both public keys belonging to a user:
 
 The term `pubkeys` is used throughout the protocol to refer to this public key bundle.
 
-<CodeGroup>
+<SchemaExample path="/crypto/keypair.json">
 ```json Example
 {
     "sk": "BASE64/HEX_STRING",
     "ek": "BASE64/HEX_STRING"
 }
 ```
-```json Schema
-{
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "/static/schemas/auth/keypair.json",
-    "title": "Keypair Schema",
-    "type": "object",
-    "properties": {
-        "sk": {
-            "type": "string",
-            "format": "base64"
-        },
-        "ek": {
-            "type": "string",
-            "format": "base64"
-        }
-    }
-}
-```
-</CodeGroup>
+</SchemaExample>
 
 
 ### `keyset`
@@ -89,10 +73,3 @@ decision meant to enforce security.
 For this reason, it is absolutely **crucial** for users to store their keys in a secure, redundant fashion. A key handler
 system has been implemented in [EchoLib](https://github.com/Echo-Chat-Systems/EchoLib) to securely store user keys in an
 encrypted file locally.
-
----
-
-## See Also
-
-- [User Identity](/protocol/definitions/users/identity.mdx)
-- [Signing Actions](/protocol/targets/auth/signin.mdx)

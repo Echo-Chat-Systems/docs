@@ -2,6 +2,10 @@
 title: "update"
 ---
 
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+
 # `update`
 
 Updates the authenticated user's profile or settings. This action allows a user to modify any or all of their private user data
@@ -16,7 +20,7 @@ All changes are subject to server-side validation and may be rejected if invalid
 
 ## Client → Server
 
-<CodeGroup>
+<SchemaExample path="/comms/users/update.json">
 ```json Example
 {
     "target": "users",
@@ -28,36 +32,20 @@ All changes are subject to server-side validation and may be rejected if invalid
     }
 }
 ```
-```json Schema
-{
-    "title": "Update Params Schema",
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "/static/schemas/comms/users/update.json",
-    "type": "object",
-    "required": [
+</SchemaExample>
 
-    ],
-    "properties": {
-        "user": {
-            "type": "object",
-            "$ref": "/static/schemas/user/private-user.json"
-        }
-    }
-}
-```
-</CodeGroup>
+<ParamsList>
+    <Param name="user" type="object" required>
+        [Private User Object](/protocol/definitions/users/data.mdx#private-user-structure)
+    </Param>
+</ParamsList>
 
-### Parameters
-
-<ParamField body="user" type="object" required>
-    [Private User Object](/protocol/definitions/users/data.mdx#private-user-structure)
-</ParamField>
 
 ---
 
 ## Server → Client
 
-Response format is a [generic acknowledgement](/protocol/targets/generic-ack.mdx)
+Response format is a [generic acknowledgement](/protocol/targets/generic/acknowledge)
 
 ---
 

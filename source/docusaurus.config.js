@@ -12,7 +12,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 const config = {
     title: 'Echo-Chat Docs',
     tagline: 'Open Source Communication',
-    favicon: 'img/favicon.ico',
+    favicon: 'https://static.echo-chat.au/res/favicon.ico',
 
     // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
     future: {
@@ -63,15 +63,15 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
         ({
             // Replace with your project's social card
-            image: 'img/docusaurus-social-card.jpg',
+            image: 'https://static.echo-chat.au/res/icon.png',
             colorMode: {
                 respectPrefersColorScheme: true
             },
             navbar: {
                 title: 'Echo-Chat Docs',
                 logo: {
-                    alt: 'My Site Logo',
-                    src: 'img/logo.svg',
+                    alt: 'Ech-Chat Logo',
+                    src: 'https://static.echo-chat.au/res/logo.svg',
                 },
                 items: [
                     {

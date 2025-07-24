@@ -2,6 +2,10 @@
 title: "rep-query"
 ---
 
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+
 # `rep-query`
 
 Allows a user to query all reputation remarks they have made in the past.
@@ -14,7 +18,7 @@ Brief action overview.
 
 ## Client → Server
 
-<CodeGroup>
+<SchemaExample path="/comms/users/rep-query.json">
 ```json Example
 {
     "target": "users",
@@ -26,58 +30,54 @@ Brief action overview.
     }
 }
 ```
-```json Schema
+</SchemaExample>
+
+<ParamsList>
+    <Param name="pg" type="integer">
+        Page number. Default = `0`
+    </Param>
+</ParamsList>
+
+## Server → Client
+
+<SchemaExample path="/comms/users/rep-query-response.json">
+```json
 {
-    "title": "Reputation Query Params Schema",
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "/static/schemas/comms/users/rep-query.json",
-    "type": "object",
-    "required": [
-        "pg"
-    ],
-    "properties": {
-        "pg": {
-            "type": "integer",
-            "minimum": 0
+    "target": "users",
+    "data": {
+        "action": "rep-query",
+        "params": {
+        "users": {
+            "VWtNcnZPIDJLUFhrdXpxPTEgMGYrMz4=": {
+                "bSNvOjhOUjVGYS4lKyNqUEpJeURBWQ==": {
+                    "direction": 1,
+                    "user": "M2NMU0ovaWUpN2ZxIjRmWC5AUVpiWA==",
+                    "comment": "Great user, very helpful!"
+                    }
+                }
+            }
         }
     }
 }
 ```
-</CodeGroup>
+</SchemaExample>
 
-### Parameters
-
-<ParamField body="pg" type="integer">
-    Page number. Default = `0`
-</ParamField>
-
-## Server → Client
-
-```json Example
-
-```
-```json Schema
-
-```
-<CodeGroup>
-
-</CodeGroup>
-
-### Parameters
-
-<ParamField body="NAME" type="TYPE" required>
-    CONTENT
-</ParamField>
+<ParamsList>
+    <Param body="users" type="object" required>
+        Flat object containing [User Ids](/protocol/definitions/users/identity) as keys and
+        [Remark](/protocol/definitions/users/reputation#remark-structure) as values.
+    </Param>
+</ParamsList>
 
 
-<Danger>Errors</Danger>
+## Errors
 
-| Message         | Description                            | Possible Causes                                           |
-|-----------------|----------------------------------------|-----------------------------------------------------------|
-| `not-signed-in` | Cannot sign out because not signed in. | The user attempted to sign out without an active session. |
+| Message         | Description                                   | Possible Causes                                                               |
+|-----------------|-----------------------------------------------|-------------------------------------------------------------------------------|
+| `not-signed-in` | Cannot perform action without active session. | The user attempted to query their authored remarks without an active session. |
 
 ---
 
-<Note>Notes</Note>
+## Notes
 
-NOTES
+- This action queries only remarks authored by the current user.
