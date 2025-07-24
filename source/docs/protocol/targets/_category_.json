@@ -1,0 +1,8 @@
+﻿{
+    "label": "Targets",
+    "position": 2,
+    "link": {
+        "type": "generated-index",
+        "description": "WebSocket targets."
+    }
+}

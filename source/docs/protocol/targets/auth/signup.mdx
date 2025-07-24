@@ -3,6 +3,10 @@ title: signup
 description: Registers a new user with a keypair and basic profile.
 ---
 
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+
 # `signup`
 
 Registers a new user on the server. This is a one-time operation per identity. The user provides their keypair and basic public profile information. The server validates the input, stores the identity, and begins tracking reputation and other user-associated data.
@@ -11,7 +15,7 @@ Registers a new user on the server. This is a one-time operation per identity. T
 
 ## Client → Server
 
-<CodeGroup>
+<SchemaExample path="/comms/auth/signup.json">
 ```json Example
 {
     "target": "auth",
@@ -24,49 +28,24 @@ Registers a new user on the server. This is a one-time operation per identity. T
     }
 }
 ```
-```json Schema
-{
-    "title": "Signup Params Schema",
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "/static/schemas/comms/auth/signup.json",
-    "type": "object",
-    "required": [
-        "profile", "keys", "sig"
-    ],
-    "properties": {
-        "sig": {
-            "type": "string",
-            "format": "base64"
-        },
-        "keys": {
-            "type": "object",
-            "$ref": "/static/schemas/crypto/keypair.json"
-        },
-        "profile": {
-            "type": "object",
-            "$ref": "/static/schemas/user/profile.json"
-        }
-    }
-}
-```
-</CodeGroup>
+</SchemaExample>
 
-### Parameters
+<ParamsList>
+    <Param name="sig" type="string" required>
+        Base64 encoded signature of `keys` and `profile`
+    </Param>
+    <Param name="keys" type="object" required>
+        User-generated public [keypair](/protocol/definitions/crypto/keys.mdx#pubkeys)
+    </Param>
+    <Param name="profile" type="object" required>
+        User public facing [`profile`](/protocol/definitions/users/data.mdx#profile-structure)
+    </Param>
+</ParamsList>
 
-<ParamField body="sig" type="string" required>
-    Base64 encoded signature of `keys` and `profile`
-</ParamField>
-<ParamField body="keys" type="object" required>
-    User-generated public [keypair](/protocol/definitions/crypto/keys.mdx#pubkeys)
-</ParamField>
-<ParamField body="profile" type="object" required>
-    User public facing [`profile`](/protocol/definitions/users/data.mdx#profile-structure)
-</ParamField>
-
----
 
 ## Server → Client (Success)
 
+<SchemaExample path="/comms/auth/signup-response.json">
 ```json Example
 {
     "target": "auth",
@@ -78,14 +57,15 @@ Registers a new user on the server. This is a one-time operation per identity. T
     }
 }
 ```
+</SchemaExample>
 
-### Parameters
+<ParamsList>
+    <Param name="user" type="object" required>
+        Private [user data](/protocol/definitions/users/data.mdx#private-user-structure)
+    </Param>
+</ParamsList>
 
-<ParamField body="user" type="object" required>
-    Private [user data](/protocol/definitions/users/data.mdx#private-user-structure)
-</ParamField>
-
-<Danger>Errors</Danger>
+## Errors
 
 | Message          | Description                                    | Possible Causes                                                           |
 |------------------|------------------------------------------------|---------------------------------------------------------------------------|
@@ -94,7 +74,7 @@ Registers a new user on the server. This is a one-time operation per identity. T
 
 ---
 
-<Note>Notes</Note>
+## Notes
 
 - No passwords or emails are used.
 - Identity is derived solely from the cryptographic keys.

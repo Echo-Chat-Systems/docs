@@ -1,0 +1,28 @@
+﻿.param {
+    display: inline-block;
+    width: 100%;
+
+    .info {
+    }
+
+    .info-item {
+        font-size: x-small;
+        margin: 5px 5px 5px 5px ;
+    }
+
+    .name {
+
+    }
+
+    .type {
+
+    }
+
+    .required {
+        background: orangered;
+    }
+
+    .description {
+
+    }
+}

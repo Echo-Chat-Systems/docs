@@ -3,6 +3,10 @@ title: signout
 description: Signs the user out of the current session.
 ---
 
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+
 # `signout`
 
 Ends the user's current authenticated session. This action should be called when the user explicitly chooses to log out. It invalidates the current session token or authentication context, requiring a new signin process for further access.
@@ -33,7 +37,7 @@ If the signout fails the appropriate [error message](/protocol/targets/error.mdx
 
 ---
 
-<Danger>Errors</Danger>
+## Errors
 
 | Message         | Description                            | Possible Causes                                           |
 |-----------------|----------------------------------------|-----------------------------------------------------------|
@@ -41,7 +45,7 @@ If the signout fails the appropriate [error message](/protocol/targets/error.mdx
 
 ---
 
-<Note>Notes</Note>
+## Notes
 - This only affects the **current connection** or session context.
 - No permanent user data is deleted or modified.
 - Servers broadcast a `session-ended` postie event for status updates.
