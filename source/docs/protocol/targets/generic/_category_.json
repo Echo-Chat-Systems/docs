@@ -1,0 +1,8 @@
+﻿{
+    "label": "Generic",
+    "position": 1,
+    "link": {
+        "type": "generated-index",
+        "description": "Generic multi-target actions."
+    }
+}

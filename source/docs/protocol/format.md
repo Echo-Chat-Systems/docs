@@ -1,0 +1,103 @@
+---
+title: "Message Format"
+sidebar_position: 2
+---
+
+# Basic WebSocket Message Format
+
+This document defines the core structure used for all WebSocket communications in the protocol. It is intentionally simple, composable, and designed for long-term maintainability and clarity.
+
+## Overview
+
+All messages exchanged between the client and server—regardless of direction or intent—follow a consistent and predictable shape.
+This enables streamlined validation, clear routing, and future architectural flexibility (e.g., microservices).
+
+At the highest level, messages are JSON objects with the following structure:
+
+```json Example
+{
+    "target": "users",
+    "data": {
+        "action": "get",
+        "params": {
+            "id": "5eVuMCsPe53zQPLfDZHyaSMPaNWWsoiZ4XYXZ35J8sQj"
+        }
+    }
+}
+```
+```json Schema
+{
+    "title": "Basic WS Message Format",
+    "$id": "/static/schemas/comms/basic-message.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "required": ["target", "data"],
+    "properties": {
+        "target": {
+            "type": "string"
+        },
+        "data": {
+            "type": "object",
+            "required": ["action", "params"],
+            "properties": {
+                "action": {
+                    "type": "string"
+                },
+                "params": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
+```
+
+---
+
+### Fields
+
+| Field         | Description                                                               | Reference                                |
+|---------------|---------------------------------------------------------------------------|------------------------------------------|
+| `target`      | Top-level namespace (e.g., `auth`, `users`, `channels`) used for routing. | Internal router or microservice mapping. |
+| `data.action` | The specific action being performed (e.g., `signup`, `get-profile`).      | Defined per target.                      |
+| `data.params` | Payload specific to the given action.                                     | Schema varies by action.                 |
+
+---
+
+## Design Considerations
+
+The message format was designed to fulfill several long-term and operational goals:
+
+### 1. **Clean Routing**
+- Every message is unambiguously directed by the `target`.
+- This allows each subsystem (or future microservice) to independently validate and respond to its own messages.
+
+### 2. **Simple Validation**
+- Each `target/action` pair corresponds to a known request/response schema.
+- Makes it easy to enforce strict validation and reject malformed messages early.
+
+### 3. **High Readability**
+- The three-layer format (`target`, `action`, `params`) is easy to scan and reason about.
+- Consistency across every message improves debugging and developer UX.
+
+### 4. **Microservice-Ready**
+- In a horizontally scalable architecture, messages can be forwarded directly to services based on their `target`.
+- The format remains stable and self-contained even in distributed environments.
+
+### 5. **Reduced Ambiguity**
+- No magic keys, overloaded fields, or positional parameters.
+- Explicit separation of routing (`target`), behavior (`action`), and content (`params`).
+
+---
+
+## Notes
+
+- Future extensions to the protocol (e.g., metadata, versioning) can be introduced non-destructively.
+
+---
+
+## See Also
+
+- [Error Message Format](/protocol/targets/error.mdx)
+- [All Actions](/protocol/index.mdx)
+- [Example Actions](/protocol/targets/users/get.mdx)
