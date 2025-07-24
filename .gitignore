@@ -2,3 +2,4 @@
 *.dtmp
 .idea
 node_modules
+source/.docusaurus
