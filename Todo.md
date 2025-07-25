@@ -19,9 +19,9 @@
 | `users`    | `get`              | Retrieves a public user by ID                                             | ✅         |
 | ~          | `get-self`         | Retrieves full private user information including settings                | ✅         |
 | ~          | `update`           | Updates user profile and status                                           | ✅         |
-| ~          | `rep-add`          | Adds a reputation remark to a profile                                     |           |
-| ~          | `rep-del`          | Allows a user to delete a reputation remark they have previously made.    |           |
-| ~          | `rep-query`        | Allows a user to query what reputation remarks they have made in the past |           |
+| ~          | `rep-add`          | Adds a reputation remark to a profile                                     | ✅         |
+| ~          | `rep-del`          | Allows a user to delete a reputation remark they have previously made.    | ✅         |
+| ~          | `rep-query`        | Allows a user to query what reputation remarks they have made in the past | ✅         |
 | `guilds`   | `create`           | Creates a new guild                                                       |           |
 | ~          | `delete`           | Deletes a guild                                                           |           |
 | ~          | `get`              | Retrieves guild metadata                                                  |           |

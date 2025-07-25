@@ -23,17 +23,16 @@ Each remark **must be signed** using the issuer's signing key. The hash of the r
 <SchemaExample path="/user/reputation/remark.json">
 ```json Example
 {
-    "sig": {
-        "dir": 1,
-        "com": "Helpful in tech support.",
-        "usr": "pubkey-of-issuer"
-    }
+    "sig": "bSNvOjhOUjVGYS4lKyNqUEpJeURBWQ==",
+    "direction": 1,
+    "user": "M2NMU0ovaWUpN2ZxIjRmWC5AUVpiWA==",
+    "comment": "Great user, very helpful!",
+    "timestamp": "2025-07-25 20:19:53"
 }
 ```
 </SchemaExample>
 
 <ParamsList>
-
     <Param name="sig" type="string" required>
         The actual signature value of the remark as calculated by the user.
     </Param>
@@ -65,21 +64,22 @@ A user’s `rep` object contains both a `points` tally and a set of signed remar
 <SchemaExample path="/user/reputation/rep.json">
 ```json Example
 {
-    "rep": {
-        "points": 100,
-        "remarks": {
-            "b2a1f...": {
-                "dir": 1,
-                "com": "Great community help.",
-                "usr": "abc123..."
-            },
-            "e3d8c...": {
-                "dir": -1,
-                "com": "Spammed a channel.",
-                "usr": "xyz456..."
-            }
+    "points": 100,
+    "remarks": [
+        {
+            "sig": "bSNvOjhOUjVGYS4lKyNqUEpJeURBWQ==",
+            "direction": 1,
+            "user": "M2NMU0ovaWUpN2ZxIjRmWC5AUVpiWA==",
+            "comment": "Great user, very helpful!"
+        },
+        {
+            "sig": "RXI0TVMkTTtCYE5pLVh+SFlLbWA9RE5e",
+            "direction": -1,
+            "user": "dDMtMlRheyVPWS9FV15nOEAuXHNCNy1s",
+            "comment": "Had a bad experience, would not recommend."
         }
-    }
+    ]
+
 }
 ```
 </SchemaExample>

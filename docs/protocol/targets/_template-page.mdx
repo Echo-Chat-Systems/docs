@@ -2,6 +2,10 @@
 title: "ACTION NAME"
 ---
 
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+
 # `action name`
 
 What this action does.
@@ -14,62 +18,39 @@ Brief action overview.
 
 ## Client → Server
 
-<CodeGroup>
+<SchemaExample path="">
 ```json Example
 
 ```
-```json Schema
+</SchemaExample>
 
-```
-</CodeGroup>
-
-### Parameters
-
-<ParamField body="NAME" type="TYPE" required>
-    CONTENT
-</ParamField>
+<ParamsList>
+    <Param name="NAME" type="TYPE" required>
+        CONTENT
+    </Param>
+</ParamsList>
 
 ## Server → Client
 
 On success, the server returns a [generic acknowledgment](/protocol/targets/generic-ack.mdx).
 
-<Danger>Errors</Danger>
-
-| Message             | Description                                              | Possible Causes                                                              |
-|---------------------|----------------------------------------------------------|------------------------------------------------------------------------------|
-| `invalid-signature` | The remark's signature could not be verified.            | The `sig` field is missing, malformed, or does not match the remark payload. |
-| `invalid-target`    | The specified target user is invalid or unknown.         | The `usr` field refers to a nonexistent or malformed public key.             |
-| `duplicate-remark`  | A remark from this sender to this target already exists. | The sender has previously submitted a remark for this user.                  |
-
-
-
-
-
-
 OR
-
-
-
 
 ## Server → Client
 
-<CodeGroup>
+<SchemaExample path="">
 ```json Example
 
 ```
-```json Schema
+</SchemaExample>
 
-```
-</CodeGroup>
+<ParamsList>
+    <Param name="NAME" type="TYPE" required>
+        CONTENT
+    </Param>
+</ParamsList>
 
-### Parameters
-
-<ParamField body="NAME" type="TYPE" required>
-    CONTENT
-</ParamField>
-
-
-<Danger>Errors</Danger>
+## Errors
 
 | Message         | Description                                   | Possible Causes                                           |
 |-----------------|-----------------------------------------------|-----------------------------------------------------------|
@@ -77,6 +58,6 @@ OR
 
 ---
 
-<Note>Notes</Note>
+## Notes
 
 NOTES
