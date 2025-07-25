@@ -1,5 +1,5 @@
 ---
-title: User Data Representations
+title: User Data Format
 description: Public and private formats for user objects in the protocol.
 ---
 
@@ -7,7 +7,7 @@ import {SchemaExample} from "@site/src/components/SchemaExample";
 import {ParamsList} from "@site/src/components/ParamsList";
 import {Param} from "@site/src/components/Param";
 
-# User Data Representations
+# User Data Format
 
 This page defines the various structured forms in which user data may appear across the protocol. Depending on context,
 a user may be represented in a **profile**, as a **public-user**, or as a **private-user** with full internal data.
@@ -117,7 +117,7 @@ This structure is used when the system needs to share a verified user identity w
     </Param>
 
     <Param name="rep" type="object">
-        User public [reputation](/protocol/definitions/users/reputation.mdx#rep-object) record.
+        User public [reputation](/protocol/definitions/user/reputation.mdx#rep-object) record.
     </Param>
 </ParamsList>
 
@@ -158,7 +158,7 @@ This form should never be shared directly with other clients.
     </Param>
 
     <Param name="rep" type="object">
-        User public [reputation](/protocol/definitions/users/reputation.mdx#rep-object) record.
+        User public [reputation](/protocol/definitions/user/reputation.mdx#rep-object) record.
     </Param>
 
     <Param name="settings" type="string (b64)">

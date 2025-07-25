@@ -8,7 +8,7 @@ import {Param} from "@site/src/components/Param";
 
 # `get`
 
-Retrieves a [**public user**](/docs/protocol/definitions/users/data.mdx#public-user-structure) by their user ID (Ed25519 public key). This action does not require authentication and returns only non-sensitive information.
+Retrieves a [**public user**](/docs/protocol/definitions/user/data.mdx#public-user-structure) by their user ID (Ed25519 public key). This action does not require authentication and returns only non-sensitive information.
 
 ## Overview
 
@@ -32,7 +32,7 @@ The `get` action allows clients to fetch basic profile information about any use
 
 <ParamsList>
     <Param name="id" type="string" required>
-        [User](/docs/protocol/definitions/users/identity.mdx) id.
+        [User](/docs/protocol/definitions/user/identity.mdx) id.
     </Param>
 </ParamsList>
 
@@ -55,7 +55,7 @@ The `get` action allows clients to fetch basic profile information about any use
 
 <ParamsList>
     <Param name="user" type="object" required>
-        [Public User](/docs/protocol/definitions/users/data.mdx#public-user-structure) requested.
+        [Public User](/docs/protocol/definitions/user/data.mdx#public-user-structure) requested.
     </Param>
 </ParamsList>
 
