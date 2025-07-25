@@ -12,7 +12,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 const config = {
     title: 'Echo-Chat Docs',
     tagline: 'Open Source Communication',
-    favicon: 'https://static.echo-chat.au/res/favicon.ico',
+    favicon: 'https://static.echo-chat.au/res/logo.svg',
 
     // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
     future: {
