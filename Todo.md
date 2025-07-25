@@ -38,6 +38,7 @@
 | ~          | `get`              | Retrieves metadata for a single channel                                   |           |
 | ~          | `update`           | Updates channel metadata                                                  |           |
 | ~          | `list`             | Lists all channels in a guild                                             |           |
+| ~          | `get-users`        | Gets a list of all user IDs able to see the specified channel             |           |
 | `messages` | `send`             | Sends a message to a channel                                              |           |
 | ~          | `edit`             | Edits a previously sent message                                           |           |
 | ~          | `delete`           | Deletes a message                                                         |           |
