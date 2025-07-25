@@ -1,0 +1,48 @@
+---
+title: Channel Data Format
+sidebar_position: 1
+---
+
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+
+# Channel Data Format
+
+This page defines the representation format of a channel within the context of the protocol. A channel is defined as a
+place in which user-communication occurs. This can be either via text, voice, or video.
+
+---
+
+## Channel Format
+
+<SchemaExample path="/channel/channel.json">
+```json Example
+{
+    "id": 78403250234732458732,
+    "name": "General Chat",
+    "index": 1,
+    "config": {  ...  },
+    "customisation": {  ...  }
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="id" type="number" required>
+        Channel [id](/docs/protocol/snowflake).
+    </Param>
+    <Param name="name" type="string" required>
+        Channel name.
+    </Param>
+    <Param name="index" type="number">
+        0-Indexed channel position from the top within it's category.
+    </Param>
+    <Param name="config" type="object">
+        Channel [configuration](/docs/protocol/definitions/channel/config).
+    </Param>
+</ParamsList>
+
+## Notes
+
+- A channel also has a list of [members](/docs/protocol/definitions/channel/member) that is handled independently.
