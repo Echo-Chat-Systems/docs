@@ -1,5 +1,7 @@
 # TODO
 
+- Add some react magic to permissions.mdx to do interactive rendering and display for the bitmask
+
 ## All REST Endpoints
 
 -
