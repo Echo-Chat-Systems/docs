@@ -1,0 +1,99 @@
+---
+title: Object Identifiers
+sidebar_position: 3
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+# Identifier Design
+
+In designing Echo-Chat as a distributed, open protocol, one of the foundational decisions we faced was the format
+and generation strategy for unique identifiers. This document walks through the reasoning and trade-offs that
+led us to adopt a custom Snowflake-based ID scheme.
+
+## Existing Formats
+
+Everyone agrees: **sequential IDs are a non‑starter for modern, web‑scale systems.**
+They’re like incrementing invoice numbers on a single‑threaded spreadsheet—fine for a hobby blog, a nightmare once you
+introduce concurrency, sharding, or public scrutiny. Why?
+
+- **Global lock‑in.** One database (or a heavyweight coordinator) has to hand out the next number. No coordinator, no guarantee.
+- **Information leakage.** Your analytics are hanging out for anyone to see: create two messages, the IDs differ by 2, so… two new messages ever? A million? Instant privacy leak.
+- **Hot‑spot indices.** Every write lands in the same part of a B‑tree, choking performance.
+Databases can spread the pain, but you still pay in latch contention and cache pressure.
+
+So if sequential IDs are Flagrant Foul, #1, surely the antidote is **UUIDs**, right?
+
+> “They’re random! They’re unique! Problem solved…”
+
+Not quite. UUIDs introduce their own, sneakier trade‑offs:
+
+| Trait               | Sounds Good…                  | …Until You Realize                                                                                        |
+|---------------------|-------------------------------|-----------------------------------------------------------------------------------------------------------|
+| **Uniqueness**      | No central authority needed.  | True—but now you’ve traded coordination for 128 bits of entropy you have to store, transmit, and index.   |
+| **Random ordering** | Avoids hot‑spots.             | True—**too** random. Indices lose locality, range scans fragment, cache lines miss.                       |
+| **Opaque**          | No info leak.                 | Also no *ordering* info. You can’t sort by creation time without a secondary column or query on metadata. |
+| **Standardized**    | Drop‑in libraries everywhere. | Sure… and every ID is a 36‑character string that bloats URLs, logs, and front‑end payloads.               |
+
+In short, **UUIDs fix the “global coordination” headache, only to hand you “oversized, unsortable identifiers” in exchange.**
+That trade‑off matters:
+
+- APIs ship larger JSON bodies.
+- Databases work harder to keep random keys clustered.
+- Clients sort on a separate timestamp field (and hope it’s indexed).
+
+Which brings us to Snowflakes—the middle ground that preserves ordering, stays compact, and still keeps every node independent. (See the next section for how we implement them in Echo‑Chat.)
+
+## Enter Snowflakes
+
+Snowflake IDs, popularized by Twitter, are 64-bit integers that combine:
+
+- A timestamp
+- A machine ID
+- A sequence number
+
+They are designed to be:
+
+- **Globally unique** without coordination
+- **Roughly ordered by time**
+- **Compact** and efficiently indexable
+- **Relatively opaque** to users
+
+## Echo-Chat’s Custom Snowflake Implementation
+
+Echo-Chat uses a custom 64-bit Snowflake implementation tailored to our protocol’s needs:
+
+<Tabs>
+    <TabItem value="v1" label="V1">
+        | Bit(s) | Name              | Description                                                  |
+        |--------|-------------------|--------------------------------------------------------------|
+        | 44     | Timestamp         | Milliseconds since custom epoch (ensures temporal ordering)  |
+        | 16     | Sequence          | Per-node counter to resolve collisions in the same ms        |
+        | 4      | Snowflake Version | Identifies the version of the snowflake specification in use |
+
+        SnowflakeV1 is designed as the jumping off point for a simple single-executable server.
+    </TabItem>
+</Tabs>
+
+### Custom Epoch
+
+We use a custom epoch (e.g. `2025-01-01T00:00:00Z`) to ensure our timestamp fits cleanly within 41 bits for decades.
+
+### Benefits in Echo-Chat
+
+- **Chronological sortability**: Snowflakes reflect creation time.
+- **Decentralized safety**: Each node generates unique IDs without needing a master server.
+- **Low storage cost**: A single 64-bit integer is far more efficient than UUIDs.
+- **Compact representation**: Easy to store, log, and display.
+
+### Notes
+
+- IDs are directly represented as numeric values.
+- If two IDs are compared numerically, the one with the lower value was created first.
+
+## Conclusion
+
+Echo-Chat's Snowflake system offers a pragmatic balance between coordination-free distributed ID generation and
+practical sorting, indexing, and representation. It plays a foundational role in enabling our open,
+decentralized architecture.
