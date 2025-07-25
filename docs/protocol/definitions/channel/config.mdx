@@ -1,0 +1,33 @@
+---
+title: Channel Configuration
+sidebar_position: 3
+---
+
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+
+# Channel Config Data
+
+Channels can be configured in a great number of ways. This is designed to be extremely expandable.
+
+---
+
+## Channel Config Format
+
+<SchemaExample path="/channel/config.json">
+```json Example
+{
+    "access": {
+        "minimum-role-index": 12
+    }
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="access.minimum-role-index" type="int">
+        The minimum 0-based index of the required role rank in the guild to be able to access the chanel. -1 means all
+        users can access.
+    </Param>
+</ParamsList>

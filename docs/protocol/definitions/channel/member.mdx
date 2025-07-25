@@ -1,0 +1,62 @@
+---
+title: Channel Member
+sidebar_position: 2
+---
+
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+
+# Channel Member Data
+
+Every channel member has the option to override certain customisation properties of the channel in question. This
+is in place to allow for global client-side moderation systems. Additionally, a guild member with appropriate permissions
+may assign specific permissions to a user within the scope of the specified channel.
+
+---
+
+## Channel Member Config
+
+<SchemaExample path="/channel/member-config.json">
+```json Example
+{
+    "permissions": {
+        "voice": 47,
+        "text": 231423
+    }
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="permissions.voice" type="int">
+        [Permission](/docs/definitions/meta/permissions/) number for voice chat activities within the channel.
+    </Param>
+    <Param name="permissions.text" type="int">
+        [Permission](/docs/definitions/meta/permissions/) number for text chat activities within the channel.
+    </Param>
+</ParamsList>
+
+## Channel Member Format
+
+<SchemaExample path="/channel/member.json">
+```json
+{
+    "id": "VzU7MFJ7Q1N7WmhPMGFxOzxBPlpRSVRb",
+    "config": {  ...  },
+    "customisation-override": {  ...  }
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="id" type="string" required>
+        [Id](/docs/protocol/definitions/user/identity) of the user.
+    </Param>
+    <Param name="config" type="object" required>
+        [Channel Member Config](#channel-member-config) object.
+    </Param>
+    <Param name="customisation-override" type="object">
+        [Channel Customisation](/docs/protocol/definitions/channel/customisation) object with all keys optional.
+    </Param>
+</ParamsList>
