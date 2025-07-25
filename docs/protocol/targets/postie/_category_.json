@@ -1,0 +1,8 @@
+﻿{
+    "label": "Postie",
+    "position": 2,
+    "link": {
+        "type": "generated-index",
+        "description": "Pub-Sub related actions."
+    }
+}
