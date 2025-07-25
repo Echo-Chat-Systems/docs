@@ -1,12 +1,13 @@
 ---
 title: "Protocol Home"
 sidebar_position: 1
+slug: /protocol
 ---
 
 
-import {Schema} from "@site/src/components/Schema";
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
 
 # Protocol Overview
 
@@ -26,24 +27,17 @@ The protocol is the foundation for a real-time, secure, and privacy-focused mess
 
 All messages sent via WebSocket follow a consistent envelope structure.
 
-<Tabs>
-    <TabItem value="example" label="Example">
-        ```json
-        {
-            "target": "messages",
-            "data": {
-                "action": "send",
-                "params": {}
-            }
-        }
-        ```
-    </TabItem>
-    <TabItem value="schema" label="Schema">
-        <Schema path="/comms/basic-message.json">
-
-        </Schema>
-    </TabItem>
-</Tabs>
+<SchemaExample path="/comms/basic-message.json">
+```json
+{
+    "target": "messages",
+    "data": {
+        "action": "send",
+        "params": {}
+    }
+}
+```
+</SchemaExample>
 
 > This schema defines the structure for all messages sent over WebSocket. It enforces:
 > - A top-level `target` string field
@@ -53,7 +47,7 @@ All messages sent via WebSocket follow a consistent envelope structure.
 ## REST API Format
 
 While most functionality is WebSocket-based, some large-payload operations (e.g., media uploads, encrypted blob storage)
-use REST. These endpoints are documented in the [REST API section](/protocol/rest/index.mdx).
+use REST. These endpoints are documented in the [REST API section](/protocol/rest/index).
 
 ---
 
@@ -102,15 +96,15 @@ responses to atomic client actions are covered in their respective pages.
 
 Want to jump straight in?
 
-| Target                                             | Description                              |
-|----------------------------------------------------|------------------------------------------|
-| [`auth`](/protocol/targets/auth/index.mdx)         | Authentication and session handling.     |
-| [`users`](/protocol/targets/users/index.mdx)       | Profile access, updates, and reputation. |
-| [`social`](/protocol/targets/social/index.mdx)     |                                          |
-| [`guilds`](/protocol/targets/guilds/index.mdx)     | Guild (server) creation and management.  |
-| [`channels`](/protocol/targets/channels/index.mdx) | Channel creation, updates, and listing.  |
-| [`messages`](/protocol/targets/messages/index.mdx) | Messaging actions including reactions.   |
-| [`invites`](/protocol/targets/invites/index.mdx)   | Guild invite management.                 |
-| [`postie`](/protocol/targets/postie/index.mdx)     | Pub/sub channel and state updates.       |
-| [`admin`](/protocol/targets/admin/index.mdx)       | Reserved for administrative features.    |
+| Target                                         | Description                              |
+|------------------------------------------------|------------------------------------------|
+| [`auth`](/protocol/targets/auth/index)         | Authentication and session handling.     |
+| [`users`](/protocol/targets/users/index)       | Profile access, updates, and reputation. |
+| [`social`](/protocol/targets/social/index)     |                                          |
+| [`guilds`](/protocol/targets/guilds/index)     | Guild (server) creation and management.  |
+| [`channels`](/protocol/targets/channels/index) | Channel creation, updates, and listing.  |
+| [`messages`](/protocol/targets/messages/index) | Messaging actions including reactions.   |
+| [`invites`](/protocol/targets/invites/index)   | Guild invite management.                 |
+| [`postie`](/protocol/targets/postie/index)     | Pub/sub channel and state updates.       |
+| [`admin`](/protocol/targets/admin/index)       | Reserved for administrative features.    |
 

@@ -3,6 +3,10 @@ title: "Message Format"
 sidebar_position: 2
 ---
 
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+
 # Basic WebSocket Message Format
 
 This document defines the core structure used for all WebSocket communications in the protocol. It is intentionally simple, composable, and designed for long-term maintainability and clarity.
@@ -14,6 +18,7 @@ This enables streamlined validation, clear routing, and future architectural fle
 
 At the highest level, messages are JSON objects with the following structure:
 
+<SchemaExample path="/comms/basic-message.json">
 ```json Example
 {
     "target": "users",
@@ -25,44 +30,19 @@ At the highest level, messages are JSON objects with the following structure:
     }
 }
 ```
-```json Schema
-{
-    "title": "Basic WS Message Format",
-    "$id": "/static/schemas/comms/basic-message.json",
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "type": "object",
-    "required": ["target", "data"],
-    "properties": {
-        "target": {
-            "type": "string"
-        },
-        "data": {
-            "type": "object",
-            "required": ["action", "params"],
-            "properties": {
-                "action": {
-                    "type": "string"
-                },
-                "params": {
-                    "type": "object"
-                }
-            }
-        }
-    }
-}
-```
+</SchemaExample>
 
----
-
-### Fields
-
-| Field         | Description                                                               | Reference                                |
-|---------------|---------------------------------------------------------------------------|------------------------------------------|
-| `target`      | Top-level namespace (e.g., `auth`, `users`, `channels`) used for routing. | Internal router or microservice mapping. |
-| `data.action` | The specific action being performed (e.g., `signup`, `get-profile`).      | Defined per target.                      |
-| `data.params` | Payload specific to the given action.                                     | Schema varies by action.                 |
-
----
+<ParamsList>
+    <Param name="target" type="string" required>
+        Top-level namespace (e.g., `auth`, `users`, `channels`) used for routing.
+    </Param>
+    <Param name="action" type="string" required>
+        The specific action being performed (e.g., `signup`, `get-profile`).
+    </Param>
+    <Param name="params" type="object" required>
+        Payload specific to the given action.
+    </Param>
+</ParamsList>
 
 ## Design Considerations
 
@@ -98,6 +78,6 @@ The message format was designed to fulfill several long-term and operational goa
 
 ## See Also
 
-- [Error Message Format](/protocol/targets/error.mdx)
-- [All Actions](/protocol/index.mdx)
-- [Example Actions](/protocol/targets/users/get.mdx)
+- [Error Message Format](/protocol/targets/error)
+- [All Actions](/protocol/index)
+- [Example Actions](/protocol/targets/users/get)
