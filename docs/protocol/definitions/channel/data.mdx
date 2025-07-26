@@ -12,6 +12,8 @@ import {Param} from "@site/src/components/Param";
 This page defines the representation format of a channel within the context of the protocol. A channel is defined as a
 place in which user-communication occurs. This can be either via text, voice, or video.
 
+Additionally, channels can be organised into [categories](/docs/protocol/definitionss/config).
+
 ---
 
 ## Channel Format
@@ -21,6 +23,7 @@ place in which user-communication occurs. This can be either via text, voice, or
 {
     "id": 78403250234732458732,
     "name": "General Chat",
+    "category": 4322639236701192000,
     "index": 1,
     "config": {  ...  },
     "customisation": {  ...  }
@@ -34,6 +37,9 @@ place in which user-communication occurs. This can be either via text, voice, or
     </Param>
     <Param name="name" type="string" required>
         Channel name.
+    </Param>
+    <Param name="parent" type="number">
+        ID of the parent category this channel belongs to.
     </Param>
     <Param name="index" type="number">
         0-Indexed channel position from the top within it's category.
