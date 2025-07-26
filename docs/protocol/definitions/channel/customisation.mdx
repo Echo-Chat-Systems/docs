@@ -1,0 +1,51 @@
+---
+title: Channel Customisation
+---
+
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+
+*This page is a work in progress and will be updated during frontend development.*
+
+# Channel Customisation
+
+An individual channel can be customised by members with the appropriate permissions in various ways.
+
+## Channel Customisation Format
+
+<SchemaExample path="/guild/customisation.json">
+```json Example
+{
+    "media": {
+        "icon": "790731916234750",
+        "banner": "https://media.echo-chat.au/13453803694830154000",
+        "background": "https://media.echo-chat.au/7019046274155340000"
+    },
+    "topic": "Discussing photograpy.",
+    "status": "",
+    "css": "#chatwindow: {font-size: 10px;}"
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="media.icon" type="string">
+        Either a URL linking to a valid image file or a [snowflake](/docs/protocol/snowflake) referencing a [media](/docs/protocol/definitions/media/) item.
+    </Param>
+    <Param name="media.banner" type="string">
+        Either a URL linking to a valid image file or a [snowflake](/docs/protocol/snowflake) referencing a [media](/docs/protocol/definitions/media/) item.
+    </Param>
+    <Param name="media.background" type="string">
+        Either a URL linking to a valid image file or a [snowflake](/docs/protocol/snowflake) referencing a [media](/docs/protocol/definitions/media/) item.
+    </Param>
+    <Param name="topic" type="string">
+        Channel topic text.
+    </Param>
+    <Param name="status" type="string">
+        Channel status text.
+    </Param>
+    <Param name="css" type="string">
+        Additional channel css.
+    </Param>
+</ParamsList>
