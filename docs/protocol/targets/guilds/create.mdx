@@ -1,0 +1,63 @@
+---
+title: create
+---
+
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+
+# `create`
+
+Creates a new guild.
+
+## Overview
+
+Brief action overview.
+
+---
+
+## Client → Server
+
+<SchemaExample path="">
+    ```json Example
+
+    ```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="NAME" type="TYPE" required>
+        CONTENT
+    </Param>
+</ParamsList>
+
+## Server → Client
+
+On success, the server returns a [generic acknowledgment](/docs/protocol/targets/generic/acknowledge).
+
+OR
+
+## Server → Client
+
+<SchemaExample path="">
+    ```json Example
+
+    ```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="NAME" type="TYPE" required>
+        CONTENT
+    </Param>
+</ParamsList>
+
+## Errors
+
+| Message         | Description                                   | Possible Causes                                           |
+|-----------------|-----------------------------------------------|-----------------------------------------------------------|
+| `not-signed-in` | Cannot perform action without active session. | The user attempted to sign out without an active session. |
+
+---
+
+## Notes
+
+NOTES

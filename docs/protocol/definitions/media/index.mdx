@@ -1,0 +1,91 @@
+---
+title: Media
+---
+
+# Media System
+
+Echo-Chat defines a unified, minimal media architecture that supports **images**, **videos**, and **files** through a
+consistent REST-based access model. Everything from emoji to message attachments flows through this system.
+
+## Media Types
+
+All media objects in Echo-Chat fall into one of three broad categories:
+
+| Type  | Description                                                 |
+|-------|-------------------------------------------------------------|
+| Image | Static or animated pictures (e.g., PNG, JPEG, GIF, WEBP)    |
+| Video | Time-based visual media (e.g., MP4, WEBM)                   |
+| File  | Arbitrary binary blobs, including documents, archives, etc. |
+
+Internally, these are all handled the same way—with a **Snowflake ID**, an associated **MIME type**, and metadata.
+Whether you’re sending a selfie, a sticker, or a ZIP file, it’s just a media object.
+
+## What Uses Media?
+
+The media system backs **everything** that involves user-uploaded data:
+
+- **Custom emojis**
+- **Stickers**
+- **User avatars and banners**
+- **Guild icons and splash images**
+- **Message attachments**
+- **Embedded images/videos**
+
+There’s no parallel system—if it’s binary, it goes through media.
+
+## Access Pattern
+
+All media is accessed **via REST**, not WebSocket. This is deliberate.
+
+- WebSockets are reserved for fast, low-volume messaging and state sync.
+- Media, on the other hand, often involves megabytes of payload, cache headers, range requests, and CDN handling—classic REST territory.
+
+Every piece of media is assigned a **Snowflake ID** on upload. That ID is globally unique and timestamped, and can
+be used directly to retrieve the file:
+
+```http request
+GET https://media.echo-chat.au/:snowflake
+```
+
+For example:
+
+```http request
+GET https://media.echo-chat.au/910244598304374981
+```
+
+Returns the raw file stream, along with appropriate headers (Content-Type, Content-Disposition, etc).
+
+The media server or gateway may handle additional logic:
+
+- Byte-range requests
+- Expiry or quarantine flags
+- Authorization (e.g. only certain users can access certain media)
+- Content-type inference or override
+
+## Why Not Inline Media?
+
+In short: **size, caching, and control**.
+
+Embedding base64 or blob content in message payloads would explode WebSocket sizes and complicate caching and storage.
+By separating media out and addressing it via Snowflake IDs, we get:
+
+- Small messages
+- Reuse and deduplication
+- Efficient client-side caching
+- Easy CDN integration
+
+## Uploading Media
+
+Media uploads are also REST-based. Clients send the file, get back a Snowflake ID, and then use that ID wherever needed (e.g., in a message payload or emoji definition).
+
+Uploads must specify:
+
+- Content-Type
+- File body
+- Optional metadata (e.g. filename, dimensions)
+
+The upload endpoint returns a Snowflake and any derived metadata the server has calculated (e.g. image dimensions, duration, etc).
+
+---
+
+This model keeps the protocol lean, consistent, and predictable—whether you’re adding a reaction or streaming a video. Everything binary is media. Everything media is REST.
