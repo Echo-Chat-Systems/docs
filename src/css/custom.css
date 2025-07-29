@@ -17,31 +17,33 @@
  * These variables define the global font, primary colors, and other design tokens.
  */
 :root {
-  /* Global Font */
-  --ifm-font-family-base: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    /* Global Font */
+    --ifm-font-family-base: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
-  /* Primary Color - Light Mode */
-  --ifm-color-primary: #b963c9; /* Base primary color */
-  --ifm-color-primary-dark: #a858ba; /* Slightly darker shade */
-  --ifm-color-primary-darker: #9e53af; /* Even darker shade */
-  --ifm-color-primary-darkest: #854492; /* Darkest shade */
-  --ifm-color-primary-light: #c270d1; /* Slightly lighter shade */
-  --ifm-color-primary-lighter: #cc7ddd; /* Even lighter shade */
-  --ifm-color-primary-lightest: #d891e8; /* Lightest shade */
-  --ifm-color-primary-rgb: 185, 99, 201; /* RGB values for the primary color */
+    --ifm-color-secondary: #0dc5a9;
 
-  /* Code Block Font Size */
-  --ifm-code-font-size: 95%; /* Slightly smaller than the default font size */
+    /* Primary Color - Light Mode */
+    --ifm-color-primary: #b963c9; /* Base primary color */
+    --ifm-color-primary-dark: #a858ba; /* Slightly darker shade */
+    --ifm-color-primary-darker: #9e53af; /* Even darker shade */
+    --ifm-color-primary-darkest: #854492; /* Darkest shade */
+    --ifm-color-primary-light: #c270d1; /* Slightly lighter shade */
+    --ifm-color-primary-lighter: #cc7ddd; /* Even lighter shade */
+    --ifm-color-primary-lightest: #d891e8; /* Lightest shade */
+    --ifm-color-primary-rgb: 185, 99, 201; /* RGB values for the primary color */
 
-  /* Code Block Font Family */
-  --ifm-font-weight-light: 300; /* Light font weight */
-  --ifm-font-weight-normal: 400; /* Normal font weight */
-  --ifm-font-weight-semibold: 500; /* Semi-bold font weight */
-  --ifm-font-weight-bold: 700; /* Bold font weight */
-  --ifm-font-weight-base: var(--ifm-font-weight-normal); /* Default font weight */
+    /* Code Block Font Size */
+    --ifm-code-font-size: 95%; /* Slightly smaller than the default font size */
 
-  /* Highlighted Code Line Background (for light mode) */
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1); /* Light gray background for highlighted lines */
+    /* Code Block Font Family */
+    --ifm-font-weight-light: 300; /* Light font weight */
+    --ifm-font-weight-normal: 400; /* Normal font weight */
+    --ifm-font-weight-semibold: 500; /* Semi-bold font weight */
+    --ifm-font-weight-bold: 700; /* Bold font weight */
+    --ifm-font-weight-base: var(--ifm-font-weight-normal); /* Default font weight */
+
+    /* Highlighted Code Line Background (for light mode) */
+    --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1); /* Light gray background for highlighted lines */
 }
 
 /**
@@ -49,16 +51,18 @@
  * These variables override the light mode variables to provide a darker color palette.
  */
 [data-theme='dark'] {
-  /* Primary Color - Dark Mode */
-  --ifm-color-primary: #0dc5a9; /* Base primary color */
-  --ifm-color-primary-dark: #0bb197; /* Slightly darker shade */
-  --ifm-color-primary-darker: #0aa58c; /* Even darker shade */
-  --ifm-color-primary-darkest: #098f77; /* Darkest shade */
-  --ifm-color-primary-light: #18d4ba; /* Slightly lighter shade */
-  --ifm-color-primary-lighter: #26e2c8; /* Even lighter shade */
-  --ifm-color-primary-lightest: #3cf0d7; /* Lightest shade */
-  --ifm-color-primary-rgb: 13, 197, 169; /* RGB values for the primary color */
+    --ifm-color-secondary: #b963c9;
 
-  /* Highlighted Code Line Background (for dark mode) */
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3); /* Darker gray background for highlighted lines */
+    /* Primary Color - Dark Mode */
+    --ifm-color-primary: #0dc5a9; /* Base primary color */
+    --ifm-color-primary-dark: #0bb197; /* Slightly darker shade */
+    --ifm-color-primary-darker: #0aa58c; /* Even darker shade */
+    --ifm-color-primary-darkest: #098f77; /* Darkest shade */
+    --ifm-color-primary-light: #18d4ba; /* Slightly lighter shade */
+    --ifm-color-primary-lighter: #26e2c8; /* Even lighter shade */
+    --ifm-color-primary-lightest: #3cf0d7; /* Lightest shade */
+    --ifm-color-primary-rgb: 13, 197, 169; /* RGB values for the primary color */
+
+    /* Highlighted Code Line Background (for dark mode) */
+    --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3); /* Darker gray background for highlighted lines */
 }

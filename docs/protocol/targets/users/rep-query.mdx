@@ -5,6 +5,9 @@ title: "rep-query"
 import {SchemaExample} from "@site/src/components/SchemaExample";
 import {ParamsList} from "@site/src/components/ParamsList";
 import {Param} from "@site/src/components/Param";
+import {Authenticated} from "@site/src/components/Authenticated";
+
+<Authenticated />
 
 # `rep-query`
 
@@ -67,15 +70,6 @@ Brief action overview.
         [Remark](/docs/protocol/definitions/user/reputation#remark-structure) as values.
     </Param>
 </ParamsList>
-
-
-## Errors
-
-| Message         | Description                                   | Possible Causes                                                               |
-|-----------------|-----------------------------------------------|-------------------------------------------------------------------------------|
-| `not-signed-in` | Cannot perform action without active session. | The user attempted to query their authored remarks without an active session. |
-
----
 
 ## Notes
 

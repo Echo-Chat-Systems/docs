@@ -2,9 +2,9 @@
 title: signout
 ---
 
-import {SchemaExample} from "@site/src/components/SchemaExample";
-import {ParamsList} from "@site/src/components/ParamsList";
-import {Param} from "@site/src/components/Param";
+import {Authenticated} from "@site/src/components/Authenticated";
+
+<Authenticated />
 
 # `signout`
 
@@ -32,15 +32,6 @@ Ends the user's current authenticated session. This action should be called when
 
 In the event the signout completes, A [generic acknowledgment](/docs/protocol/targets/generic/acknowledge) is sent to the client.
 If the signout fails the appropriate [error message](/docs/protocol/targets/generic/error) is sent.
-
-
----
-
-## Errors
-
-| Message         | Description                                   | Possible Causes                                           |
-|-----------------|-----------------------------------------------|-----------------------------------------------------------|
-| `not-signed-in` | Cannot perform action without active session. | The user attempted to sign out without an active session. |
 
 ---
 

@@ -29,6 +29,12 @@
 | ~          | `get`              | Retrieves guild metadata                                                  |           |
 | ~          | `update`           | Updates guild information                                                 |           |
 | ~          | `list`             | Lists guilds the user has access to                                       |           |
+| `roles`    | `list`             | List all roles in a guild the user is in                                  |           |
+| ~          | `create`           | Creates a new role.                                                       |           |
+| ~          | `delete`           | Deletes a role                                                            |           |
+| ~          | `update`           | Updates a role.                                                           |           | 
+| ~          | `assign`           | Assigns a role to a user                                                  |           |
+| ~          | `revoke`           | Revokes a role from a user                                                |           |
 | `invites`  | `create`           | Creates an invite for a guild                                             |           |
 | ~          | `get`              | Retrieves a specific invite                                               |           |
 | ~          | `update`           | Updates an existing invite                                                |           |

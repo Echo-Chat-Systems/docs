@@ -5,6 +5,9 @@ title: "get-self"
 import {SchemaExample} from "@site/src/components/SchemaExample";
 import {ParamsList} from "@site/src/components/ParamsList";
 import {Param} from "@site/src/components/Param";
+import {Authenticated} from "@site/src/components/Authenticated";
+
+<Authenticated />
 
 # `get-self`
 
@@ -57,6 +60,5 @@ This action allows a client to retrieve all of their private user information. I
 
 ## Notes
 
-- This action is only available to authenticated clients.
 - The response is always scoped to the current session's user identity.
 - You can treat this as a canonical source of truth for client-side user initialization.
