@@ -24,13 +24,13 @@ import {Param} from "@site/src/components/Param";
 
 <ParamsList>
     <Param name="id" type="integer" required>
-        [Member Id](/docs/protocol/definitions/snowflake).
+        [Member Id](/docs/protocol/snowflake).
     </Param>
     <Param name="user-id" type="string" required>
         [User Id](/docs/protocol/definitions/user/identity).
     </Param>
     <Param name="roles" type="array" required>
-        Array of [role](/docs/definitions/guild/role) [ids](/docs/definitions/snowflake) applied to the user.
+        Array of [role](/docs/protocol/definitions/guild/role) [ids](/docs/protocol/snowflake) applied to the user.
     </Param>
     <Param name="nickname" type="string">
         Optional display name override for the specific [guild](/docs/protocol/definitions/guild/data).
