@@ -1,183 +1,74 @@
 ---
 title: Guild Data Format
+sidebar_position: 1
 ---
 
 import {SchemaExample} from "@site/src/components/SchemaExample";
 import {ParamsList} from "@site/src/components/ParamsList";
 import {Param} from "@site/src/components/Param";
 
-# User Data Representations
+# Guild Data
 
-This page defines the various structured forms in which user data may appear across the protocol. Depending on context,
-a user may be represented in a **profile**, as a **public-user**, or as a **private-user** with full internal data.
-
----
-
-## Profile Structure
-
-A user profile is a broadcast structure typically attached guild membership or public presence.
-
-<SchemaExample path="/user/profile.json">
-    ```json Example
-    {
-        "username": "",
-        "tag": 1234,
-        "pronouns": "",
-        "bio": "",
-        "css": "",
-        "pfp": "",
-        "banner": "",
-        "timezone": "",
-        "status": {
-        "type": "",
-        "text": ""
-    }
-    }
-    ```
-</SchemaExample>
-
-This form **does not include any identifiers** like keys or internal user IDs. It's purely decorative and user-controlled.
-
-<ParamsList>
-    <Param name="username" type="string" required>
-        User’s display name
-    </Param>
-
-    <Param name="tag" type="integer" required>
-        Numeric tag used to disambiguate usernames
-    </Param>
-
-    <Param name="pronouns" type="string">
-        User-specified pronouns
-    </Param>
-
-    <Param name="bio" type="string">
-        Freeform biography text
-    </Param>
-
-    <Param name="css" type="string">
-        Optional CSS code used for profile theming
-    </Param>
-
-    <Param name="pfp" type="string">
-        URI to the profile picture
-    </Param>
-
-    <Param name="banner" type="string">
-        URI to the profile banner
-    </Param>
-
-    <Param name="timezone" type="string">
-        User’s preferred timezone string
-    </Param>
-
-    <Param name="status" type="object">
-        Object describing the user’s current status
-    </Param>
-
-    <Param name="status.type" type="string">
-        Type of the status (e.g. "online", "away")
-    </Param>
-
-    <Param name="status.text" type="string">
-        Freeform status message
-    </Param>
-</ParamsList>
-
-
-
-
-## Public User Structure
-
-This structure is used when the system needs to share a verified user identity with others, such as message authors, guild owners, or moderators.
-
-<SchemaExample path="/user/public-user.json">
-    ```json Example
-    {
-        "origin": {  ...  },
-        "keys": {  ...  },
-        "profile": {  ...  },
-        "rep": {  ...  },
-    }
-    ```
-</SchemaExample>
-
-<ParamsList>
-    <Param name="origin" type="object">
-        User [origin server details](/protocol/definitions/meta/origin.mdx).
-    </Param>
-
-    <Param name="keys" type="object">
-        User [public keys](/protocol/definitions/crypto/keys.mdx#pubkeys).
-    </Param>
-
-    <Param name="profile" type="object">
-        User [profile](#profile-structure).
-    </Param>
-
-    <Param name="rep" type="object">
-        User public [reputation](/protocol/definitions/user/reputation.mdx#rep-object) record.
-    </Param>
-</ParamsList>
-
-
-This representation is visible to all clients and safe for sharing.
+This page defines the representation format of a guild within the context of the protocol specs. A guild is defined as
+a collection of [channels](/docs/protocol/definitions/channel/data) and
+[users](/docs/protocol/definitions/user/data#public-user-structure).
 
 ---
 
-## Private User Structure
+## Guild Structure
 
-The internal structure for a logged-in user, visible only to the user and the server. Includes sensitive fields like settings.
-
-This form should never be shared directly with other clients.
-
-<SchemaExample path="/user/private-user.json">
-    ```json Example
-    {
-        "origin": {  ...  },
-        "keys": {  ...  },
-        "profile": {  ...  },
-        "rep": {  ...  },
-        "settings": ""
-    }
-    ```
+<SchemaExample path="/guild/guild.json">
+```json Example
+{
+    "id": 17575072144222058000,
+    "owner": "RUxSNFkqJSQxRV9MaDJSP00vTXRtVSN7",
+    "members": [ ... ],
+    "channels": [  ...  ],
+    "roles": [  ...  ],
+    "media": {
+        "stickers": [  ...  ],
+        "emojis": [  ...  ]
+    },
+    "config": {  ...  },
+    "customisation": {  ...  }
+}
+```
 </SchemaExample>
 
 <ParamsList>
-    <Param name="origin" type="object">
-        User [origin server details](/docs/protocol/definitions/meta/origin.mdx).
+    <Param name="id" type="integer" required>
+        [Guild Id](/docs/protocol/snowflake).
     </Param>
 
-    <Param name="keys" type="object">
-        User [public keys](/docs/protocol/definitions/crypto/keys.mdx#pubkeys).
+    <Param name="owner" type="string" required>
+        Guild Owner [Id](/docs/protocol/definitions/user/identity).
     </Param>
 
-    <Param name="profile" type="object">
-        User [profile](#profile-structure).
+    <Param name="members" type="array" required>
+        Array of [guild members](/docs/protocol/definitions/guild/member).
     </Param>
 
-    <Param name="rep" type="object">
-        User public [reputation](/docs/protocol/definitions/user/reputation.mdx#rep-object) record.
+    <Param name="channels" type="array" required>
+        Array of [channels](/docs/protocol/definitions/channel/data) belonging to the guild.
     </Param>
 
-    <Param name="settings" type="string (b64)">
-        Encrypted base64-encoded string containing user roaming settings.
+    <Param name="roles" type="array" required>
+        Array of [roles](/docs/protocol/definitions/guild/role).
+    </Param>
+
+    <Param name="media.stickers" type="array">
+        Array of [stickers](/docs/protocol/definitions/media/).
+    </Param>
+
+    <Param name="media.emojis" type="array">
+        Array of [emojis](/docs/protocol/definitions/media/).
+    </Param>
+
+    <Param name="config" type="object">
+        Guild [configuration](/docs/protocol/definitions/guild/config).
+    </Param>
+
+    <Param name="customisation" type="object">
+        Guild [customisation](/docs/protocol/definitions/guild/customisation).
     </Param>
 </ParamsList>
-
-
-## Key Differences
-
-| Representation | Includes Profile | Includes Keys | Includes Settings | Visibility        |
-|----------------|------------------|---------------|-------------------|-------------------|
-| `profile`      | ✅                | ❌             | ❌                 | Public everywhere |
-| `public-user`  | ✅                | ✅             | ❌                 | Public API usage  |
-| `private-user` | ✅                | ✅             | ✅                 | Internal/private  |
-
----
-
-## Notes
-
-- All user objects must include `pubkeys` in any authenticated or signed context.
-- The `settings` object is an E2EE user-controlled blob.
-- Profiles are expected to be customizable, with potential for federation in future revisions.

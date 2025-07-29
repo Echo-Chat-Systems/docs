@@ -1,0 +1,24 @@
+﻿---
+title: Guild Configuration
+sidebar_position: 2
+---
+
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+
+# Guild Configuration
+
+<SchemaExample path="/guild/config.json">
+```json Example
+{
+    "notifications": {  ...  }
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="notifications" type="object">
+        [Notifications configuration](/docs/protocol/definitions/postie/notifications) object scoped to the guild.
+    </Param>
+</ParamsList>
