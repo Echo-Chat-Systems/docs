@@ -1,0 +1,32 @@
+﻿---
+title: Guild Customisation
+sidebar_position: 3
+---
+
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+
+# Guild Customisation
+
+<SchemaExample path="/guild/customisation.json">
+```json Example
+{
+    "banner": "8095105255303905000",
+    "icon": "17734329634182668000",
+    "css": ""
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="banner" type="string">
+        Either a URL linking to a valid image file or a [snowflake](/docs/protocol/snowflake) referencing a [media](/docs/protocol/definitions/media/) item.
+    </Param>
+    <Param name="icon" type="string" required>
+        Either a URL linking to a valid image file or a [snowflake](/docs/protocol/snowflake) referencing a [media](/docs/protocol/definitions/media/) item.
+    </Param>
+    <Param name="css" type="string">
+        Additional guild-wide css.
+    </Param>
+</ParamsList>
