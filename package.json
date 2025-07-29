@@ -1,5 +1,5 @@
 {
-  "name": "source",
+  "name": "docs",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -40,5 +40,20 @@
   },
   "engines": {
     "node": ">=18.0"
-  }
+  },
+  "description": "These docs are designed to be hosted using Mintlify.",
+  "main": "docusaurus.config.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JaXMusic/docs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JaXMusic/docs/issues"
+  },
+  "homepage": "https://github.com/JaXMusic/docs#readme"
 }

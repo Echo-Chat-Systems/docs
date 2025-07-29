@@ -2,6 +2,7 @@
 title: "Generic Error"
 ---
 
+import {Authenticated} from "@site/src/components/Authenticated";
 import {SchemaExample} from "@site/src/components/SchemaExample";
 import {ParamsList} from "@site/src/components/ParamsList";
 import {Param} from "@site/src/components/Param";
@@ -21,6 +22,11 @@ Any target or action combination is able to return the following errors when app
 | `payload-too-large` | Data exceeds allowed size                                         | Oversized blob or excessively long inputs                      |
 | `internal-error`    | Failed to apply update                                            | Unexpected server-side failure                                 |
 
+Additionally, on actions marked with <Authenticated />, the following errors can be raised when appropriate.
+
+| Message         | Description                                   | Possible Causes                                           |
+|-----------------|-----------------------------------------------|-----------------------------------------------------------|
+| `not-signed-in` | Cannot perform action without active session. | The user attempted to sign out without an active session. |
 
 ## Error Message Structure
 

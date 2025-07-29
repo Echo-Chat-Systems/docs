@@ -1,30 +1,68 @@
+@import url('https://fonts.googleapis.com/css?family=Konkhmer%20Sleokchher:700|Inter:400');
+
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * Global CSS file for customizing the Docusaurus theme.
+ * This file includes overrides for Infima variables, custom styles for light and dark themes,
+ * and additional component-specific styles.
  */
 
-/* You can override the default Infima variables here. */
+/**
+ * Importing the Poppins font from Google Fonts.
+ * This font will be used as the base font for the website.
+ */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/**
+ * Root CSS variables for light mode.
+ * These variables define the global font, primary colors, and other design tokens.
+ */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+    /* Global Font */
+    --ifm-font-family-base: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+    --ifm-color-secondary: #0dc5a9;
+
+    /* Primary Color - Light Mode */
+    --ifm-color-primary: #b963c9; /* Base primary color */
+    --ifm-color-primary-dark: #a858ba; /* Slightly darker shade */
+    --ifm-color-primary-darker: #9e53af; /* Even darker shade */
+    --ifm-color-primary-darkest: #854492; /* Darkest shade */
+    --ifm-color-primary-light: #c270d1; /* Slightly lighter shade */
+    --ifm-color-primary-lighter: #cc7ddd; /* Even lighter shade */
+    --ifm-color-primary-lightest: #d891e8; /* Lightest shade */
+    --ifm-color-primary-rgb: 185, 99, 201; /* RGB values for the primary color */
+
+    /* Code Block Font Size */
+    --ifm-code-font-size: 95%; /* Slightly smaller than the default font size */
+
+    /* Code Block Font Family */
+    --ifm-font-weight-light: 300; /* Light font weight */
+    --ifm-font-weight-normal: 400; /* Normal font weight */
+    --ifm-font-weight-semibold: 500; /* Semi-bold font weight */
+    --ifm-font-weight-bold: 700; /* Bold font weight */
+    --ifm-font-weight-base: var(--ifm-font-weight-normal); /* Default font weight */
+
+    /* Highlighted Code Line Background (for light mode) */
+    --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1); /* Light gray background for highlighted lines */
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
+/**
+ * CSS variables for dark mode.
+ * These variables override the light mode variables to provide a darker color palette.
+ */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+    --ifm-color-secondary: #b963c9;
+
+    /* Primary Color - Dark Mode */
+    --ifm-color-primary: #0dc5a9; /* Base primary color */
+    --ifm-color-primary-dark: #0bb197; /* Slightly darker shade */
+    --ifm-color-primary-darker: #0aa58c; /* Even darker shade */
+    --ifm-color-primary-darkest: #098f77; /* Darkest shade */
+    --ifm-color-primary-light: #18d4ba; /* Slightly lighter shade */
+    --ifm-color-primary-lighter: #26e2c8; /* Even lighter shade */
+    --ifm-color-primary-lightest: #3cf0d7; /* Lightest shade */
+    --ifm-color-primary-rgb: 13, 197, 169; /* RGB values for the primary color */
+
+    /* Highlighted Code Line Background (for dark mode) */
+    --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3); /* Darker gray background for highlighted lines */
 }

@@ -1,0 +1,59 @@
+﻿---
+title: delete
+---
+
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+import {Authenticated} from "@site/src/components/Authenticated";
+
+<Authenticated />
+
+# `delete`
+
+Deletes an existing guild.
+
+## Overview
+
+Allows a user to delete a guild that they are the owner of.
+
+---
+
+## Client → Server
+
+<SchemaExample path="/comms/guilds/delete.json">
+```json Example
+{
+    "target": "guilds",
+    "data": {
+        "action": "delete",
+        "params": {
+            "id": 5655277926790978000
+        }
+    }
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="id" type="integer" required>
+        Guild [id](/docs/protocol/snowflake).
+    </Param>
+</ParamsList>
+
+## Server → Client
+
+On success, the server returns a [generic acknowledgment](/protocol/targets/generic-ack.mdx).
+
+## Errors
+
+| Message         | Description                                                     | Possible Causes                                                     |
+|-----------------|-----------------------------------------------------------------|---------------------------------------------------------------------|
+| `not-found`     | Requested guild was not found.                                  | Guild does not exist or user does not have permission to access it. |
+| `missing-perms` | User does not have appropriate permission level to delete guild |                                                                     |
+
+---
+
+## Notes
+
+- This action is irreversible

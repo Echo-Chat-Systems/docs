@@ -1,6 +1,5 @@
 ﻿{
     "label": "Social",
-    "position": 2,
     "link": {
         "type": "generated-index",
         "description": "User friend requests related actions."

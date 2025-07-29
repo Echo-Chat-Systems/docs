@@ -5,6 +5,9 @@ title: create
 import {SchemaExample} from "@site/src/components/SchemaExample";
 import {ParamsList} from "@site/src/components/ParamsList";
 import {Param} from "@site/src/components/Param";
+import {Authenticated} from "@site/src/components/Authenticated";
+
+<Authenticated />
 
 # `create`
 
@@ -12,52 +15,52 @@ Creates a new guild.
 
 ## Overview
 
-Brief action overview.
+Allows the user to create a new guild.
 
 ---
 
 ## Client → Server
 
-<SchemaExample path="">
-    ```json Example
-
-    ```
+<SchemaExample path="/comms/guilds/create.json">
+```json Example
+{
+    "target": "guilds",
+    "data": {
+        "action": "create",
+        "params": {
+            "name": "The Storag Vault"
+        }
+    }
+}
+```
 </SchemaExample>
 
 <ParamsList>
-    <Param name="NAME" type="TYPE" required>
-        CONTENT
+    <Param name="name" type="string" required>
+        Initial guild name.
     </Param>
 </ParamsList>
 
 ## Server → Client
 
-On success, the server returns a [generic acknowledgment](/docs/protocol/targets/generic/acknowledge).
+Provided the guild creation succeeds, the user who initiated the `create` is added to the guild after creation.
 
-OR
-
-## Server → Client
-
-<SchemaExample path="">
-    ```json Example
-
-    ```
+<SchemaExample path="/comms/guilds/create-response.json">
+```json Example
+{
+    "target": "guilds",
+    "data": {
+        "action": "create",
+        "params": {
+            "id": 17204232703081746000
+        }
+    }
+}
+```
 </SchemaExample>
 
 <ParamsList>
-    <Param name="NAME" type="TYPE" required>
-        CONTENT
+    <Param name="id" type="integer" required>
+        Newly created guild [id](/docs/protocol/snowflake).
     </Param>
 </ParamsList>
-
-## Errors
-
-| Message         | Description                                   | Possible Causes                                           |
-|-----------------|-----------------------------------------------|-----------------------------------------------------------|
-| `not-signed-in` | Cannot perform action without active session. | The user attempted to sign out without an active session. |
-
----
-
-## Notes
-
-NOTES

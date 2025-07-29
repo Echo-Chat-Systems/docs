@@ -1,6 +1,5 @@
 {
     "label": "Admin",
-    "position": 1,
     "link": {
         "type": "generated-index",
         "description": "Server administrator actions."

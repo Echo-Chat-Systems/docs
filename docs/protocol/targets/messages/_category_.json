@@ -1,6 +1,5 @@
 ﻿{
     "label": "Messages",
-    "position": 2,
     "link": {
         "type": "generated-index",
         "description": "Message related actions."
