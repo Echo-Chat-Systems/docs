@@ -3,6 +3,10 @@
  * and scoped locally.
  */
 
+:root {
+    transition: ease-in-out 0.1s;
+}
+
 .heroBanner {
     padding: 4rem 0;
     margin-bottom: 5vh;
