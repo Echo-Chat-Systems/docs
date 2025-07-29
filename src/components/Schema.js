@@ -1,5 +1,6 @@
 ﻿import CodeBlock from '@theme/CodeBlock';
 import {useState} from "react";
+import './styles.schema.css';
 
 export const Schema = ({ path }) => {
     const [schema, setSchema] = useState("")
@@ -16,7 +17,13 @@ export const Schema = ({ path }) => {
             <CodeBlock language="json">
                 {schema}
             </CodeBlock>
-            <button onClick={get}>Get Schema</button>
+            <div className="get-schema-button-wrapper">
+                <button
+                    onClick={get}
+                    className="get-schema-button"
+                >Get Schema
+                </button>
+            </div>
         </CodeBlock>
     )
 }
