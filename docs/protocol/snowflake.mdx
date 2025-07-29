@@ -66,13 +66,12 @@ Echo-Chat uses a custom 64-bit Snowflake implementation tailored to our protocol
 
 <Tabs>
     <TabItem value="v1" label="V1">
-        | Bit(s) | Name              | Description                                                  |
-        |--------|-------------------|--------------------------------------------------------------|
-        | 44     | Timestamp         | Milliseconds since custom epoch (ensures temporal ordering)  |
-        | 16     | Sequence          | Per-node counter to resolve collisions in the same ms        |
-        | 4      | Snowflake Version | Identifies the version of the snowflake specification in use |
+        | Bit(s) | Name              | Description                                                           |
+        |--------|-------------------|-----------------------------------------------------------------------|
+        | 44     | Timestamp         | Milliseconds since custom epoch (ensures temporal ordering)           |
+        | 8      | Instance Number   | Coordinated per-instance number used to allow for distributed hosting |
+        | 12     | Sequence          | Per-node counter to resolve collisions in the same ms                 |
 
-        SnowflakeV1 is designed as the jumping off point for a simple single-executable server.
     </TabItem>
 </Tabs>
 
