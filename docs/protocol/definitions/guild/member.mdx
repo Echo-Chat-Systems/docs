@@ -1,0 +1,45 @@
+﻿---
+title: Guild Member
+---
+
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+
+# Guild Member
+
+<SchemaExample path="/guild/member.json">
+```json Example
+{
+    "id": 10884996049901476000,
+    "user-id": "TlR7Xi5gbTFkLW8hXVRndSdqeWhicg==",
+    "roles": [  ...  ],
+    "nickname": "Sir Strange",
+    "user-override": {  ...  },
+    "guild-override": {  ...  }
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="id" type="integer" required>
+        [Member Id](/docs/protocol/definitions/snowflake).
+    </Param>
+    <Param name="user-id" type="string" required>
+        [User Id](/docs/protocol/definitions/user/identity).
+    </Param>
+    <Param name="roles" type="array" required>
+        Array of [role](/docs/definitions/guild/role) [ids](/docs/definitions/snowflake) applied to the user.
+    </Param>
+    <Param name="nickname" type="string">
+        Optional display name override for the specific [guild](/docs/protocol/definitions/guild/data).
+    </Param>
+    <Param name="user-override" type="object">
+        Guild-wide [user profile](/docs/protocol/definitions/user/data#profile-structure) override. Used to customise
+        appearance to individual guilds.
+    </Param>
+    <Param name="guild-override" type="object">
+        Final override for [user profile](/docs/protocol/definitions/user/data#profile-structure). Controlled by guild members with appropriate permissions. Used for moderation
+        of profiles to conform to server community standards.
+    </Param>
+</ParamsList>
