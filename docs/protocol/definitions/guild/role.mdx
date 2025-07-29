@@ -1,0 +1,82 @@
+﻿---
+title: Guild Role
+sidebar_position: 5
+---
+
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+
+# Guild Role
+
+
+<SchemaExample path="/guild/role.json">
+```json Example
+{
+    "id": 11316396544880767000,
+    "name": "Strange Beings",
+    "permissions": {
+        "guild": 2147483648,
+        "text": 12202,
+        "voice": 3221225596
+    },
+    "customisation": {  ...  }
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="id" type="integer" required>
+        Role [Id](/docs/protocol/snowflake).
+    </Param>
+    <Param name="name" type="string" required>
+        Role name.
+    </Param>
+    <Param name="permissions" type="object" required />
+    <Param name="permissions.guild" type="integer">
+        Guild [permissions set](/docs/protocol/definitions/meta/permissions).
+    </Param>
+    <Param name="permissions.text" type="integer">
+        Guild-wide text [permissions set](/docs/protocol/definitions/meta/permissions).
+    </Param>
+    <Param name="permissions.voice" type="integer">
+        Guild-wide voice [permissions set](/docs/protocol/definitions/meta/permissions).
+    </Param>
+    <Param name="customisation" type="object">
+        Role [customisation](#role-customisation).
+    </Param>
+</ParamsList>
+
+## Role Customisation
+
+<SchemaExample path="/guild/role-customisation.json">
+```json Example
+{
+    "banner": "8103275619140250000",
+    "icon": "14915265854996625000",
+    "text-colour": "#c548d5",
+    "background-colour": "#00ffd5",
+    "css": ""
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="banner" type="string">
+        Either a URL linking to a valid image file or a [snowflake](/docs/protocol/snowflake) referencing a [media](/docs/protocol/definitions/media/) item.
+    </Param>
+    <Param name="icon" type="string">
+        Either a URL linking to a valid image file or a [snowflake](/docs/protocol/snowflake) referencing a [media](/docs/protocol/definitions/media/) item.
+    </Param>
+    <Param name="text-colour" type="string">
+        Role label text colour in hexadecimal format. (\# is optional)
+    </Param>
+    <Param name="background-colour" type="string">
+        Role label background colour in hexadecimal format. (\# is optional)
+    </Param>
+    <Param name="css" type="string">
+        Additional guild-wide css.
+    </Param>
+</ParamsList>
+
+
