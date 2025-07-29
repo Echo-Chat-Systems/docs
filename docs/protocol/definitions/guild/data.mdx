@@ -21,6 +21,7 @@ a collection of [channels](/docs/protocol/definitions/channel/data) and
 ```json Example
 {
     "id": 17575072144222058000,
+    "name": "The Storag Vault",
     "owner": "RUxSNFkqJSQxRV9MaDJSP00vTXRtVSN7",
     "members": [ ... ],
     "channels": [  ...  ],
@@ -39,7 +40,9 @@ a collection of [channels](/docs/protocol/definitions/channel/data) and
     <Param name="id" type="integer" required>
         [Guild Id](/docs/protocol/snowflake).
     </Param>
-
+    <Param name="name" type="string" required>
+        Guild name.
+    </Param>
     <Param name="owner" type="string" required>
         Guild Owner [Id](/docs/protocol/definitions/user/identity).
     </Param>
