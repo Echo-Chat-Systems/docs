@@ -20,7 +20,7 @@ There are three different permission types, each with their own set of bitmasks:
 
 ### Guild Permissions
 
-| Permission      | Bit Number | Bit Position (HEX) | Description                                                                                 | OAuth Scope           |
+| Permission      | Bit Number | Bit Position (HEX) | Description                                                                                 | Text ID               |
 |-----------------|------------|--------------------|---------------------------------------------------------------------------------------------|-----------------------|
 | Administrator   | 31         | 8000 0000          | Allows the user to bypass all permissions checks                                            | guild:admin           |
 | View Audit Logs | 30         | 4000 0000          | Allows the user to view the guild audit logs                                                | guild:audit           |
@@ -57,7 +57,7 @@ There are three different permission types, each with their own set of bitmasks:
 
 ### Text Channel Permissions
 
-| Permission                     | Bit Number | Bit Position (HEX) | Description                                                      | OAuth Scope                     |
+| Permission                     | Bit Number | Bit Position (HEX) | Description                                                      | Text ID                         |
 |--------------------------------|------------|--------------------|------------------------------------------------------------------|---------------------------------|
 | Not used                       | 31         | 8000 0000          | Not used                                                         | Not used                        |
 | Not used                       | 30         | 4000 0000          | Not used                                                         | Not used                        |
@@ -94,7 +94,7 @@ There are three different permission types, each with their own set of bitmasks:
 
 ### Voice Channel Permissions
 
-| Permission            | Bit Number | Bit Position (HEX) | Description                                             | OAuth Scope          |
+| Permission            | Bit Number | Bit Position (HEX) | Description                                             | Text ID              |
 |-----------------------|------------|--------------------|---------------------------------------------------------|----------------------|
 | Server Deafen Members | 31         | 8000 0000          | Allows the user to server deafen members in the channel | voice:global_deafen  |
 | Server Mute Members   | 30         | 4000 0000          | Allows the user to server mute members in the channel   | voice:global_mute    |
