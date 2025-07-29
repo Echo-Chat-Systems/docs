@@ -1,0 +1,75 @@
+/* src/components/styles.schema.css */
+
+/* --- Wrapper for the 'Get Schema' button to control its position --- */
+/*
+ * This class is used to position the 'Get Schema' button within its container.
+ * It ensures the button is aligned to the right and provides spacing and padding
+ * to match the surrounding layout.
+ */
+.get-schema-button-wrapper {
+    display: flex; /* Makes the wrapper a flex container for alignment control */
+    justify-content: flex-end; /* Aligns the button to the right */
+    width: 100%; /* Ensures the wrapper spans the full width of its container */
+    margin-top: 10px; /* Adds spacing above the button */
+    padding-right: var(--ifm-code-padding-horizontal); /* Matches the code block's right padding */
+}
+
+/* --- Stylized Button for the 'Get Schema' button specifically --- */
+/*
+ * This class defines the appearance and behavior of the 'Get Schema' button.
+ * It includes base styles, hover effects, and active state styles.
+ */
+.get-schema-button {
+    /* Base Button Styles */
+    display: inline-flex; /* Centers content horizontally and vertically */
+    align-items: center; /* Vertically centers content */
+    justify-content: center; /* Horizontally centers content */
+    padding: 0.75rem 1.5rem; /* Adds internal spacing */
+    font-family: var(--ifm-font-family-base), sans-serif; /* Uses the global font */
+    font-size: 1rem; /* Sets the font size */
+    font-weight: var(--ifm-font-weight-bold); /* Uses the bold font weight */
+    line-height: 1.2; /* Sets the line height */
+    text-align: center; /* Centers text */
+    text-decoration: none; /* Removes underline */
+    white-space: nowrap; /* Prevents text wrapping */
+    vertical-align: middle; /* Aligns text vertically */
+    cursor: pointer; /* Changes the cursor to a pointer on hover */
+    user-select: none; /* Disables text selection */
+    border: 1px solid transparent; /* Adds a transparent border */
+    border-radius: 9999px; /* Makes the button fully rounded (pill shape) */
+    transition: all 0.2s ease-in-out; /* Adds smooth transitions for hover effects */
+
+    /* Default Appearance */
+    background-color: var(--ifm-color-primary); /* Sets the background color */
+    color: white; /* Sets the text color */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+}
+
+/*
+ * Hover State
+ * Changes the button's appearance when hovered over.
+ */
+.get-schema-button:hover {
+    background-color: var(--ifm-color-primary-dark); /* Darkens the background color */
+    transform: translateY(-2px); /* Moves the button slightly upward */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Increases the shadow for emphasis */
+}
+
+/*
+ * Active State
+ * Defines the button's appearance when clicked.
+ */
+.get-schema-button:active {
+    background-color: var(--ifm-color-primary-darker); /* Further darkens the background color */
+    transform: translateY(0); /* Resets the upward movement */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reduces the shadow */
+}
+
+/*
+ * Optional: Dark Mode Adjustments
+ * Customizes the button's appearance for dark mode.
+ */
+[data-theme='dark'] .get-schema-button {
+    background-color: var(--ifm-color-primary); /* Uses the primary color */
+    color: black; /* Sets the text color to black for contrast */
+}
