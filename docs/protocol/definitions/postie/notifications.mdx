@@ -1,0 +1,35 @@
+﻿---
+title: Notifications Config
+---
+
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+
+# Notifications Config
+
+<SchemaExample path="/postie/notif-config.json">
+```json Example
+{
+    "mode": "mentions",
+    "suppressed-roles": [
+        7209366322324083000,
+        13744396215503835000,
+        22503375935488000,
+        8525805028323099000
+    ]
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="mode" type="string" required>
+        Notifications mode. Can be one of the following: "all", "mentions", "direct-mentions"
+
+        Controls what type of events raised will trigger a notification to the user. This could be an in-app ping or
+        a push notification.
+    </Param>
+    <Param name="suppressed-roles" type="array" required>
+        Role IDs from which notifications are suppressed.
+    </Param>
+</ParamsList>
