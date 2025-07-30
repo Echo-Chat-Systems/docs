@@ -1,0 +1,52 @@
+---
+title: update
+---
+
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+import {Authenticated} from "@site/src/components/Authenticated";
+
+<Authenticated />
+
+# `update`
+
+Updates guild information.
+
+## Overview
+
+Allows a user to update guild information for a guild that they have permission to modify.
+
+---
+
+## Client → Server
+
+```json Example
+{
+    "target": "guilds",
+    "data": {
+        "action": "update",
+        "params": {
+            "guild": {  ...  }
+        }
+    }
+}
+```
+
+<SchemaExample path="">
+
+</SchemaExample>
+
+<ParamsList>
+    <Param name="guild" type="object" required>
+        [Guild data] being updated.
+    </Param>
+</ParamsList>
+
+## Server → Client
+
+On success, the server returns a [generic acknowledgment](/docs/protocol/targets/generic/acknowledge).
+
+## Notes
+
+- Certain guild fields are immutable. Only `config`, `customisation`, and `name` are permitted to be changed in this way.
