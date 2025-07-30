@@ -1,0 +1,68 @@
+---
+title: get
+---
+
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+import {Authenticated} from "@site/src/components/Authenticated";
+
+<Authenticated />
+
+# `get`
+
+Retrieves an existing guild by ID.
+
+## Overview
+
+Allows a user to get the information pertaining to a specific guild.
+
+---
+
+## Client → Server
+
+<SchemaExample path="/comms/guilds/get.json">
+```json Example
+{
+    "target": "guilds",
+    "data": {
+        "action": "get",
+        "params": {
+            "id": 847744928655622100
+        }
+    }
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="id" type="integer" required>
+        [Id](/docs/protocol/snowflake) of the requested guild.
+    </Param>
+</ParamsList>
+
+## Server → Client
+
+<SchemaExample path="/comms/guilds/get-response.json">
+```json Example
+{
+    "target": "guilds",
+    "data": {
+        "action": "get",
+        "params": {
+            "guild": {  ...  }
+        }
+    }
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="guild" type="object" required>
+        [Guild Data](/docs/protocol/definitions/guild/data)
+    </Param>
+</ParamsList>
+
+## Notes
+
+- In the event a user requests an existing guild that they do not have access to, a `not-found` error will be raised to avoid an info leak

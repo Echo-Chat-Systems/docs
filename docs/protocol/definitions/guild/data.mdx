@@ -40,22 +40,22 @@ a collection of [channels](/docs/protocol/definitions/channel/data) and
     <Param name="id" type="integer" required>
         [Guild Id](/docs/protocol/snowflake).
     </Param>
-    <Param name="name" type="string" required>
+    <Param name="name" type="string">
         Guild name.
     </Param>
-    <Param name="owner" type="string" required>
+    <Param name="owner" type="string">
         Guild Owner [Id](/docs/protocol/definitions/user/identity).
     </Param>
 
-    <Param name="members" type="array" required>
+    <Param name="members" type="array">
         Array of [guild members](/docs/protocol/definitions/guild/member).
     </Param>
 
-    <Param name="channels" type="array" required>
+    <Param name="channels" type="array">
         Array of [channels](/docs/protocol/definitions/channel/data) belonging to the guild.
     </Param>
 
-    <Param name="roles" type="array" required>
+    <Param name="roles" type="array">
         Array of [roles](/docs/protocol/definitions/guild/role).
     </Param>
 
@@ -67,11 +67,11 @@ a collection of [channels](/docs/protocol/definitions/channel/data) and
         Array of [emojis](/docs/protocol/definitions/media/).
     </Param>
 
-    <Param name="config" type="object">
+    <Param name="config" type="object" required>
         Guild [configuration](/docs/protocol/definitions/guild/config).
     </Param>
 
-    <Param name="customisation" type="object">
+    <Param name="customisation" type="object" required>
         Guild [customisation](/docs/protocol/definitions/guild/customisation).
     </Param>
 </ParamsList>

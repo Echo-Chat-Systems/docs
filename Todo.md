@@ -24,9 +24,9 @@
 | ~          | `rep-add`          | Adds a reputation remark to a profile                                     | ✅         |
 | ~          | `rep-del`          | Allows a user to delete a reputation remark they have previously made.    | ✅         |
 | ~          | `rep-query`        | Allows a user to query what reputation remarks they have made in the past | ✅         |
-| `guilds`   | `create`           | Creates a new guild                                                       |           |
-| ~          | `delete`           | Deletes a guild                                                           |           |
-| ~          | `get`              | Retrieves guild metadata                                                  |           |
+| `guilds`   | `create`           | Creates a new guild                                                       | ✅         |
+| ~          | `delete`           | Deletes a guild                                                           | ✅         |
+| ~          | `get`              | Retrieves guild metadata                                                  | ✅         |
 | ~          | `update`           | Updates guild information                                                 |           |
 | ~          | `list`             | Lists guilds the user has access to                                       |           |
 | `roles`    | `list`             | List all roles in a guild the user is in                                  |           |
@@ -46,21 +46,19 @@
 | ~          | `get`              | Retrieves metadata for a single channel                                   |           |
 | ~          | `update`           | Updates channel metadata                                                  |           |
 | ~          | `list`             | Lists all channels in a guild                                             |           |
-| ~          | `get-users`        | Gets a list of all user IDs able to see the specified channel             |           |
 | `messages` | `send`             | Sends a message to a channel                                              |           |
 | ~          | `edit`             | Edits a previously sent message                                           |           |
 | ~          | `delete`           | Deletes a message                                                         |           |
-| ~          | `get-single`       | Retrieves a specific message                                              |           |
-| ~          | `get-many`         | Retrieves multiple messages from a channel                                |           |
+| ~          | `get`              | Retrieves a specific message                                              |           |
+| ~          | `query`            | Retrieves multiple messages from a channel                                |           |
 | ~          | `react-add`        | Adds a reaction to a message                                              |           |
 | ~          | `react-remove`     | Removes a reaction from a message                                         |           |
-| ~          | `react-get`        | Retrieves reaction counts for a message                                   |           |
 | ~          | `reacts-edit`      | Moderation endpoint to alter reactions                                    |           |
-| `social`   | `send-rq`          | Sends a friend request to a specified user-id or username-tag combo       |           |
+| `social`   | `send`             | Sends a friend request to a specified user-id or username-tag combo       |           |
 | ~          | `get-incoming`     | Gets all incoming friend requests.                                        |           |
 | ~          | `get-outgoing`     | Gets all outgoing friend requests.                                        |           |
-| ~          | `action-rq`        | Accepts or declines an incoming friend request.                           |           |
-| ~          | `cancel-rq`        | Cancels an outgoing friend request                                        |           |
+| ~          | `respond`          | Accepts or declines an incoming friend request.                           |           |
+| ~          | `cancel`           | Cancels an outgoing friend request                                        |           |
 | `postie`   | `subscribe`        | Subscribes to a topic or data feed                                        |           |
 | ~          | `unsubscribe`      | Unsubscribes from a topic or data feed                                    |           |
 | ~          | `event`            | Server-sent event pushed to subscribed clients                            |           |
