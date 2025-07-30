@@ -43,13 +43,12 @@ Allows a user to delete a guild that they are the owner of.
 
 ## Server → Client
 
-On success, the server returns a [generic acknowledgment](/protocol/targets/generic-ack.mdx).
+On success, the server returns a [generic acknowledgment](/docs/protocol/targets/generic/acknowledge).
 
 ## Errors
 
 | Message         | Description                                                     | Possible Causes                                                     |
 |-----------------|-----------------------------------------------------------------|---------------------------------------------------------------------|
-| `not-found`     | Requested guild was not found.                                  | Guild does not exist or user does not have permission to access it. |
 | `missing-perms` | User does not have appropriate permission level to delete guild |                                                                     |
 
 ---
@@ -57,3 +56,4 @@ On success, the server returns a [generic acknowledgment](/protocol/targets/gene
 ## Notes
 
 - This action is irreversible
+- The client is expected to implement checks on their end to ensure that guilds are not deleted accidentally.
