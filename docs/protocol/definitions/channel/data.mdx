@@ -23,8 +23,9 @@ Additionally, channels can be organised into [categories](/docs/protocol/definit
 {
     "id": 78403250234732458732,
     "name": "General Chat",
-    "category": 4322639236701192000,
+    "parent": 4322639236701192000,
     "index": 1,
+    "members": [  ...  ]
     "config": {  ...  },
     "customisation": {  ...  }
 }
@@ -40,6 +41,9 @@ Additionally, channels can be organised into [categories](/docs/protocol/definit
     </Param>
     <Param name="parent" type="number">
         ID of the parent category this channel belongs to.
+    </Param>
+    <Param name="members" type="array">
+        Array of [channel members](/docs/protocol/definitions/channel/member).
     </Param>
     <Param name="index" type="number">
         0-Indexed channel position from the top within it's category.
