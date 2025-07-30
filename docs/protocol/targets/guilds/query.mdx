@@ -1,0 +1,59 @@
+---
+title: query
+---
+
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+import {Authenticated} from "@site/src/components/Authenticated";
+
+<Authenticated />
+
+# `query`
+
+Lists guilds the user is a part of.
+
+## Overview
+
+Allows the user to list all guilds they are a member of.
+
+---
+
+## Client → Server
+
+```json Example
+{
+    "target": "guilds",
+    "data": {
+        "action": "query"
+    }
+}
+```
+
+> This action has no parameters.
+
+## Server → Client
+
+<SchemaExample path="/comms/guilds/query-response.json">
+```json Example
+{
+    "target": "guilds",
+    "data": {
+        "action": "query",
+        "params": {
+            "guilds": [  ...  ]
+        }
+    }
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="guilds" type="array" required>
+        Basic [Guild](/docs/protocol/definitions/guild/data)s information containing only required properites.
+    </Param>
+</ParamsList>
+
+## Notes
+
+- This only returns a surface level overview of the guild, not internal properties like members and channels
