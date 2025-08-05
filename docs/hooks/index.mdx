@@ -1,0 +1,65 @@
+---
+title: Hooks
+description: Introduction to Echo's pre- and post-execution hook system
+---
+
+# Hooks
+
+Echo's hook system allows users and guild owners to attach custom behavior to protocol actions at controlled execution points. These behaviors are defined in **sandboxed public JavaScript files**, which are securely executed by the server during the relevant phase of an action's lifecycle.
+
+Hooks are designed to be **auditable**, **scoped**, and **privacy-respecting**, while still offering powerful customization for user and community needs.
+
+## Hook Types
+
+There are two distinct types of hooks supported by Echo:
+
+- [**Pre-execute hooks**](/docs/protocol/hooks/pre-execute): Run **before** an action is handled. They may inspect and optionally mutate the message envelope.
+- [**Post-execute hooks**](/docs/protocol/hooks/post-execute): Run **after** an action is processed. They are used for logging, analytics, or other external integrations.
+
+Each action may support either or both hook types, depending on its nature. Sensitive or cryptographic actions (e.g. key management) **do not support hooks at all**.
+
+For a list of which hooks are supported per action, see the relevant protocol action documentation.
+
+## Scope and Ownership
+
+Hooks are **scoped** to specific objects and only the owner of that object may define them:
+
+- A **guild owner** may attach hooks to the guild, specific channels, roles, etc.
+- An **individual user** may attach hooks to their user profile.
+- Multiple hooks may be defined per scope, and are executed in order.
+
+Hooks are **publicly hosted** via URLs and subject to [caching rules](#caching-and-validity). This ensures the code is transparent and auditable by all participants.
+
+## Privacy Model
+
+- **Pre-execute hooks** are entirely local to the server. They do **not** perform network requests and have **no persistent storage** access.
+- **Post-execute hooks** may make outbound HTTP requests, but require **opt-in consent** from any user affected by the action.
+- All hook executions are **stateless**: no data persists between runs.
+
+## Caching and Validity
+
+Hook source code is retrieved over HTTP and cached for performance with a long TTL. The origin server may trigger cache invalidation by returning appropriate HTTP headers (e.g. `Cache-Control: no-cache`, `ETag`, etc.).
+
+## Auditing and History
+
+To ensure traceability and safety, all hook executions are logged in a **read-only audit history**. This includes:
+
+- Execution context (timestamp, scope, user ID, action)
+- The hook URL and HTTP result (status code, if applicable)
+- Output values or mutations (for pre-execute hooks)
+
+The history is immutable and **does not expire**, though servers may configure retention limits or manual pruning.
+
+Learn more:
+- [Hook History](/docs/protocol/hooks/history)
+- [Hook Runs Database](/docs/protocol/hooks/runs)
+
+## Execution Contract
+
+All hook types must conform to the standardized [Execution Contract](/docs/protocol/hooks/contract), which defines:
+
+- The structure of the input envelope provided to the hook
+- The allowed return values or transformations
+- Error handling and timeouts
+
+This ensures that hooks behave consistently across deployments, while remaining isolated and secure.
