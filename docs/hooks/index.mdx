@@ -13,8 +13,8 @@ Hooks are designed to be **auditable**, **scoped**, and **privacy-respecting**, 
 
 There are two distinct types of hooks supported by Echo:
 
-- [**Pre-execute hooks**](/docs/protocol/hooks/pre-execute): Run **before** an action is handled. They may inspect and optionally mutate the message envelope.
-- [**Post-execute hooks**](/docs/protocol/hooks/post-execute): Run **after** an action is processed. They are used for logging, analytics, or other external integrations.
+- [**Pre-execute hooks**](/docs/hooks/pre-execute): Run **before** an action is handled. They may inspect and optionally mutate the message envelope.
+- [**Post-execute hooks**](/docs/hooks/post-execute): Run **after** an action is processed. They are used for logging, analytics, or other external integrations.
 
 Each action may support either or both hook types, depending on its nature. Sensitive or cryptographic actions (e.g. key management) **do not support hooks at all**.
 
@@ -51,12 +51,12 @@ To ensure traceability and safety, all hook executions are logged in a **read-on
 The history is immutable and **does not expire**, though servers may configure retention limits or manual pruning.
 
 Learn more:
-- [Hook History](/docs/protocol/hooks/history)
-- [Hook Runs Database](/docs/protocol/hooks/runs)
+- [Hook History](/docs/hooks/history)
+- [Hook Runs Database](/docs/hooks/runs)
 
 ## Execution Contract
 
-All hook types must conform to the standardized [Execution Contract](/docs/protocol/hooks/contract), which defines:
+All hook types must conform to the standardized [Execution Contract](/docs/hooks/contract), which defines:
 
 - The structure of the input envelope provided to the hook
 - The allowed return values or transformations

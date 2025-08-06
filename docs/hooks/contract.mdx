@@ -1,0 +1,239 @@
+﻿---
+title: Hook Execution Contract
+description: Defines the data structures and runtime expectations for all hook invocations.
+---
+
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+
+# Hook Execution Contract
+
+All hooks in Echo operate under a strict runtime contract that defines:
+
+- The **execution environment**
+- The **data payloads** passed to the hook
+- The **allowed effects and return values**
+- The **error and exception semantics**
+
+This contract applies to both [/docs/hooks/pre-execute](/docs/hooks/pre-execute) and
+[/docs/hooks/post-execute](/docs/hooks/post-execute) hooks and provides the foundation for reliable, safe, and
+debuggable hook behavior.
+
+---
+
+## Environment
+
+Hooks are executed in a sandboxed JavaScript runtime with no access to the global filesystem, network, or
+unscoped memory. The following capabilities are available:
+
+- ES2020-compatible syntax
+- A preconfigured `console` for debugging
+- A minimal standard library (`JSON`, `Date`, etc.)
+- A shared `context` object passed as a global
+
+This guarantees that all hooks run deterministically and without side effects outside the allowed interfaces.
+
+---
+
+## Execution Entry Point
+
+Each hook must export a single function:
+
+```js
+export default function(context) {
+// Your logic here
+}
+```
+The `context` parameter contains runtime information about the invocation, including details about the triggering
+action and the entities involved.
+
+---
+
+
+## Manifest
+
+Each hook must include a static manifest describing its source and the context data it needs access to.
+
+This manifest is validated at registration time and determines which fields are injected into the hook during execution.
+
+### Fields
+
+| Field     | Description                                                                       |
+|-----------|-----------------------------------------------------------------------------------|
+| `source`  | A string URL pointing to the raw JavaScript code. Can be local or remote.         |
+| `context` | An array of strings indicating required context keys (e.g., `["user", "guild"]`). |
+
+### Example
+
+CODE BLOCK START HERE
+json
+CODE BLOCK END HERE
+
+Only the fields explicitly listed in the manifest’s `context` array will be included in the runtime object. This ensures hooks only receive the minimum necessary data.
+
+
+## Context Structure
+
+The `context` object passed to each hook adheres to this structure:
+
+<SchemaExample path="">
+
+</SchemaExample>
+
+```json
+{
+    "stage": "pre",
+    "source": {  ...  },
+    "data": {
+
+    }
+}
+```
+
+The schema is designed to give hooks sufficient insight into the origin of an action without violating user privacy. `serverConfig` is useful for things like pre-shared blocklists or configuration rules.
+
+---
+
+## Return Value (Pre-Execute)
+
+Pre-execute hooks are allowed to return a modified payload or cancel the action entirely. They are invoked before any changes are committed or sent to other users.
+
+The return value must follow this structure:
+
+CODE BLOCK START HERE
+json
+{
+"allow": true,
+"payload": {
+// (optional) Mutated payload to replace the original
+}
+}
+CODE BLOCK END HERE
+
+Hooks that want to reject the action must throw an error. If this error is a `HookStopException` (or subclass), the execution of the hook stack is stopped and the request fails with a structured error response to the user.
+
+For example:
+
+CODE BLOCK START HERE
+js
+throw new HookStopException("Message blocked due to use of prohibited words.");
+CODE BLOCK END HERE
+
+This mechanism enables complex moderation rules while maintaining transparency and traceability.
+
+---
+
+## Return Value (Post-Execute)
+
+Post-execute hooks run after the user's action has completed and been acknowledged. These hooks cannot change the outcome of the original action but may trigger side effects such as logging, replication, or moderation alerts.
+
+They do not return any meaningful result — any return value is ignored. However, if a post-execute hook throws an exception, the error is still recorded in the logs and monitoring dashboards.
+
+If the error is a `HookStopException`, it is annotated but does not interrupt the action that triggered the hook.
+
+---
+
+## Sample Inputs and Outputs
+
+Here is a sample pre-execute input for a message send action:
+
+CODE BLOCK START HERE
+json
+{
+"action": "message-send",
+"stage": "pre",
+"user": {
+"id": "abc123",
+"publicKey": "ed25519:...",
+"reputation": 95,
+"certificates": []
+},
+"guild": {
+"id": "guild456",
+"name": "MyGuild",
+"ownerId": "abc123"
+},
+"channel": {
+"id": "chan789",
+"name": "general",
+"type": "text"
+},
+"payload": {
+"content": "hello world!"
+},
+"serverConfig": {},
+"consent": true
+}
+CODE BLOCK END HERE
+
+### Valid Response (Allow)
+
+<CodeGroup>
+
+    CODE BLOCK START HERE
+    json Example
+
+    CODE BLOCK END HERE
+
+    ### Valid Response (Block)
+
+    CODE BLOCK START HERE
+    json Example
+
+    CODE BLOCK END HERE
+
+</CodeGroup>
+
+You can populate these blocks with examples like:
+
+- Allowing the message through unchanged
+- Mutating the payload to include extra metadata
+- Blocking the message and returning a custom reason
+
+---
+
+## Error Contract
+
+If a hook throws any exception, it is caught and logged. If the exception inherits from `HookStopException`, it will:
+
+- Stop the remaining hooks in the pre-execute stack
+- Reject the action with an appropriate error to the client
+- Log the rejection in the hook run history with full trace
+
+For post-execute hooks, exceptions are **never** visible to the end user, but are still recorded for operator visibility.
+
+The canonical `HookStopException` definition is served at:
+
+
+Hook authors are encouraged to subclass this and raise semantic errors, such as:
+
+CODE BLOCK START HERE
+js
+class HateSpeechBlock extends HookStopException {}
+throw new HateSpeechBlock("Toxic language detected.");
+CODE BLOCK END HERE
+
+This allows frontend clients and operator dashboards to categorize failures meaningfully.
+
+---
+
+## Consent Requirements
+
+Post-execute hooks that perform outbound HTTP calls, telemetry, or behavioral tracking **require user consent**. If `context.consent` is `false`, the hook is skipped entirely.
+
+This requirement ensures:
+
+- Legal compliance for analytics
+- Transparent data collection policies
+- User empowerment over passive behavioral tracking
+
+---
+
+## See Also
+
+- [/docs/hooks/pre-execute](/docs/hooks/pre-execute)
+- [/docs/hooks/post-execute](/docs/hooks/post-execute)
+- [/docs/hooks/history](/docs/hooks/history)
+- [/docs/hooks/registry](/docs/hooks/registry)
+
