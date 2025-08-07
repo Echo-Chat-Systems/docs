@@ -1,0 +1,57 @@
+﻿---
+title: assign
+---
+
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+import {Authenticated} from "@site/src/components/tags/Authenticated";
+
+<Authenticated />
+
+# `assign`
+
+Assigns a role to a member.
+
+## Overview
+
+Allows a guild member with appropriate permissions to a assign roles to a member.
+
+---
+
+## Client → Server
+
+<SchemaExample path="">
+```json Example
+{
+    "target": "roles",
+    "data": {
+        "action": "assign",
+        "params": {
+            "user": "RGIvb1p3UHFZflBLMSs+cCIvLXI9IQ==",
+            "role": 10344604849215222000
+        }
+    }
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="user" type="string" required>
+        [User Id](/docs/protocol/definitions/user/identity).
+    </Param>
+    <Param name="role" type="int" required>
+        Role [Id](/docs/protocol/snowflake).
+    </Param>
+</ParamsList>
+
+## Server → Client
+
+On success, the server returns a [generic acknowledgment](/docs/protocol/targets/generic/acknowledge).
+
+## Errors
+
+| Message            | Description            | Possible Causes                                                                               |
+|--------------------|------------------------|-----------------------------------------------------------------------------------------------|
+| `already-assigned` | User already has role. | The client attempted to add a role to a user that already has that role.                      |
+| `not-found`        | Resource not found     | Thrown in adddition to normal circumstances when user requests role or user outside of scope. |
