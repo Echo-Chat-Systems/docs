@@ -1,0 +1,70 @@
+﻿---
+title: list
+---
+
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+import {Authenticated} from "@site/src/components/tags/Authenticated";
+
+<Authenticated />
+
+# `list`
+
+Lists roles inside a specific guild.
+
+## Overview
+
+Allows any guild member to list all roles available in the guild.
+
+---
+
+## Client → Server
+
+<SchemaExample path="">
+```json Example
+{
+    "target": "roles",
+    "data": {
+        "action": "list",
+        "params": {
+            "guild": 3980959480774269000
+        }
+    }
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="guild" type="int" required>
+        Guild [id](/docs/protocol/snowflake).
+    </Param>
+</ParamsList>
+
+## Server → Client
+
+<SchemaExample path="">
+
+</SchemaExample>
+
+```json Example
+
+```
+
+<ParamsList>
+    <Param name="NAME" type="TYPE" required>
+        CONTENT
+    </Param>
+</ParamsList>
+
+## Errors
+
+| Message         | Description                                   | Possible Causes                                           |
+|-----------------|-----------------------------------------------|-----------------------------------------------------------|
+| `not-signed-in` | Cannot perform action without active session. | The user attempted to sign out without an active session. |
+
+---
+
+## Notes
+
+NOTES
