@@ -1,0 +1,68 @@
+---
+title: Pre-Execute Hooks
+description: Details of pre-execute hooks and their behavior in Echo
+sidebar_position: 3
+---
+
+# Pre-Execute Hooks
+
+Pre-execute hooks are executed immediately after a message is received by the server but before it is handed off to the
+target action handler. These hooks offer a powerful mechanism for mutating, filtering, or validating messages based on
+custom logic defined by the owner of a scope, such as a guild or channel.
+
+Their primary purpose is to enable deep control over inbound data. By running code prior to core processing,
+they allow for behaviors such as content moderation, schema adjustments, localized permissions enforcement, or feature
+toggling based on user-defined logic.
+
+## Hook Stacking and Execution Order
+
+When multiple hooks are defined for a particular scope and action, they are executed in a strictly ordered sequence.
+This ordered chain is configurable by the owner of the scope in which the hooks are defined.
+
+Each hook in the chain receives the message envelope—potentially already modified by previous hooks—and can return a
+mutated version of that message to be passed down the chain. This creates a pipeline where each hook has an opportunity
+to inspect or transform the message before it reaches the action handler.
+
+The ordering of hooks is particularly important in moderation workflows or staged validation. For instance, one hook
+might sanitize content, while another checks for banned phrases. Allowing configuration of the execution order ensures
+these operations occur in a predictable, controlled sequence.
+
+## Interrupting Hook Execution: [`HookStopException`](https://static.echo-chat.au/js/hooks.js)
+
+Hooks can signal that the message should not proceed to the action handler by throwing a special exception,
+[`HookStopException`](https://static.echo-chat.au/js/hooks.js).
+
+When a hook raises this exception or a subclass of it, the remaining hooks in the chain are skipped, and the message is
+never delivered to its destination handler. Instead, an error is returned to the client, and the event is recorded in
+the server logs with contextual information.
+
+This provides a structured way for hooks to prevent undesired behavior, such as blocking a message that violates
+moderation policy. The distinction between a general error and a `HookStopException` is crucial: the former represents
+implementation failure, while the latter represents intentional policy enforcement.
+
+## Error Propagation and Logging
+
+Errors thrown by hooks that are **not** `HookStopException` derivatives do not halt execution. These errors are logged,
+and the next hook in the chain is called with the output of the last successful hook (or the original message if none).
+This fault-tolerant approach ensures that non-critical failures do not impair the overall system.
+
+However, repeated or high-impact hook errors may be flagged for administrative attention, and servers may choose to
+disable problematic hooks as a safety measure.
+
+## Privacy, Safety, and Execution Constraints
+
+Pre-execute hooks are executed within a tightly sandboxed runtime environment. This is a deliberate choice to ensure
+that hooks cannot access sensitive server internals, persist data, or communicate over the network. Their scope is
+strictly limited to the message envelope and approved helper APIs.
+
+By enforcing this level of isolation, Echo protects users from malicious or buggy hooks, while still enabling flexible,
+expressive behaviors. Hooks are cached for performance, and caching may be explicitly invalidated by the hosting server
+using HTTP directives.
+
+Additionally, any user may view all hooks defined in any scope they are a member of, ensuring transparency and
+accountability. This visibility allows users to audit the behavior of hooks that may affect them, fostering
+trust in the system.
+
+All inputs and outputs from pre-execute hooks are validated against the
+[Execution Contract](/docs/hooks/contract), ensuring consistency and preventing accidental protocol violations.
+

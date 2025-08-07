@@ -1,0 +1,86 @@
+---
+title: Hooks Registry
+description: How community-verified hook modules are tracked, reviewed, and moderated
+sidebar_position: 6
+---
+
+# Hooks Registry
+
+The Echo Hooks Registry is a community-curated listing of hook modules that have been published for broader use across
+guilds, channels, and servers. It acts as a shared trust layer: while anyone can write and host their own hooks
+independently, those listed in the registry benefit from enhanced visibility, shared infrastructure, and a structured
+reputation system.
+
+## Purpose of the Registry
+
+The registry exists to solve several challenges that emerge in decentralized hook systems:
+
+- **Discoverability**: Without a central index, high-quality, reusable hooks are difficult to find and reuse.
+- **Trust**: Hooks execute code on the server—if not audited or known, they pose risks. Registry membership signals peer-reviewed safety.
+- **Accountability**: The registry makes it possible to track authorship, historical versions, and usage patterns, which encourages responsible development.
+
+By participating in the registry, hook developers gain visibility and infrastructure support, while users and server
+operators gain a layer of assurance and community oversight.
+
+## Registration and Hosting
+
+Any hook can be submitted to the registry. Upon submission, it undergoes a brief automated review for basic contract
+compliance (e.g. correct exports, valid hook metadata, size and resource limits).
+
+Hooks accepted into the registry are:
+
+- **Hosted centrally** at `registry.echo-chat.au/hooks/{namespace}`.
+- **Versioned** automatically and immutably.
+- **Signed** with the registry key for integrity verification.
+- **Indexed** for lookup via the Echo server admin interface or API.
+
+While registry hosting is encouraged, it is not required. Servers are free to load hooks from any valid URL. However,
+only registry-hosted hooks are eligible for trust scoring and governance votes.
+
+## Trust Scoring and Governance
+
+Echo's registry integrates with the same **reputation-based consensus system** used in other areas of the protocol,
+such as [user trust scoring](/docs/protocol/definitions/user/reputation).
+
+Once a hook is registered:
+
+- **Users** and **server operators** who have used the hook may rate or flag it.
+- Hooks can **gain or lose trust** over time based on usage and feedback.
+- A hook with consistently low trust may become **flagged**, triggering a community vote.
+
+The registry is governed by a lightweight voting protocol. If a registered hook is believed to be harmful, misleading,
+or malicious, users can initiate a vote to:
+
+- **Ban** a hook from being served via the registry.
+- **Revoke** a developer's authoring privileges (if abuse is recurring or egregious).
+
+These votes are weighted based on participant reputation, and quorum thresholds prevent spammy or biased takeovers.
+
+## Author Reputation
+
+Every registered hook must declare an author or maintainer. Authors themselves accumulate a **registry reputation score** based on:
+
+- Number of accepted hooks
+- Hook usage volume
+- Feedback ratings and trust metrics
+- Participation in governance actions
+
+An author with consistently poor scores may be prevented from registering new hooks or may have their existing ones
+disabled. This encourages responsible stewardship of public hooks and deters spam or malicious usage.
+
+Community actions are final and only reversible through a direct appeal to the registry host, who can review the case
+and potentially reinstate a hook or author if warranted, however community votes are strongly weighted and only
+reversed in circumstances of clear error or abuse.
+
+## Benefits of Registration
+
+Choosing to register a hook is **optional**, but comes with significant upsides:
+
+- **Registry Hosting**: Automatic caching and availability via CDN
+- **Visibility**: Hooks are listed in official search tools
+- **Auditability**: Others can review and verify the hook’s logic and security
+- **Trust Marking**: Registered hooks can be opted into by users more confidently
+- **Version Tracking**: Hook changes are recorded and accessible via an audit trail
+
+Unregistered hooks can still be loaded by a server, but must be hosted externally and do not benefit from any of the
+above systems.

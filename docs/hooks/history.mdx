@@ -1,0 +1,97 @@
+---
+title: Hook History and Run Logs
+description: Learn how Echo maintains a comprehensive, privacy-aware record of hook-related events, executions, and user consents.
+sidebar_position: 5
+---
+
+# Hook History and Run Logs
+
+Echo maintains a unified system for tracking and auditing hook-related activities across three independent domains: **hook content history**, **hook run history**, and **hook consent history**. This page describes the structure, purpose, and policies governing each of these systems, enabling transparency and accountability while preserving user privacy.
+
+These histories are stored independently and are queryable via administrative tools or server APIs depending on configuration. All data is retained indefinitely unless explicitly deleted by server operators.
+
+## Hook Content History
+
+Hook content history tracks changes to the JavaScript files that define hook logic. This allows server operators and users to audit what code was executed at any point in time.
+
+### Purpose
+
+- Ensure transparency when hook behavior changes over time.
+- Allow reproducibility of decisions, actions, or failures by preserving exact script versions.
+- Facilitate safe hook registry voting and reputation scoring based on historical behavior.
+
+### What Is Tracked
+
+- Every version of a hook's code, retrieved via its canonical URL.
+- HTTP metadata associated with the fetch (e.g. ETag, Last-Modified).
+- Time of first observation and time of most recent confirmation.
+- Source host trust level (if served from a known registry).
+
+### Update Detection
+
+Code changes are detected by:
+
+- Content hash mismatch with the previous version.
+- HTTP headers indicating a forced invalidation (`Cache-Control: no-cache`, `ETag` mismatch, etc).
+- Manual re-fetches triggered by server operators or registry votes.
+
+The actual code content is retained for all versions observed.
+
+## Hook Run History
+
+The run history records each time a hook is executed by the server. These logs allow server administrators to analyze behavior, performance, and fault patterns.
+
+### Purpose
+
+- Enable debugging and behavioral audits of hooks.
+- Provide statistics on hook usage and performance.
+- Maintain accountability for owners of problematic or misbehaving hooks.
+
+### What Is Tracked
+
+Each run entry includes:
+
+- Timestamp of invocation.
+- Hook source URL and version hash.
+- Triggering action and context (e.g. `message-send` in `guild/abc123/channel/xyz`).
+- Result: success, failure, or skipped (with reason).
+- Execution duration and any errors raised.
+- Exception details if raised (especially for `HookStopException` types).
+- Hook execution stage (pre-execute or post-execute).
+
+### Privacy Notes
+
+- No message contents are stored in the logs.
+- Identifiers such as `user_id` or `guild_id` may be stored to aid auditing but can be anonymized via configuration.
+- Hook code has no access to these logs or data persisted within them.
+
+## Hook Consent History
+
+Some hook executions—especially post-execute hooks that make outbound HTTP requests—require **user consent**. Consent history maintains a permanent record of which hooks each user has approved or denied.
+
+### Purpose
+
+- Ensure users are never subject to unsafe or privacy-violating hook behavior without their explicit opt-in.
+- Provide an audit trail of user decisions, including revocations and overrides.
+- Allow users to inspect and manage their hook consents.
+
+### What Is Tracked
+
+- Hook source URL.
+- User identifier (public key).
+- Scope of consent (e.g. entire guild, specific action, or channel).
+- Consent decision: approved, denied, revoked.
+- Timestamp of decision.
+- Mechanism of consent (UI, command, etc).
+
+### Behavior on Consent Change
+
+- Consent revocations take effect immediately and block future runs.
+- Re-consent is required for hooks that change URL or code hash (if configured).
+- Server operators may override or expire consents on policy grounds.
+
+## Implementation Notes
+
+- These systems are pluggable and customizable by server operators.
+- History may be exposed via a REST API or management UI.
+- Data retention is **infinite by default**—operators may choose to truncate data, but Echo imposes no expiry.
