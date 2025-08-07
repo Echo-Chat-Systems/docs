@@ -21,7 +21,7 @@ Allows any guild member to list all roles available in the guild.
 
 ## Client → Server
 
-<SchemaExample path="">
+<SchemaExample path="/comms/roles/list.json">
 ```json Example
 {
     "target": "roles",
@@ -44,27 +44,24 @@ Allows any guild member to list all roles available in the guild.
 ## Server → Client
 
 <SchemaExample path="">
-
+```json Example
+{
+    "target": "roles",
+    "data": {
+        "action": "list",
+        "params": {
+            "roles": [
+                {  ...  },
+                {  ...  }
+            ]
+        }
+    }
+}
+```
 </SchemaExample>
 
-```json Example
-
-```
-
 <ParamsList>
-    <Param name="NAME" type="TYPE" required>
-        CONTENT
+    <Param name="roles" type="array" required>
+        All [roles](/docs/protocol/definitions/guild/role) in the guild.
     </Param>
 </ParamsList>
-
-## Errors
-
-| Message         | Description                                   | Possible Causes                                           |
-|-----------------|-----------------------------------------------|-----------------------------------------------------------|
-| `not-signed-in` | Cannot perform action without active session. | The user attempted to sign out without an active session. |
-
----
-
-## Notes
-
-NOTES
