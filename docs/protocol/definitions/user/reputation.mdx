@@ -20,7 +20,7 @@ Each remark is a JSON object **signed by its issuer**. A single remark looks lik
 Each remark **must be signed** using the issuer's signing key. The hash of the remark and its signature is used as the unique `sig` key.
 
 
-<SchemaExample path="/user/reputation/remark.json">
+<SchemaExample path="/definitions/user/reputation/remark.json">
 ```json Example
 {
     "sig": "bSNvOjhOUjVGYS4lKyNqUEpJeURBWQ==",
@@ -61,7 +61,7 @@ Each remark **must be signed** using the issuer's signing key. The hash of the r
 
 A user’s `rep` object contains both a `points` tally and a set of signed remarks. The `remarks` are stored in a flat JSON object, using the **remark's signature** as the key:
 
-<SchemaExample path="/user/reputation/rep.json">
+<SchemaExample path="/definitions/user/reputation/rep.json">
 ```json Example
 {
     "points": 100,

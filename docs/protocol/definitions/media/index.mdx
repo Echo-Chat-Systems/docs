@@ -76,7 +76,8 @@ By separating media out and addressing it via Snowflake IDs, we get:
 
 ## Uploading Media
 
-Media uploads are also REST-based. Clients send the file, get back a Snowflake ID, and then use that ID wherever needed (e.g., in a message payload or emoji definition).
+Media uploads are also REST-based. Clients send the file, get back a Snowflake ID, and then use that ID wherever needed
+(e.g., in a message payload or emoji definition).
 
 Uploads must specify:
 
@@ -88,4 +89,5 @@ The upload endpoint returns a Snowflake and any derived metadata the server has 
 
 ---
 
-This model keeps the protocol lean, consistent, and predictable—whether you’re adding a reaction or streaming a video. Everything binary is media. Everything media is REST.
+This model keeps the protocol lean, consistent, and predictable—whether you’re adding a reaction or streaming a video.
+Everything binary is media. Everything media is REST.
