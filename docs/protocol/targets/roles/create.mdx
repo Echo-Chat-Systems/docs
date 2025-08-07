@@ -1,0 +1,68 @@
+﻿---
+title: create
+---
+
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+import {Authenticated} from "@site/src/components/tags/Authenticated";
+
+<Authenticated />
+
+# `create`
+
+What this action does.
+
+## Overview
+
+Brief action overview.
+
+---
+
+## Client → Server
+
+<SchemaExample path="/comms/roles/create.json">
+```json Example
+{
+    "target": "roles",
+    "data": {
+        "action": "create",
+        "params": {
+            "guild": 14701149094486223000,
+            "name": "Moderators"
+        }
+    }
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="guild" type="int" required>
+        Guild [id](/docs/protocol/snowflake).
+    </Param>
+    <Param name="name" type="string" required>
+        Initial role name.
+    </Param>
+</ParamsList>
+
+## Server → Client
+
+<SchemaExample path="">
+```json Example
+{
+    "target": "roles",
+    "data": {
+        "action": "create",
+        "params": {
+            "id": 13770633853673760000
+        }
+    }
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="id" type="int" required>
+        Created Role [Id](/docs/protocol/snowflake)
+    </Param>
+</ParamsList>
