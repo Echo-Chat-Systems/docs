@@ -18,7 +18,7 @@ a user may be represented in a **profile**, as a **public-user**, or as a **priv
 
 A user profile is a broadcast structure typically attached guild membership or public presence.
 
-<SchemaExample path="/user/profile.json">
+<SchemaExample path="/definitions/user/profile.json">
 ```json Example
 {
     "username": "",
@@ -92,7 +92,7 @@ This form **does not include any identifiers** like keys or internal user IDs. I
 
 This structure is used when the system needs to share a verified user identity with others, such as message authors, guild owners, or moderators.
 
-<SchemaExample path="/user/public-user.json">
+<SchemaExample path="/definitions/user/public-user.json">
 ```json Example
 {
     "origin": {  ...  },
@@ -105,7 +105,7 @@ This structure is used when the system needs to share a verified user identity w
 
 <ParamsList>
     <Param name="origin" type="object">
-        User [origin server details](/protocol/definitions/meta/origin.mdx).
+        User [origin server details](/protocol/definitions/origin.mdx).
     </Param>
 
     <Param name="keys" type="object">
@@ -132,7 +132,7 @@ The internal structure for a logged-in user, visible only to the user and the se
 
 This form should never be shared directly with other clients.
 
-<SchemaExample path="/user/private-user.json">
+<SchemaExample path="/definitions/user/private-user.json">
 ```json Example
 {
     "origin": {  ...  },
@@ -146,7 +146,7 @@ This form should never be shared directly with other clients.
 
 <ParamsList>
     <Param name="origin" type="object">
-        User [origin server details](/protocol/definitions/meta/origin.mdx).
+        User [origin server details](/protocol/definitions/origin.mdx).
     </Param>
 
     <Param name="keys" type="object">
