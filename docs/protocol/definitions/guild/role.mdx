@@ -10,7 +10,7 @@ import {Param} from "@site/src/components/Param";
 # Guild Role
 
 
-<SchemaExample path="/guild/role.json">
+<SchemaExample path="/definitions/guild/role.json">
 ```json Example
 {
     "id": 11316396544880767000,
@@ -34,13 +34,13 @@ import {Param} from "@site/src/components/Param";
     </Param>
     <Param name="permissions" type="object" required />
     <Param name="permissions.guild" type="integer">
-        Guild [permissions set](/docs/protocol/definitions/meta/permissions).
+        Guild [permissions set](/docs/protocol/definitions/permissions).
     </Param>
     <Param name="permissions.text" type="integer">
-        Guild-wide text [permissions set](/docs/protocol/definitions/meta/permissions).
+        Guild-wide text [permissions set](/docs/protocol/definitions/permissions).
     </Param>
     <Param name="permissions.voice" type="integer">
-        Guild-wide voice [permissions set](/docs/protocol/definitions/meta/permissions).
+        Guild-wide voice [permissions set](/docs/protocol/definitions/permissions).
     </Param>
     <Param name="customisation" type="object">
         Role [customisation](#role-customisation).
@@ -49,7 +49,7 @@ import {Param} from "@site/src/components/Param";
 
 ## Role Customisation
 
-<SchemaExample path="/guild/role-customisation.json">
+<SchemaExample path="/definitions/guild/role-customisation.json">
 ```json Example
 {
     "banner": "8103275619140250000",
