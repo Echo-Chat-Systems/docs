@@ -1,6 +1,7 @@
 ---
 title: Hooks
 description: Introduction to Echo's pre- and post-execution hook system
+sidebar_position: 1
 ---
 
 # Hooks
@@ -13,8 +14,8 @@ Hooks are designed to be **auditable**, **scoped**, and **privacy-respecting**, 
 
 There are two distinct types of hooks supported by Echo:
 
-- [**Pre-execute hooks**](/docs/hooks/pre-execute): Run **before** an action is handled. They may inspect and optionally mutate the message envelope.
-- [**Post-execute hooks**](/docs/hooks/post-execute): Run **after** an action is processed. They are used for logging, analytics, or other external integrations.
+- [**Pre-execute hooks**](pre-execute): Run **before** an action is handled. They may inspect and optionally mutate the message envelope.
+- [**Post-execute hooks**](post-execute): Run **after** an action is processed. They are used for logging, analytics, or other external integrations.
 
 Each action may support either or both hook types, depending on its nature. Sensitive or cryptographic actions (e.g. key management) **do not support hooks at all**.
 
