@@ -1,8 +1,8 @@
-﻿import authenticatedTag from './styles.authenticated.css';
+﻿import styles from './../Tags.module.css';
 
 export const Authenticated = () => {
     return (
-        <div className="authenticatedTag">
+        <div className={styles.tag}>
             <span>Authenticated</span>
         </div>
     )

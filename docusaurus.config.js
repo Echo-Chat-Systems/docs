@@ -87,6 +87,12 @@ const config = {
                         position: 'left'
                     },
                     {
+                        label: 'Hooks',
+                        type: 'docSidebar',
+                        sidebarId: 'hooksSidebar',
+                        position: 'left'
+                    },
+                    {
                         href: 'https://github.com/Echo-Chat-Systems/',
                         label: 'GitHub',
                         position: 'right',

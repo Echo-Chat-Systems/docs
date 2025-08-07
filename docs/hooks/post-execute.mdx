@@ -1,0 +1,55 @@
+---
+title: Post-Execute Hooks
+description: Details of post-execute hooks and their behavior in Echo
+---
+
+# Post-Execute Hooks
+
+Post-execute hooks are executed only after a server action has completed and the response has been sent back to the
+client. Unlike pre-execute hooks, these hooks cannot modify the message or response—they are purely observational and
+are intended for use cases that require **auditing**, **analytics**, or **external system integration**.
+
+This separation of concerns—between mutation and observation—ensures that post-execute hooks cannot interfere with the
+normal behavior of the system, while still enabling reactive behaviors based on activity.
+
+## Use Cases and Capabilities
+
+The primary motivation behind post-execute hooks is to allow external systems to be notified of events occurring within
+Echo. For example, a guild administrator might configure a hook that logs every `send-message` event to an analytics
+platform, or a user might opt into a system that tracks usage statistics for their own account.
+
+To support these scenarios, post-execute hooks are permitted to make outbound HTTP requests to public endpoints.
+These requests can include contextual information about the action that occurred, such as the actor, the message
+payload, and the result of the action.
+
+## User Consent and Safety
+
+Because post-execute hooks can leak sensitive user data to third-party systems via HTTP, they are considered
+**privacy-sensitive**. To protect user autonomy, Echo enforces a strict opt-in model: any user must explicitly
+grant permission for post-execute hooks to be run on actions that **originate from them**.
+
+This model allows community-driven features like public statistics or badge systems to be built consensually,
+without sacrificing the privacy guarantees that Echo is designed to uphold.
+
+A hook manifest must contain a declaration stating exactly what the hook does and what data it will send out. These
+declarations are presented to users individually when they first encounter a post-execute hook, and they must
+affirmatively agree to allow the hook to run. Users can later revoke this consent at any time, preventing the hook from
+running on future actions.
+
+There is also an existing [hooks registry](/docs/hooks/registry/) that allows users to discover and
+review available hooks, including their descriptions and the data they will transmit. This registry is separate from the
+main Echo system and is maintained by the community, ensuring that users can make informed decisions about which
+hooks to enable.
+
+## Error Handling and Isolation
+
+Post-execute hooks are fully decoupled from the user request flow. They are run asynchronously and have no impact on the
+success or failure of the original request. Any errors raised during hook execution are logged, but never propagated to
+the user or to other systems.
+
+This ensures that hooks do not introduce instability or latency into the client experience. Failed HTTP requests,
+runtime errors, or timeouts are silently handled unless explicitly flagged for review by the host server.
+
+Just like pre-execute hooks, post-execute hooks are sandboxed and subject to the same
+[Execution Contract](/docs/hooks/contract). The only exception is their ability to perform outbound network
+requests, which is otherwise disallowed in Echo’s hook environment.
