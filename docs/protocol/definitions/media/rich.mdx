@@ -1,0 +1,113 @@
+---
+title: Emojis and Stickers
+---
+
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {Param} from "@site/src/components/Param";
+import {ParamsList} from "@site/src/components/ParamsList";
+
+# Emojis and Stickers
+
+Emojis and stickers expand upon the basic [media system](/docs/protocol/definitions/media/) to provide expressive,
+reusable content that enhances communication. They are treated as specialized media objects with additional metadata
+and usage patterns.
+
+## Custom Emojis
+
+Custom emojis are user-defined images that can be used in messages, reactions, and other contexts. They are stored as
+a set of metadata with a reference to the underlying media file.
+
+<SchemaExample path="/definitions/media/emoji.json">
+```json Example
+{
+    "id": 4020543056693000,
+    "from": "guild",
+    "name": "smile",
+    "ref": "4796299209727572000",
+    "source": 198316576995801100,
+    "size": {
+        "x": 256,
+        "y": 256
+    }
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="id" type="int" required>
+        Emoji [id](/docs/protocol/snowflake).
+    </Param>
+    <Param name="from" type="string" required>
+        The source of the emoji, can be `server` or `guild`.
+    </Param>
+    <Param name="name" type="string" required>
+        The name of the emoji.
+    </Param>
+    <Param name="ref" type="string" required>
+        Either a URL to an external image or a media item [id](/docs/protocol/snowflake) that contains the emoji image.
+    </Param>
+    <Param name="source" type="int">
+        The [id](/docs/protocol/snowflake) of the guild that owns the emoji, if applicable.
+    </Param>
+    <Param name="size" type="object">
+        The dimensions of the emoji image.
+        <ParamsList>
+            <Param name="x" type="int" required>
+                Width in pixels.
+            </Param>
+            <Param name="y" type="int" required>
+                Height in pixels.
+            </Param>
+        </ParamsList>
+    </Param>
+</ParamsList>
+
+## Stickers
+
+Stickers are very similar to custom emojis but are designed for larger, more expressive images that are not designed to
+be embedded in messages, rather they are used as standalone messages.
+
+<SchemaExample path="/definitions/media/sticker.json">
+```json Example
+{
+    "id": 4020543056693000,
+    "from": "guild",
+    "name": "happy",
+    "ref": "4796299209727572000",
+    "source": 198316576995801100,
+    "size": {
+        "x": 512,
+        "y": 512
+    }
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="id" type="int" required>
+        Sticker [id](/docs/protocol/snowflake).
+    </Param>
+    <Param name="from" type="string" required>
+        The source of the sticker, can be `server` or `guild`.
+    </Param>
+    <Param name="name" type="string" required>
+        The name of the sticker, used for display purposes.
+    </Param>
+    <Param name="ref" type="string" required>
+        Either a URL to an external image or a media item [id](/docs/protocol/snowflake) that contains the sticker image.
+    </Param>
+    <Param name="source" type="int">
+        The [id](/docs/protocol/snowflake) of the guild that owns the sticker, if applicable.
+    </Param>
+    <Param name="size" type="object">
+        The dimensions of the sticker image.
+        <ParamsList>
+            <Param name="x" type="int" required>
+                Width in pixels.
+            </Param>
+            <Param name="y" type="int" required>
+                Height in pixels.
+            </Param>
+        </ParamsList>
+    </Param>
+</ParamsList>
