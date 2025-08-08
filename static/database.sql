@@ -1,10 +1,11 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   Create schemas
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-CREATE SCHEMA IF NOT EXISTS config;
-CREATE SCHEMA IF NOT EXISTS public;
 CREATE SCHEMA IF NOT EXISTS chat;
+CREATE SCHEMA IF NOT EXISTS config;
+CREATE SCHEMA IF NOT EXISTS hooks;
 CREATE SCHEMA IF NOT EXISTS media;
+CREATE SCHEMA IF NOT EXISTS public;
 CREATE SCHEMA IF NOT EXISTS secure;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -27,11 +28,12 @@ CREATE TABLE config.data
 CREATE TABLE public.users
 (
     id             varchar(64) NOT NULL PRIMARY KEY,
+    created_at     TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
     encryption_key bytea       NOT NULL,
     username       TEXT        NOT NULL,
     tag            INT         NOT NULL,
     profile        jsonb       NOT NULL DEFAULT '{}',
-    settings       bytea       NOT NULL DEFAULT '',
+    settings       text       NOT NULL DEFAULT '{}',
     last_online    TIMESTAMP,
     is_online      BOOLEAN     NOT NULL DEFAULT FALSE,
     is_banned      BOOLEAN     NOT NULL DEFAULT FALSE
@@ -42,8 +44,10 @@ CREATE TABLE public.roles
     id            NUMERIC NOT NULL PRIMARY KEY,
     guild_id      NUMERIC NOT NULL,
     name          TEXT    NOT NULL,
-    customisation jsonb   NOT NULL DEFAULT '{}',
-    permissions   NUMERIC NOT NULL DEFAULT 0
+    guild_permissions NUMERIC NOT NULL DEFAULT 0,
+    text_permissions  NUMERIC NOT NULL DEFAULT 0,
+    voice_permissions NUMERIC NOT NULL DEFAULT 0,
+    customisation jsonb   NOT NULL DEFAULT '{}'
 );
 
 CREATE TABLE public.user_roles
@@ -71,7 +75,8 @@ CREATE TABLE chat.guilds
     id            NUMERIC     NOT NULL PRIMARY KEY,
     owner_id      varchar(64) NOT NULL,
     name          TEXT        NOT NULL,
-    customisation jsonb       NOT NULL DEFAULT '{}'
+    customisation jsonb       NOT NULL DEFAULT '{}',
+    config        jsonb       NOT NULL DEFAULT '{}'
 );
 
 CREATE TABLE chat.guild_members
@@ -80,7 +85,8 @@ CREATE TABLE chat.guild_members
     guild_id      NUMERIC     NOT NULL,
     user_id       varchar(64) NOT NULL,
     nickname      TEXT,
-    customisation jsonb       NOT NULL DEFAULT '{}'
+    g_customisation_o jsonb       NOT NULL DEFAULT '{}',
+    u_customisation_o jsonb       NOT NULL DEFAULT '{}'
 );
 
 CREATE TABLE chat.messages
