@@ -139,7 +139,16 @@ This form should never be shared directly with other clients.
     "keys": {  ...  },
     "profile": {  ...  },
     "rep": {  ...  },
-    "settings": ""
+    "settings": "",
+    "hooks": {
+        "enabled": [
+            1594888922386088000,
+            10226521759002145000
+        ],
+        "blocked": [
+            17046937965463540000
+        ]
+    }
 }
 ```
 </SchemaExample>
@@ -163,6 +172,16 @@ This form should never be shared directly with other clients.
 
     <Param name="settings" type="string (b64)">
         Encrypted base64-encoded string containing user roaming settings.
+    </Param>
+
+    <Param name="hooks" type="object" required />
+
+    <Param name="hooks.enabled" type="array" required>
+
+    </Param>
+
+    <Param name="hooks.blocked" type="array" required>
+        List of blocked [hook](/docs/hooks/) [IDs](/docs/protocol/snowflake).
     </Param>
 </ParamsList>
 
