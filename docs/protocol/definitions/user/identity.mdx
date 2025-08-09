@@ -3,18 +3,27 @@ title: User Identity
 description: How users are identified and authenticated in the protocol.
 ---
 
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+
 # User Identity
 
-This page outlines how users are uniquely identified in the protocol, and the reasoning behind using cryptographic keys instead of traditional identifiers such as usernames or passwords.
+This page outlines how users are uniquely identified in the protocol, and the reasoning behind using cryptographic
+keys instead of traditional identifiers such as usernames or passwords.
 
 Required knowledge:
-- [Keys](/protocol/definitions/crypto/keys.mdx)
+- [Keys](/docs/protocol/definitions/crypto/keys.mdx)
 
 ## Identity Through Public Keys
 
-Each user is uniquely identified by their [`sk`](/protocol/definitions/crypto/keys.mdx#signing-key). This key acts as their permanent identity on the network. When a user connects or interacts with the system, they prove control over this key by signing challenges or payloads.
+To simplify user identity management, the user's [`sk`](/docs/protocol/definitions/crypto/keys.mdx#signing-key)
+can be used as a shorthand identifier for the user within the current server context.
 
-This replaces the need for user IDs, usernames, or email addresses as a core identity mechanism.
+This does not comply with MLS, and as such is not used for MLS purposes, but is used for other protocol features.
+
+In order to allow for compliance with MLS, the [`UserPackage`](#user-package) is used to represent the user in MLS
+contexts, which contains the user's public keys and other metadata.
 
 ---
 
@@ -46,6 +55,45 @@ In this system, **identity is not what you know (a password)** — it’s **what
 If a user loses their private keys, they lose access to their identity and must start fresh. For this reason, secure client-side storage and optional key backup/export features are essential at the UI level.
 
 ---
+
+## User Package
+
+The `UserPackage` is a structure that contains the user's public keys and other metadata, used in MLS contexts.
+<SchemaExample path="/definitions/crypto/user-package.json">
+```json Example
+{
+    "keypair": {
+        "sk": "BASE64/HEX_STRING",
+        "ek": "BASE64/HEX_STRING"
+    },
+    "profile": {  ...  },
+    "origin": {  ...  },
+    "sig": "BASE64/HEX_STRING"
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <a href="/docs/protocol/definitions/crypto/keys">
+        <Param name="keypair" type="object" required>
+            The user's public keys.
+        </Param>
+    </a>
+    <a href="/docs/protocol/definitions/user/data">
+        <Param name="profile" type="object" required>
+            The user's profile information.
+        </Param>
+    </a>
+    <a href="/docs/protocol/definitions/origin">
+        <Param name="origin" type="object" required>
+            The origin server details for the user.
+        </Param>
+    </a>
+    <Param name="sig" type="string" required>
+        The signature of the package, signed with the user's signing key.
+    </Param>
+</ParamsList>
+
 
 ## Summary
 

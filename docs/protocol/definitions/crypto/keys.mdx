@@ -8,7 +8,8 @@ import {SchemaExample} from "@site/src/components/SchemaExample";
 
 This page defines the terminology used throughout the documentation to refer to user identity and key cryptographic material.
 
-All users in the system are identified and authenticated using cryptographic key pairs. These keys are central to user verification, end-to-end encryption, and identity management.
+All users in the system are identified and authenticated using cryptographic key pairs. These keys are central to user
+verification, end-to-end encryption, and identity management.
 
 ---
 
@@ -16,7 +17,8 @@ All users in the system are identified and authenticated using cryptographic key
 
 ### `signing-key`
 
-The user's **Ed25519** public key used to **verify signatures**. This key serves as the user's **identity** within the protocol.
+The user's **Ed25519** public key used to **verify signatures**. This key serves as a shorthand identifier for the user
+within the current server context.
 
 **Referred to as `sk` for short.**
 
@@ -26,7 +28,7 @@ The user's **Ed25519** public key used to **verify signatures**. This key serves
 
 ### `encryption-key`
 
-The user's **RSA** or public key used for various secure key exchanges and low security system messages.
+The user's **AES256-GCM** or public key used for various secure key exchanges and low security system messages.
 
 **Referred to as `ek` for short**
 
