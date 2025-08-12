@@ -104,19 +104,19 @@ This structure is used when the system needs to share a verified user identity w
 </SchemaExample>
 
 <ParamsList>
-    <Param name="origin" type="object">
+    <Param name="origin" type="object" required>
         User [origin server details](/protocol/definitions/origin.mdx).
     </Param>
 
-    <Param name="keys" type="object">
+    <Param name="keys" type="object" required>
         User [public keys](/protocol/definitions/crypto/keys.mdx#pubkeys).
     </Param>
 
-    <Param name="profile" type="object">
+    <Param name="profile" type="object" required>
         User [profile](#profile-structure).
     </Param>
 
-    <Param name="rep" type="object">
+    <Param name="rep" type="object" required>
         User public [reputation](/protocol/definitions/user/reputation.mdx#rep-object) record.
     </Param>
 </ParamsList>
@@ -154,23 +154,23 @@ This form should never be shared directly with other clients.
 </SchemaExample>
 
 <ParamsList>
-    <Param name="origin" type="object">
+    <Param name="origin" type="object" required>
         User [origin server details](/protocol/definitions/origin.mdx).
     </Param>
 
-    <Param name="keys" type="object">
+    <Param name="keys" type="object" required>
         User [public keys](/protocol/definitions/crypto/keys.mdx#pubkeys).
     </Param>
 
-    <Param name="profile" type="object">
+    <Param name="profile" type="object" required>
         User [profile](#profile-structure).
     </Param>
 
-    <Param name="rep" type="object">
+    <Param name="rep" type="object" required>
         User public [reputation](/protocol/definitions/user/reputation.mdx#rep-object) record.
     </Param>
 
-    <Param name="settings" type="string (b64)">
+    <Param name="settings" type="string (b64)" required>
         Encrypted base64-encoded string containing user roaming settings.
     </Param>
 
