@@ -23,6 +23,7 @@ are created by guild members with the `create_invites` permission.
     "uses": 10,
     "target": 162512316532615156156,
     "expires": "2025-08-08 23:59:59Z",
+    "customisation": {  ...  }
 }
 ```
 </SchemaExample>
@@ -41,12 +42,41 @@ are created by guild members with the `create_invites` permission.
         The [id](/docs/protocol/snowflake) of the user who created the invite.
     </Param>
     <Param name="uses" type="int">
-        The number of times this invite has been used.
+        Remaining invite uses.
     </Param>
     <Param name="target" type="int">
         Optional. The [id](/docs/protocol/snowflake) of a user that this invite targets, if applicable.
     </Param>
     <Param name="expires" type="string">
         Optional. The expiration date and time of the invite in ISO 8601 format.
+    </Param>
+    <Param name="customisation" type="object" required>
+        Invite [customisation](#invite-customisation) object.
+    </Param>
+</ParamsList>
+
+## Invite Customisation
+
+<SchemaExample path="/definitions/guilld/invite-customisation.json">
+
+</SchemaExample>
+
+```json Example
+{
+    "banner": "",
+    "icon": "",
+    "css": ""
+}
+```
+
+<ParamsList>
+    <Param name="banner" type="string">
+        Either a URL linking to a valid image file or a [snowflake](/docs/protocol/snowflake) referencing a [media](/docs/protocol/definitions/media/) item.
+    </Param>
+    <Param name="icon" type="string">
+        Either a URL linking to a valid image file or a [snowflake](/docs/protocol/snowflake) referencing a [media](/docs/protocol/definitions/media/) item.
+    </Param>
+    <Param name="css" type="string">
+        Additional invite CSS.
     </Param>
 </ParamsList>
