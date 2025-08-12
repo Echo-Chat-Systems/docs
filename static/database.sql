@@ -48,6 +48,16 @@ CREATE TABLE public.users
     is_banned      BOOLEAN   NOT NULL DEFAULT FALSE
 );
 
+CREATE TABLE public.remarks
+(
+    id          snowflake NOT NULL PRIMARY KEY,
+    target_user uid       NOT NULL,
+    source_user uid       NOT NULL,
+    sig         TEXT      NOT NULL,
+    direction   SMALLINT  NOT NULL DEFAULT 0,
+    comment     TEXT      NOT NULL DEFAULT ''
+);
+
 CREATE TABLE public.roles
 (
     id                snowflake NOT NULL PRIMARY KEY,
@@ -268,6 +278,11 @@ ALTER TABLE media.rich_media
     ADD CONSTRAINT fk_rich_media_file_id FOREIGN KEY (file_id) REFERENCES media.files (id);
 
 -- Public
+ALTER TABLE public.remarks
+    ADD CONSTRAINT fk_remarks_source_user_id FOREIGN KEY (source_user) REFERENCES public.users (id);
+ALTER TABLE public.remarks
+    ADD CONSTRAINT fk_remarks_target_user_id FOREIGN KEY (target_user) REFERENCES public.users (id);
+
 ALTER TABLE public.roles
     ADD CONSTRAINT fk_roles_guild_id FOREIGN KEY (guild_id) REFERENCES chat.guilds (id);
 
@@ -320,7 +335,7 @@ ALTER TABLE hooks.runs
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 -- Message Count View
-    create OR REPLACE VIEW chat.message_count AS
+CREATE OR REPLACE VIEW chat.message_count AS
 SELECT user_id,
        channel_id,
        COUNT(*) AS message_count
