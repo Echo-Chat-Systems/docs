@@ -41,8 +41,6 @@ CREATE TABLE public.users
     id             uid       NOT NULL PRIMARY KEY,
     created_at     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     encryption_key bytea     NOT NULL,
-    username       TEXT      NOT NULL,
-    tag            INT       NOT NULL,
     profile        jsonb     NOT NULL,
     settings       TEXT      NOT NULL,
     last_online    TIMESTAMP,
