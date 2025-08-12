@@ -21,14 +21,15 @@ a set of metadata with a reference to the underlying media file.
 ```json Example
 {
     "id": 4020543056693000,
-    "from": "guild",
+    "from": 0,
     "name": "smile",
     "ref": "4796299209727572000",
     "source": 198316576995801100,
     "size": {
         "x": 256,
         "y": 256
-    }
+    },
+    "type": 0
 }
 ```
 </SchemaExample>
@@ -37,8 +38,8 @@ a set of metadata with a reference to the underlying media file.
     <Param name="id" type="int" required>
         Emoji [id](/docs/protocol/snowflake).
     </Param>
-    <Param name="from" type="string" required>
-        The source of the emoji, can be `server` or `guild`.
+    <Param name="from" type="int" required>
+        The source of the emoji, 0 = `server` 1 = `guild`.
     </Param>
     <Param name="name" type="string" required>
         The name of the emoji.
@@ -59,6 +60,9 @@ a set of metadata with a reference to the underlying media file.
                 Height in pixels.
             </Param>
         </ParamsList>
+    </Param>
+    <Param name="type" type="int" required>
+        Type of rich media. 0 = Sticker, 1 = Emoji
     </Param>
 </ParamsList>
 
