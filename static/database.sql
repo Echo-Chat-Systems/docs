@@ -9,13 +9,20 @@ CREATE SCHEMA IF NOT EXISTS public;
 CREATE SCHEMA IF NOT EXISTS secure;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  Create types & domains
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+CREATE DOMAIN snowflake AS bigint;
+CREATE DOMAIN uid AS varchar(64);
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   Create tables
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 -- Config
 CREATE TABLE config.owners
 (
-    user_id varchar(64) NOT NULL PRIMARY KEY
+    user_id uid NOT NULL PRIMARY KEY
 );
 
 CREATE TABLE config.data
@@ -27,138 +34,138 @@ CREATE TABLE config.data
 -- Public
 CREATE TABLE public.users
 (
-    id             varchar(64) NOT NULL PRIMARY KEY,
-    created_at     TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    encryption_key bytea       NOT NULL,
-    username       TEXT        NOT NULL,
-    tag            INT         NOT NULL,
-    profile        jsonb       NOT NULL DEFAULT '{}',
-    settings       text       NOT NULL DEFAULT '{}',
+    id             uid       NOT NULL PRIMARY KEY,
+    created_at     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    encryption_key bytea     NOT NULL,
+    username       TEXT      NOT NULL,
+    tag            INT       NOT NULL,
+    profile        jsonb     NOT NULL,
+    settings       text      NOT NULL,
     last_online    TIMESTAMP,
-    is_online      BOOLEAN     NOT NULL DEFAULT FALSE,
-    is_banned      BOOLEAN     NOT NULL DEFAULT FALSE
+    is_online      BOOLEAN   NOT NULL DEFAULT FALSE,
+    is_banned      BOOLEAN   NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE public.roles
 (
-    id            NUMERIC NOT NULL PRIMARY KEY,
-    guild_id      NUMERIC NOT NULL,
-    name          TEXT    NOT NULL,
-    guild_permissions NUMERIC NOT NULL DEFAULT 0,
-    text_permissions  NUMERIC NOT NULL DEFAULT 0,
-    voice_permissions NUMERIC NOT NULL DEFAULT 0,
-    customisation jsonb   NOT NULL DEFAULT '{}'
+    id                snowflake NOT NULL PRIMARY KEY,
+    guild_id          snowflake NOT NULL,
+    name              TEXT      NOT NULL,
+    guild_permissions bigint    NOT NULL DEFAULT 0,
+    text_permissions  bigint    NOT NULL DEFAULT 0,
+    voice_permissions bigint    NOT NULL DEFAULT 0,
+    customisation     jsonb     NOT NULL
 );
 
 CREATE TABLE public.user_roles
 (
-    id      NUMERIC     NOT NULL PRIMARY KEY,
-    user_id varchar(64) NOT NULL,
-    role_id NUMERIC     NOT NULL
+    id      snowflake NOT NULL PRIMARY KEY,
+    user_id uid       NOT NULL,
+    role_id snowflake NOT NULL
 );
 
 CREATE TABLE public.invites
 (
-    id            NUMERIC     NOT NULL PRIMARY KEY,
-    guild_id      NUMERIC     NOT NULL,
-    channel_id    NUMERIC     NOT NULL,
-    created_by    varchar(64) NOT NULL,
-    uses          REAL        NOT NULL DEFAULT -1,
-    customisation jsonb       NOT NULL DEFAULT '{}',
-    expires_at    TIMESTAMP,
-    target_user   varchar(64)
+    id            snowflake NOT NULL PRIMARY KEY,
+    guild_id      snowflake NOT NULL,
+    channel_id    snowflake NOT NULL,
+    attribution   uid,
+    uses          REAL,
+    customisation jsonb     NOT NULL,
+    expires       TIMESTAMP,
+    target        uid
 );
 
 -- Chat
 CREATE TABLE chat.guilds
 (
-    id            NUMERIC     NOT NULL PRIMARY KEY,
-    owner_id      varchar(64) NOT NULL,
-    name          TEXT        NOT NULL,
-    customisation jsonb       NOT NULL DEFAULT '{}',
-    config        jsonb       NOT NULL DEFAULT '{}'
+    id            snowflake NOT NULL PRIMARY KEY,
+    owner_id      uid       NOT NULL,
+    name          TEXT      NOT NULL,
+    customisation jsonb     NOT NULL,
+    config        jsonb     NOT NULL
 );
 
 CREATE TABLE chat.guild_members
 (
-    id            NUMERIC     NOT NULL PRIMARY KEY,
-    guild_id      NUMERIC     NOT NULL,
-    user_id       varchar(64) NOT NULL,
-    nickname      TEXT,
-    g_customisation_o jsonb       NOT NULL DEFAULT '{}',
-    u_customisation_o jsonb       NOT NULL DEFAULT '{}'
+    id                snowflake NOT NULL PRIMARY KEY,
+    guild_id          snowflake NOT NULL,
+    user_id           uid       NOT NULL,
+    nickname          TEXT,
+    g_customisation_o jsonb     NOT NULL,
+    u_customisation_o jsonb     NOT NULL
 );
 
 CREATE TABLE chat.messages
 (
-    id           NUMERIC     NOT NULL PRIMARY KEY,
-    user_id      varchar(64) NOT NULL,
-    channel_id   NUMERIC     NOT NULL,
-    epoch        NUMERIC, -- Epoch and sender index are optional, as not all messages will be part of a secure channel
+    id           snowflake NOT NULL PRIMARY KEY,
+    user_id      uid       NOT NULL,
+    channel_id   snowflake NOT NULL,
+    epoch        bigint, -- Epoch and sender index are optional, as not all messages will be part of a secure channel
     sender_index INT,
-    body         bytea       NOT NULL,
-    metadata     jsonb       NOT NULL DEFAULT '{}'
+    body         bytea     NOT NULL,
+    metadata     jsonb     NOT NULL
 );
 
 CREATE TABLE chat.channels
 (
-    id            NUMERIC  NOT NULL PRIMARY KEY,
-    guild_id      NUMERIC  NOT NULL,
-    name          TEXT     NOT NULL,
-    type          SMALLINT NOT NULL DEFAULT 0,
-    customisation jsonb    NOT NULL DEFAULT '{}',
-    config        jsonb    NOT NULL DEFAULT '{}'
+    id            snowflake NOT NULL PRIMARY KEY,
+    guild_id      snowflake NOT NULL,
+    name          TEXT      NOT NULL,
+    type          SMALLINT  NOT NULL DEFAULT 0,
+    customisation jsonb     NOT NULL,
+    config        jsonb     NOT NULL
 );
 
 CREATE TABLE chat.channel_categories
 (
-    id            NUMERIC NOT NULL PRIMARY KEY,
-    guild_id      NUMERIC NOT NULL,
-    name          TEXT    NOT NULL,
-    type          INT     NOT NULL DEFAULT 0,
-    customisation jsonb   NOT NULL DEFAULT '{}',
-    config        jsonb   NOT NULL DEFAULT '{}'
+    id            snowflake NOT NULL PRIMARY KEY,
+    guild_id      snowflake NOT NULL,
+    name          TEXT      NOT NULL,
+    type          INT       NOT NULL DEFAULT 0,
+    customisation jsonb     NOT NULL,
+    config        jsonb     NOT NULL
 );
 
 CREATE TABLE chat.channel_members
 (
-    id          NUMERIC     NOT NULL PRIMARY KEY,
-    user_id     varchar(64) NOT NULL,
-    channel_id  NUMERIC     NOT NULL,
-    permissions NUMERIC     NOT NULL DEFAULT 0
+    id          snowflake NOT NULL PRIMARY KEY,
+    user_id     uid       NOT NULL,
+    channel_id  snowflake NOT NULL,
+    permissions bigint    NOT NULL DEFAULT 0
 );
 
 -- Media
 CREATE TABLE media.files
 (
-    id            NUMERIC     NOT NULL PRIMARY KEY,
-    last_accessed TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    created_by    varchar(64) NOT NULL,
-    metadata      jsonb       NOT NULL DEFAULT '{}'
+    id            snowflake NOT NULL PRIMARY KEY,
+    last_accessed TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    created_by    uid       NOT NULL,
+    metadata      jsonb     NOT NULL
 );
 
 CREATE TABLE media.message_attachments
 (
-    id         NUMERIC NOT NULL PRIMARY KEY,
-    message_id NUMERIC NOT NULL,
-    file_id    NUMERIC NOT NULL
+    id         snowflake NOT NULL PRIMARY KEY,
+    message_id snowflake NOT NULL,
+    file_id    snowflake NOT NULL
 );
 
 CREATE TABLE media.guild_emojis
 (
-    id            NUMERIC     NOT NULL PRIMARY KEY,
-    guild_id      NUMERIC     NOT NULL,
-    created_by    varchar(64) NOT NULL,
-    name          TEXT        NOT NULL,
-    type          SMALLINT    NOT NULL DEFAULT 0,
-    customisation jsonb       NOT NULL DEFAULT '{}',
-    file_id       NUMERIC     NOT NULL
+    id            snowflake NOT NULL PRIMARY KEY,
+    guild_id      snowflake NOT NULL,
+    created_by    uid       NOT NULL,
+    name          TEXT      NOT NULL,
+    type          SMALLINT  NOT NULL DEFAULT 0,
+    customisation jsonb     NOT NULL,
+    file_id       snowflake NOT NULL
 );
 
 -- Secured
 CREATE TABLE secure.certificates
 (
-    id        NUMERIC   NOT NULL PRIMARY KEY,
+    id        snowflake NOT NULL PRIMARY KEY,
     signature bytea     NOT NULL,
     expires   TIMESTAMP NOT NULL,
     revoked   BOOLEAN   NOT NULL DEFAULT FALSE
@@ -166,20 +173,20 @@ CREATE TABLE secure.certificates
 
 CREATE TABLE secure.channel_commits
 (
-    id               NUMERIC     NOT NULL PRIMARY KEY,
-    user_id          varchar(64) NOT NULL,
-    channel_id       NUMERIC     NOT NULL,
-    epoch            NUMERIC     NOT NULL,
-    encrypted_commit bytea       NOT NULL
+    id               snowflake NOT NULL PRIMARY KEY,
+    user_id          uid       NOT NULL,
+    channel_id       snowflake NOT NULL,
+    epoch            snowflake NOT NULL,
+    encrypted_commit bytea     NOT NULL
 );
 
 CREATE TABLE secure.mls_states
 (
-    id                NUMERIC   NOT NULL PRIMARY KEY,
+    id                snowflake NOT NULL PRIMARY KEY,
     last_updated      TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    channel_member_id NUMERIC   NOT NULL,
+    channel_member_id snowflake NOT NULL,
     nonce             bytea     NOT NULL,
-    epoch             NUMERIC   NOT NULL,
+    epoch             bigint    NOT NULL,
     encrypted_state   bytea     NOT NULL
 );
 
