@@ -1,0 +1,68 @@
+---
+title: Emojis and Stickers
+---
+
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {Param} from "@site/src/components/Param";
+import {ParamsList} from "@site/src/components/ParamsList";
+
+# Emojis and Stickers
+
+Emojis and stickers expand upon the basic [media system](/docs/protocol/definitions/media/) to provide expressive,
+reusable content that enhances communication. They are treated as specialized media objects with additional metadata
+and usage patterns.
+
+## Rich Media
+
+Both stickers and emojis share the same base structure.
+
+<SchemaExample path="/definitions/media/emoji.json">
+```json Example
+{
+    "id": 4020543056693000,
+    "from": 0,
+    "name": "smile",
+    "ref": "4796299209727572000",
+    "source": 198316576995801100,
+    "size": {
+        "x": 256,
+        "y": 256
+    },
+    "type": 0
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="id" type="int" required>
+        Emoji [id](/docs/protocol/snowflake).
+    </Param>
+    <Param name="from" type="int" required>
+        The source of the emoji, 0 = `server` 1 = `guild`.
+    </Param>
+    <Param name="name" type="string" required>
+        The name of the emoji.
+    </Param>
+    <Param name="ref" type="string" required>
+        Either a URL to an external image or a media item [id](/docs/protocol/snowflake) that contains the emoji image.
+    </Param>
+    <Param name="source" type="int">
+        The [id](/docs/protocol/snowflake) of the guild that owns the emoji, if applicable.
+    </Param>
+    <Param name="size" type="object">
+        The dimensions of the emoji image.
+        <ParamsList>
+            <Param name="x" type="int" required>
+                Width in pixels.
+            </Param>
+            <Param name="y" type="int" required>
+                Height in pixels.
+            </Param>
+        </ParamsList>
+    </Param>
+    <Param name="type" type="int" required>
+        Type of rich media. 0 = Sticker, 1 = Emoji
+    </Param>
+</ParamsList>
+
+

@@ -1,0 +1,100 @@
+﻿---
+title: User Certificates
+description: Protocol usage of user certificates.
+---
+
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+
+# User Certificates
+
+User certificates are a core part of identity in the protocol. They are standardized JSON structures that encapsulate
+a user’s identity, cryptographic keys, and trust signals. There are **two main forms of user certificate**:
+
+- **User-signed certificate**  
+This certificate is generated and signed by the user themselves using their private signing key. It asserts the
+authenticity of their public keys and profile data. Its primary role is to give other parties a verifiable statement
+of "this is who I am" that can be validated without trusting a server.
+
+- **Server-signed certificate**  
+This certificate is issued by a server the user is interacting with. It is signed with the server’s private signing key
+and contains additional information such as reputation standing and origin server information on top of the existing
+information in the user-signed cert.
+
+This allows servers to vouch for users in their ecosystem and to impose validity limits
+(for example, expiring certificates or revoking trust when a user is banned).
+
+Both types of certificate use the **same underlying user structures**, ensuring consistency in how clients and servers
+interpret identity. The only difference lies in *who signs the certificate* and what authority that signature conveys.
+
+---
+
+## User-Signed Certificate
+
+The structure below defines the user signed certificate.
+
+<SchemaExample path="/definitions/user/user-cert.json">
+```json Example
+{
+    "keys": { ... },
+    "profile": { ... },
+    "sig": "UVcgO3slODkwcipodmtXaVJBWndxbFxv"
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="keys" type="object" required>
+        User [public keys](/protocol/definitions/crypto/keys.mdx#pubkeys).
+        These allow others to verify signatures and encrypt messages to the user.
+    </Param>
+
+    <Param name="profile" type="object" required>
+        User [profile](/docs/protocol/definitions/user/data#profile-structure).
+        Contains human-readable metadata such as display name, avatar, and other optional details.
+    </Param>
+
+    <Param name="sig" type="string" required>
+        Signature of the package without the `sig` key.
+    </Param>
+</ParamsList>
+
+
+## Server-Signed User Certificate
+
+<SchemaExample path="/definitions/user/server-cert.json">
+```json Example
+{
+    "origin": {  ...  },
+    "keys": { ... },
+    "profile": { ... },
+    "rep": {  ...  },
+    "sig": "UVcgO3slODkwcipodmtXaVJBWndxbFxv"
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="origin" type="object" required>
+        User [origin server details](/protocol/definitions/origin.mdx).
+    </Param>
+
+    <Param name="keys" type="object" required>
+        User [public keys](/protocol/definitions/crypto/keys.mdx#pubkeys).
+    </Param>
+
+    <Param name="profile" type="object" required>
+        User [profile](/docs/protocol/definitions/user/data#profile-structure).
+        Contains human-readable metadata such as display name, avatar, and other optional details.
+    </Param>
+
+    <Param name="rep" type="object" required>
+        User public [reputation](/docs/protocol/definitions/user/reputation#rep-object) record.
+    </Param>
+
+    <Param name="sig" type="string" required>
+        Signature of the package without the `sig` key.
+    </Param>
+</ParamsList>
+

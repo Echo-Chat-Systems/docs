@@ -1,11 +1,23 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   Create schemas
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-CREATE SCHEMA IF NOT EXISTS config;
-CREATE SCHEMA IF NOT EXISTS public;
 CREATE SCHEMA IF NOT EXISTS chat;
+CREATE SCHEMA IF NOT EXISTS config;
+CREATE SCHEMA IF NOT EXISTS hooks;
 CREATE SCHEMA IF NOT EXISTS media;
+CREATE SCHEMA IF NOT EXISTS public;
 CREATE SCHEMA IF NOT EXISTS secure;
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  Create types & domains
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+CREATE DOMAIN snowflake AS BIGINT;
+CREATE DOMAIN uid AS VARCHAR(64);
+
+CREATE DOMAIN rich_media_type AS SMALLINT CHECK ( 0 <= value AND value <= 1 );
+CREATE DOMAIN hook_stage AS SMALLINT CHECK ( 0 <= value AND value <= 1 );
+CREATE DOMAIN hook_status AS SMALLINT CHECK ( 0 <= value AND value <= 1 );
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   Create tables
@@ -14,7 +26,7 @@ CREATE SCHEMA IF NOT EXISTS secure;
 -- Config
 CREATE TABLE config.owners
 (
-    user_id varchar(64) NOT NULL PRIMARY KEY
+    user_id uid NOT NULL PRIMARY KEY
 );
 
 CREATE TABLE config.data
@@ -26,133 +38,136 @@ CREATE TABLE config.data
 -- Public
 CREATE TABLE public.users
 (
-    id             varchar(64) NOT NULL PRIMARY KEY,
-    encryption_key bytea       NOT NULL,
-    username       TEXT        NOT NULL,
-    tag            INT         NOT NULL,
-    profile        jsonb       NOT NULL DEFAULT '{}',
-    settings       bytea       NOT NULL DEFAULT '',
+    id             uid       NOT NULL PRIMARY KEY,
+    created_at     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    encryption_key bytea     NOT NULL,
+    profile        jsonb     NOT NULL,
+    settings       TEXT      NOT NULL,
     last_online    TIMESTAMP,
-    is_online      BOOLEAN     NOT NULL DEFAULT FALSE,
-    is_banned      BOOLEAN     NOT NULL DEFAULT FALSE
+    is_online      BOOLEAN   NOT NULL DEFAULT FALSE,
+    is_banned      BOOLEAN   NOT NULL DEFAULT FALSE
+);
+
+CREATE TABLE public.remarks
+(
+    id          snowflake NOT NULL PRIMARY KEY,
+    target_user uid       NOT NULL,
+    source_user uid       NOT NULL,
+    sig         TEXT      NOT NULL,
+    direction   SMALLINT  NOT NULL DEFAULT 0,
+    comment     TEXT      NOT NULL DEFAULT ''
 );
 
 CREATE TABLE public.roles
 (
-    id            NUMERIC NOT NULL PRIMARY KEY,
-    guild_id      NUMERIC NOT NULL,
-    name          TEXT    NOT NULL,
-    customisation jsonb   NOT NULL DEFAULT '{}',
-    permissions   NUMERIC NOT NULL DEFAULT 0
+    id                snowflake NOT NULL PRIMARY KEY,
+    guild_id          snowflake NOT NULL,
+    name              TEXT      NOT NULL,
+    guild_permissions BIGINT    NOT NULL DEFAULT 0,
+    text_permissions  BIGINT    NOT NULL DEFAULT 0,
+    voice_permissions BIGINT    NOT NULL DEFAULT 0,
+    customisation     jsonb     NOT NULL
 );
 
 CREATE TABLE public.user_roles
 (
-    id      NUMERIC     NOT NULL PRIMARY KEY,
-    user_id varchar(64) NOT NULL,
-    role_id NUMERIC     NOT NULL
+    id      snowflake NOT NULL PRIMARY KEY,
+    user_id uid       NOT NULL,
+    role_id snowflake NOT NULL
 );
 
 CREATE TABLE public.invites
 (
-    id            NUMERIC     NOT NULL PRIMARY KEY,
-    guild_id      NUMERIC     NOT NULL,
-    channel_id    NUMERIC     NOT NULL,
-    created_by    varchar(64) NOT NULL,
-    uses          REAL        NOT NULL DEFAULT -1,
-    customisation jsonb       NOT NULL DEFAULT '{}',
-    expires_at    TIMESTAMP,
-    target_user   varchar(64)
+    id            snowflake NOT NULL PRIMARY KEY,
+    guild_id      snowflake NOT NULL,
+    channel_id    snowflake NOT NULL,
+    attribution   uid,
+    uses          REAL,
+    customisation jsonb     NOT NULL,
+    expires       TIMESTAMP,
+    target        uid
 );
 
 -- Chat
 CREATE TABLE chat.guilds
 (
-    id            NUMERIC     NOT NULL PRIMARY KEY,
-    owner_id      varchar(64) NOT NULL,
-    name          TEXT        NOT NULL,
-    customisation jsonb       NOT NULL DEFAULT '{}'
+    id            snowflake NOT NULL PRIMARY KEY,
+    owner_id      uid       NOT NULL,
+    name          TEXT      NOT NULL,
+    customisation jsonb     NOT NULL,
+    config        jsonb     NOT NULL
 );
 
 CREATE TABLE chat.guild_members
 (
-    id            NUMERIC     NOT NULL PRIMARY KEY,
-    guild_id      NUMERIC     NOT NULL,
-    user_id       varchar(64) NOT NULL,
-    nickname      TEXT,
-    customisation jsonb       NOT NULL DEFAULT '{}'
+    id                snowflake NOT NULL PRIMARY KEY,
+    guild_id          snowflake NOT NULL,
+    user_id           uid       NOT NULL,
+    nickname          TEXT,
+    g_customisation_o jsonb     NOT NULL,
+    u_customisation_o jsonb     NOT NULL
 );
 
 CREATE TABLE chat.messages
 (
-    id           NUMERIC     NOT NULL PRIMARY KEY,
-    user_id      varchar(64) NOT NULL,
-    channel_id   NUMERIC     NOT NULL,
-    epoch        NUMERIC, -- Epoch and sender index are optional, as not all messages will be part of a secure channel
+    id           snowflake NOT NULL PRIMARY KEY,
+    user_id      uid       NOT NULL,
+    channel_id   snowflake NOT NULL,
+    epoch        BIGINT, -- Epoch and sender index are optional, as not all messages will be part of a secure channel
     sender_index INT,
-    body         bytea       NOT NULL,
-    metadata     jsonb       NOT NULL DEFAULT '{}'
+    body         bytea     NOT NULL,
+    metadata     jsonb     NOT NULL
 );
 
 CREATE TABLE chat.channels
 (
-    id            NUMERIC  NOT NULL PRIMARY KEY,
-    guild_id      NUMERIC  NOT NULL,
-    name          TEXT     NOT NULL,
-    type          SMALLINT NOT NULL DEFAULT 0,
-    customisation jsonb    NOT NULL DEFAULT '{}',
-    config        jsonb    NOT NULL DEFAULT '{}'
-);
-
-CREATE TABLE chat.channel_categories
-(
-    id            NUMERIC NOT NULL PRIMARY KEY,
-    guild_id      NUMERIC NOT NULL,
-    name          TEXT    NOT NULL,
-    type          INT     NOT NULL DEFAULT 0,
-    customisation jsonb   NOT NULL DEFAULT '{}',
-    config        jsonb   NOT NULL DEFAULT '{}'
+    id            snowflake NOT NULL PRIMARY KEY,
+    guild_id      snowflake NOT NULL,
+    name          TEXT      NOT NULL,
+    parent        snowflake,
+    index         INT       NOT NULL,
+    customisation jsonb     NOT NULL,
+    config        jsonb     NOT NULL
 );
 
 CREATE TABLE chat.channel_members
 (
-    id          NUMERIC     NOT NULL PRIMARY KEY,
-    user_id     varchar(64) NOT NULL,
-    channel_id  NUMERIC     NOT NULL,
-    permissions NUMERIC     NOT NULL DEFAULT 0
+    id          snowflake NOT NULL PRIMARY KEY,
+    user_id     uid       NOT NULL,
+    channel_id  snowflake NOT NULL,
+    permissions BIGINT    NOT NULL DEFAULT 0
 );
 
 -- Media
 CREATE TABLE media.files
 (
-    id            NUMERIC     NOT NULL PRIMARY KEY,
-    last_accessed TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    created_by    varchar(64) NOT NULL,
-    metadata      jsonb       NOT NULL DEFAULT '{}'
+    id            snowflake NOT NULL PRIMARY KEY,
+    last_accessed TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    created_by    uid       NOT NULL
 );
 
 CREATE TABLE media.message_attachments
 (
-    id         NUMERIC NOT NULL PRIMARY KEY,
-    message_id NUMERIC NOT NULL,
-    file_id    NUMERIC NOT NULL
+    id         snowflake NOT NULL PRIMARY KEY,
+    message_id snowflake NOT NULL,
+    file_id    snowflake NOT NULL,
+    index      INT       NOT NULL DEFAULT 0
 );
 
-CREATE TABLE media.guild_emojis
+CREATE TABLE media.rich_media
 (
-    id            NUMERIC     NOT NULL PRIMARY KEY,
-    guild_id      NUMERIC     NOT NULL,
-    created_by    varchar(64) NOT NULL,
-    name          TEXT        NOT NULL,
-    type          SMALLINT    NOT NULL DEFAULT 0,
-    customisation jsonb       NOT NULL DEFAULT '{}',
-    file_id       NUMERIC     NOT NULL
+    id            snowflake       NOT NULL PRIMARY KEY,
+    guild_id      snowflake,
+    name          TEXT            NOT NULL,
+    type          rich_media_type NOT NULL DEFAULT 0,
+    customisation jsonb           NOT NULL,
+    file_id       snowflake       NOT NULL
 );
 
 -- Secured
 CREATE TABLE secure.certificates
 (
-    id        NUMERIC   NOT NULL PRIMARY KEY,
+    id        snowflake NOT NULL PRIMARY KEY,
     signature bytea     NOT NULL,
     expires   TIMESTAMP NOT NULL,
     revoked   BOOLEAN   NOT NULL DEFAULT FALSE
@@ -160,21 +175,62 @@ CREATE TABLE secure.certificates
 
 CREATE TABLE secure.channel_commits
 (
-    id               NUMERIC     NOT NULL PRIMARY KEY,
-    user_id          varchar(64) NOT NULL,
-    channel_id       NUMERIC     NOT NULL,
-    epoch            NUMERIC     NOT NULL,
-    encrypted_commit bytea       NOT NULL
+    id               snowflake NOT NULL PRIMARY KEY,
+    user_id          uid       NOT NULL,
+    channel_id       snowflake NOT NULL,
+    epoch            BIGINT    NOT NULL,
+    encrypted_commit bytea     NOT NULL
 );
 
 CREATE TABLE secure.mls_states
 (
-    id                NUMERIC   NOT NULL PRIMARY KEY,
+    id                snowflake NOT NULL PRIMARY KEY,
     last_updated      TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    channel_member_id NUMERIC   NOT NULL,
+    channel_member_id snowflake NOT NULL,
     nonce             bytea     NOT NULL,
-    epoch             NUMERIC   NOT NULL,
+    epoch             BIGINT    NOT NULL,
     encrypted_state   bytea     NOT NULL
+);
+
+-- Hooks
+
+CREATE TABLE hooks.hooks
+(
+    id      snowflake  NOT NULL PRIMARY KEY,
+    name    TEXT       NOT NULL,
+    source  TEXT       NOT NULL,
+    stage   hook_stage NOT NULL,
+    context jsonb      NOT NULL,
+    enabled bool       NOT NULL DEFAULT FALSE
+);
+
+CREATE TABLE hooks.hook_users
+(
+    id       snowflake NOT NULL PRIMARY KEY,
+    hook_id  snowflake NOT NULL,
+    user_id  uid       NOT NULL,
+    approved bool      NOT NULL
+);
+
+CREATE TABLE hooks.history
+(
+    id            snowflake NOT NULL PRIMARY KEY,
+    hook_id       snowflake NOT NULL,
+    manifest_hash TEXT      NOT NULL,
+    manifest      jsonb     NOT NULL,
+    code_hash     TEXT      NOT NULL,
+    code          TEXT      NOT NULL,
+    valid         bool DEFAULT FALSE
+);
+
+CREATE TABLE hooks.runs
+(
+    id           snowflake NOT NULL PRIMARY KEY,
+    history_id   snowflake NOT NULL,
+    hook_user_id snowflake NOT NULL,
+    result       SMALLINT  NOT NULL DEFAULT 0,
+    output       jsonb     NOT NULL,
+    log          TEXT      NOT NULL DEFAULT ''
 );
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -192,9 +248,6 @@ ALTER TABLE chat.guild_members
 
 ALTER TABLE chat.channels
     ADD CONSTRAINT fk_channels_guild_id FOREIGN KEY (guild_id) REFERENCES chat.guilds (id);
-
-ALTER TABLE chat.channel_categories
-    ADD CONSTRAINT fk_channel_categories_guild_id FOREIGN KEY (guild_id) REFERENCES chat.guilds (id);
 
 ALTER TABLE chat.channel_members
     ADD CONSTRAINT fk_channel_members_user_id FOREIGN KEY (user_id) REFERENCES public.users (id);
@@ -219,14 +272,17 @@ ALTER TABLE media.message_attachments
 ALTER TABLE media.message_attachments
     ADD CONSTRAINT fk_message_attachments_file_id FOREIGN KEY (file_id) REFERENCES media.files (id);
 
-ALTER TABLE media.guild_emojis
-    ADD CONSTRAINT fk_guild_emojis_guild_id FOREIGN KEY (guild_id) REFERENCES chat.guilds (id);
-ALTER TABLE media.guild_emojis
-    ADD CONSTRAINT fk_guild_emojis_created_by FOREIGN KEY (created_by) REFERENCES public.users (id);
-ALTER TABLE media.guild_emojis
-    ADD CONSTRAINT fk_guild_emojis_file_id FOREIGN KEY (file_id) REFERENCES media.files (id);
+ALTER TABLE media.rich_media
+    ADD CONSTRAINT fk_rich_media_guild_id FOREIGN KEY (guild_id) REFERENCES chat.guilds (id);
+ALTER TABLE media.rich_media
+    ADD CONSTRAINT fk_rich_media_file_id FOREIGN KEY (file_id) REFERENCES media.files (id);
 
 -- Public
+ALTER TABLE public.remarks
+    ADD CONSTRAINT fk_remarks_source_user_id FOREIGN KEY (source_user) REFERENCES public.users (id);
+ALTER TABLE public.remarks
+    ADD CONSTRAINT fk_remarks_target_user_id FOREIGN KEY (target_user) REFERENCES public.users (id);
+
 ALTER TABLE public.roles
     ADD CONSTRAINT fk_roles_guild_id FOREIGN KEY (guild_id) REFERENCES chat.guilds (id);
 
@@ -240,9 +296,9 @@ ALTER TABLE public.invites
 ALTER TABLE public.invites
     ADD CONSTRAINT fk_invites_channel_id FOREIGN KEY (channel_id) REFERENCES chat.channels (id);
 ALTER TABLE public.invites
-    ADD CONSTRAINT fk_invites_created_by FOREIGN KEY (created_by) REFERENCES public.users (id);
+    ADD CONSTRAINT fk_invites_created_by FOREIGN KEY (attribution) REFERENCES public.users (id);
 ALTER TABLE public.invites
-    ADD CONSTRAINT fk_invites_target_user FOREIGN KEY (target_user) REFERENCES public.users (id);
+    ADD CONSTRAINT fk_invites_target_user FOREIGN KEY (target) REFERENCES public.users (id);
 
 -- Secured
 ALTER TABLE secure.channel_commits
@@ -252,6 +308,21 @@ ALTER TABLE secure.channel_commits
 
 ALTER TABLE secure.mls_states
     ADD CONSTRAINT fk_mls_states_channel_member_id FOREIGN KEY (channel_member_id) REFERENCES chat.channel_members (id);
+
+-- Hooks
+ALTER TABLE hooks.hook_users
+    ADD CONSTRAINT fk_hook_users_user_id FOREIGN KEY (user_id) REFERENCES public.users (id);
+ALTER TABLE hooks.hook_users
+    ADD CONSTRAINT fk_hook_users_hook_id FOREIGN KEY (hook_id) REFERENCES hooks.hooks (id);
+
+ALTER TABLE hooks.history
+    ADD CONSTRAINT fk_history_hook_id FOREIGN KEY (hook_id) REFERENCES hooks.hooks (id);
+
+ALTER TABLE hooks.runs
+    ADD CONSTRAINT fk_runs_hook_user_id FOREIGN KEY (hook_user_id) REFERENCES hooks.hook_users (id);
+ALTER TABLE hooks.runs
+    ADD CONSTRAINT fk_runs_history_id FOREIGN KEY (history_id) REFERENCES hooks.history (id);
+
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   Indexes

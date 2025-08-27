@@ -19,23 +19,27 @@ Channels can be configured in a great number of ways. This is designed to be ext
 ```json Example
 {
     "modes": ["text", "voice"],
-    "chat-enabled": true,
+    "encrypted": false,
     "access": {
         "minimum-role-index": 12
-    }
+    },
+    "notifications": {  ...  }
 }
 ```
 </SchemaExample>
 
 <ParamsList>
-    <Param name="modes" type="array">
+    <Param name="modes" type="array" required>
         The modes of communication this channel supports. Valid modes are "text" and "voice" and any combination thereof.
     </Param>
-    <Param name="chat-enabled" type="bool">
-        Communication enabled in this channel. Can be used to turn a channel into essentially a category heading.
+    <Param name="encrypted" type="bool" required>
+        Controls if the channel has encryption enabled or not.
     </Param>
     <Param name="access.minimum-role-index" type="int">
         The minimum 0-based index of the required role rank in the guild to be able to access the chanel. -1 means all
         users can access.
+    </Param>
+    <Param name="notifications" type="object">
+        [Notifications configuration](/docs/protocol/definitions/postie/notifications) object applied to the channel.
     </Param>
 </ParamsList>

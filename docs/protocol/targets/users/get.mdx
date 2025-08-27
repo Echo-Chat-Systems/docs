@@ -11,7 +11,8 @@ import {Authenticated} from "@site/src/components/tags/Authenticated";
 
 # `get`
 
-Retrieves a [**public user**](/docs/protocol/definitions/user/data.mdx#public-user-structure) by their user ID (Ed25519 public key). This action does not require authentication and returns only non-sensitive information.
+Retrieves a [**server-signed user certificate**](/docs/protocol/definitions/user/certificates#server-signed-user-certificate) by their user ID (Ed25519 public key).
+This action does not require authentication and returns only non-sensitive information.
 
 ## Overview
 
@@ -58,7 +59,7 @@ The `get` action allows clients to fetch basic profile information about any use
 
 <ParamsList>
     <Param name="user" type="object" required>
-        [Public User](/docs/protocol/definitions/user/data.mdx#public-user-structure) requested.
+        [Server-Signed User Certificate](/docs/protocol/definitions/user/certificates#server-signed-user-certificate) requested.
     </Param>
 </ParamsList>
 

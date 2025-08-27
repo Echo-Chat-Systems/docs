@@ -1,0 +1,82 @@
+---
+title: Guild Invite
+---
+
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {Param} from "@site/src/components/Param";
+import {ParamsList} from "@site/src/components/ParamsList";
+
+# Guild Invite
+
+Guild invites are the way to allow users to join a guild in Echo-Chat. They are shared as 8 digit hexadecimal codes and
+are created by guild members with the `create_invites` permission.
+
+## Invite Structure
+
+<SchemaExample path="/definitions/guild/invite.json">
+```json Example
+{
+    "id": 123456789012345678,
+    "code": "AF3BCD20",
+    "guild":  123456789012345678,
+    "attribution": 987654321098765432,
+    "uses": 10,
+    "target": 162512316532615156156,
+    "expires": "2025-08-08 23:59:59Z",
+    "customisation": {  ...  }
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="id" type="int" required>
+        The [id](/docs/protocol/snowflake) of the invite.
+    </Param>
+    <Param name="code" type="string" required>
+        The 8-digit hexadecimal code used to join the guild.
+    </Param>
+    <Param name="guild" type="int" required>
+        The [id](/docs/protocol/snowflake) of the guild this invite is for.
+    </Param>
+    <Param name="attribution" type="int">
+        The [id](/docs/protocol/snowflake) of the user who created the invite.
+    </Param>
+    <Param name="uses" type="int">
+        Remaining invite uses.
+    </Param>
+    <Param name="target" type="string">
+        Optional. The [id](/docs/protocol/definitions/user/identity) of a user that this invite targets, if applicable.
+    </Param>
+    <Param name="expires" type="string">
+        Optional. The expiration date and time of the invite in ISO 8601 format.
+    </Param>
+    <Param name="customisation" type="object" required>
+        Invite [customisation](#invite-customisation) object.
+    </Param>
+</ParamsList>
+
+## Invite Customisation
+
+<SchemaExample path="/definitions/guilld/invite-customisation.json">
+
+</SchemaExample>
+
+```json Example
+{
+    "banner": "",
+    "icon": "",
+    "css": ""
+}
+```
+
+<ParamsList>
+    <Param name="banner" type="string">
+        Either a URL linking to a valid image file or a [snowflake](/docs/protocol/snowflake) referencing a [media](/docs/protocol/definitions/media/) item.
+    </Param>
+    <Param name="icon" type="string">
+        Either a URL linking to a valid image file or a [snowflake](/docs/protocol/snowflake) referencing a [media](/docs/protocol/definitions/media/) item.
+    </Param>
+    <Param name="css" type="string">
+        Additional invite CSS.
+    </Param>
+</ParamsList>

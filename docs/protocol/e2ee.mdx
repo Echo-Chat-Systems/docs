@@ -1,0 +1,76 @@
+---
+title: End-to-End Encryption
+---
+
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+
+# End-to-End Encryption (E2EE)
+
+Echo-Chat implements [Message Layer Security (MLS)](https://www.rfc-editor.org/rfc/rfc9420.html) to provide end-to-end
+encryption for all messages. Echo-Chat provides all required functionality for MLS, however the primary purpose is to
+provide the Delivery Service and Authentication Service assumed to be present in MLS.
+
+## Overview
+
+End-to-end encryption (E2EE) ensures that messages are encrypted on the sender's device and can only be decrypted by the
+intended recipient's device. This prevents intermediaries, including Echo-Chat servers, from accessing the content of
+messages.
+
+## Purpose
+
+The reason we've implemented E2EE is to protect user privacy and security explicitly with the goal of providing user
+security against government surveillance and corporate data mining.
+
+## Tradeoffs and Considerations
+
+During the design of Echo-Chat's E2EE system, several tradeoffs were made to balance security, community safety, and
+legal liability. The core issue is that while E2EE protects user privacy, it makes it possible for bad actors to abuse
+the system in ways that cause harm to others, such as the sharing of explicit content involving minors (this was the
+primary concern influencing the design of Echo-Chat's E2EE system).
+
+Many other platforms have chosen to disable E2EE entirely to avoid these issues, but we refuse to compromise on core
+values of privacy and security of message content. Instead, Echo-Chat implements a system that allows for manual review
+of message attachments and statistical analysis of message frequency and context (time of day, attachments, recipients,
+etc) to detect and allow for the actioning of abusive accounts while still protecting the content of messages.
+
+**We refuse to compromise the security of our text messaging system even under threat of legal action.**
+
+This means that while we can detect and take action against accounts that are abusing the system, support law
+enforcement in investigations of CSAM, and take action against accounts that are abusing the system.
+
+We as platform providers do not have the ability to read the content of messages. This is absolute, and no amount of
+legal pressure can change this as it is a natural result of the mathematics of E2EE.
+
+Additionally, the Echo-Chat protocol does not support any form of "backdoor" or "key escrow" that would allow for
+third parties to decrypt messages. This is a fundamental principle of E2EE: if the platform can read your messages,
+then so can anyone else. Echo-Chat's E2EE is designed to ensure that only the sender and intended recipients can
+decrypt messages, with no exceptions.
+
+## Key Features
+
+This section will cover the key features of Message Layer Security and how they are broadly implemented in Echo-Chat.
+
+### Entities
+
+#### [Client](/docs/protocol/definitions/user/identity)
+
+A client (also referred to as a "user" throughout the protocol) is an individual account identified by their cryptographic
+keys.
+
+#### Group
+
+A group is a collection of clients that possess a shared secret. This shared secret evolves over time with each [epoch](#epoch).
+
+#### Epoch
+
+An epoch is defined as a group state at a specific point in time. Each epoch possesses a signing key and encryption key.
+
+### Data Structures
+
+#### Key Package
+
+MLS defines a key package as a signed structure that contains the client's capabilities and an HPKE public key.
+
+Echo-Chat redefines this structure as a [`UserPackage`](/docs/protocol/definitions/user/identity#user-package), which contains the user's public keys and other metadata.
