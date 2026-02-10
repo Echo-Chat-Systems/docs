@@ -42,7 +42,8 @@ may assign specific permissions to a user within the scope of the specified chan
 <SchemaExample path="/definitions/channel/member.json">
 ```json
 {
-    "id": "VzU7MFJ7Q1N7WmhPMGFxOzxBPlpRSVRb",
+    "user-id": "VzU7MFJ7Q1N7WmhPMGFxOzxBPlpRSVRb",
+    "channel-id": 2984561219845132191566516,
     "config": {  ...  },
     "customisation-override": {  ...  }
 }
@@ -50,8 +51,11 @@ may assign specific permissions to a user within the scope of the specified chan
 </SchemaExample>
 
 <ParamsList>
-    <Param name="id" type="string" required>
+    <Param name="user-id" type="string" required>
         [Id](/docs/protocol/definitions/user/identity) of the user.
+    </Param>
+    <Param name="channel-id" type="number" required>
+        Channel [id](/docs/protocol/snowflake).
     </Param>
     <Param name="config" type="object" required>
         [Channel Member Config](#channel-member-config) object.
