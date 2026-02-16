@@ -1,3 +1,3 @@
 # Echo Chat Docs
 
-These docs are designed to be hosted using Mintlify.
+These docs are made with docusaurus, built using github actions, and pushed to cloudflare.
