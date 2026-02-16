@@ -135,6 +135,7 @@ If the signature is valid, the server returns the authenticated user profile and
 | Message             | Description                                                             | Possible Causes                                                                  |
 |---------------------|-------------------------------------------------------------------------|----------------------------------------------------------------------------------|
 | `invalid-key`       | The provided public key is malformed or unsupported.                    | Public key does not match expected format (e.g. not Ed25519 / invalid base64).   |
+| `not-found`         | The provided public key was not found in the database                   | The user does not have an account or is trying to sign on to the wrong server    |
 | `already-started`   | A sign-in session has already been initiated for this key.              | Calling `signin-start` again before completing the previous session.             |
 | `not-started`       | No active sign-in session found for this key.                           | Calling `signin-challenge`, `signin-response`, or `signin-complete` prematurely. |
 | `challenge-failed`  | One or more cryptographic challenges failed verification.               | Incorrect signing/encryption of challenge payloads.                              |
