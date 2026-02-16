@@ -66,18 +66,18 @@ Echo-Chat uses a custom 64-bit Snowflake implementation tailored to our protocol
 
 <Tabs>
     <TabItem value="v1" label="V1">
-        | Bit(s) | Name              | Description                                                           |
-        |--------|-------------------|-----------------------------------------------------------------------|
-        | 44     | Timestamp         | Milliseconds since custom epoch (ensures temporal ordering)           |
-        | 8      | Instance Number   | Coordinated per-instance number used to allow for distributed hosting |
-        | 12     | Sequence          | Per-node counter to resolve collisions in the same ms                 |
-
+        | Bit(s) | Name              | Description                                                            |
+        |--------|-------------------|------------------------------------------------------------------------|
+        | 42     | Timestamp         | Milliseconds since custom epoch (ensures temporal ordering)            |
+        | 6      | Instance Number   | Coordinated per-instance number used to allow for distributed hosting  |
+        | 12     | Sequence          | Per-node counter to resolve collisions in the same ms                  |
+        | 4      | Snowflake Version | The working version of the snowflake definition used by this snowflake |
     </TabItem>
 </Tabs>
 
 ### Custom Epoch
 
-We use a custom epoch (e.g. `2025-01-01T00:00:00Z`) to ensure our timestamp fits cleanly within 41 bits for decades.
+We use a custom epoch (e.g. `2025-01-01T00:00:00Z`) to ensure our timestamp fits cleanly within 42 bits for decades.
 
 ### Benefits in Echo-Chat
 
