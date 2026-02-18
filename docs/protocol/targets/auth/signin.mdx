@@ -70,10 +70,10 @@ The server responds with a unique challenge string to be signed.
 
 <ParamsList>
     <Param name="sign-challenge" type="string" required>
-        Random string the user must sign.
+        Random base64 string the user must decode and sign.
     </Param>
     <Param name="encrypt-challenge" type="string" required>
-        Random string encrypted using the users public `ek`.
+        Random base64 string encrypted using the users public `ek`.
     </Param>
 </ParamsList>
 
