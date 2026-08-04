@@ -1,0 +1,68 @@
+---
+title: get
+---
+
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+import {Authenticated} from "@site/src/components/tags/Authenticated";
+
+<Authenticated />
+
+# `get`
+
+Retrieves an existing channel by ID.
+
+## Overview
+
+Allows a user to get the information pertaining to a specific channel provided they have access.
+
+---
+
+## Client → Server
+
+<SchemaExample path="/comms/channels/get.json">
+```json Example
+{
+    "target": "channels",
+    "data": {
+        "action": "get",
+        "params": {
+            "id": 847744928655622100
+        }
+    }
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="id" type="integer" required>
+        [Id](/docs/protocol/snowflake) of the requested channel.
+    </Param>
+</ParamsList>
+
+## Server → Client
+
+<SchemaExample path="/comms/channels/get-response.json">
+```json Example
+{
+    "target": "channels",
+    "data": {
+        "action": "get",
+        "params": {
+            "channel": {  ...  }
+        }
+    }
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="channel" type="object" required>
+        [Channel Data](/docs/protocol/definitions/channel/data)
+    </Param>
+</ParamsList>
+
+## Notes
+
+- In the event a user requests an existing channel that they do not have access to, a `not-found` error will be raised to avoid an info leak
