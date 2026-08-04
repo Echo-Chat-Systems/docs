@@ -1,0 +1,64 @@
+---
+title: create
+---
+
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+import {Authenticated} from "@site/src/components/tags/Authenticated";
+
+<Authenticated />
+
+# `create`
+
+Creates a new channel.
+
+## Overview
+
+Allows the user to create a new channel in a guild they're a part of and have the permissions to do so in.
+
+---
+
+## Client → Server
+
+<SchemaExample path="/comms/channels/create.json">
+```json Example
+{
+    "target": "guilds",
+    "data": {
+        "action": "create",
+        "params": {
+            "name": "chat-1"
+        }
+    }
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="name" type="string" required>
+        Initial channel name.
+    </Param>
+</ParamsList>
+
+## Server → Client
+
+<SchemaExample path="/comms/channels/create-response.json">
+```json Example
+{
+    "target": "channels",
+    "data": {
+        "action": "create",
+        "params": {
+            "id": 17204232703081746000
+        }
+    }
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="id" type="integer" required>
+        Newly created channel [id](/docs/protocol/snowflake).
+    </Param>
+</ParamsList>
