@@ -1,0 +1,52 @@
+---
+title: update
+---
+
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+import {Authenticated} from "@site/src/components/tags/Authenticated";
+
+<Authenticated />
+
+# `update`
+
+Updates channel information.
+
+## Overview
+
+Allows a user to update channel information for a channel that they have permission to modify.
+
+---
+
+## Client → Server
+
+```json Example
+{
+    "target": "channels",
+    "data": {
+        "action": "update",
+        "params": {
+            "channel": {  ...  }
+        }
+    }
+}
+```
+
+<SchemaExample path="">
+
+</SchemaExample>
+
+<ParamsList>
+    <Param name="channel" type="object" required>
+        [Channel data] being updated.
+    </Param>
+</ParamsList>
+
+## Server → Client
+
+On success, the server returns a [generic acknowledgment](/docs/protocol/targets/generic/acknowledge).
+
+## Notes
+
+- Certain channel fields are immutable. The server should reject any update that attempts to change immutable fields.
