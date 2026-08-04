@@ -1,0 +1,53 @@
+﻿---
+title: delete
+---
+
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+import {Authenticated} from "@site/src/components/tags/Authenticated";
+
+<Authenticated />
+
+# `delete`
+
+Deletes an existing channel.
+
+## Overview
+
+Allows a user to delete a channel provided they have the appropriate permissions.
+
+---
+
+## Client → Server
+
+<SchemaExample path="/comms/channels/delete.json">
+```json Example
+{
+    "target": "channels",
+    "data": {
+        "action": "delete",
+        "params": {
+            "id": 5655277926790978000
+        }
+    }
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="id" type="integer" required>
+        Channel [id](/docs/protocol/snowflake).
+    </Param>
+</ParamsList>
+
+## Server → Client
+
+On success, the server returns a [generic acknowledgment](/docs/protocol/targets/generic/acknowledge).
+
+---
+
+## Notes
+
+- This action is irreversible. No data should be kept by any implementing servers.
+- The client is expected to implement checks on their end to ensure that guilds are not deleted accidentally.
