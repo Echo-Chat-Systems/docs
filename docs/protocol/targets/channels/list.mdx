@@ -1,0 +1,68 @@
+---
+title: list
+---
+
+import {SchemaExample} from "@site/src/components/SchemaExample";
+import {ParamsList} from "@site/src/components/ParamsList";
+import {Param} from "@site/src/components/Param";
+import {Authenticated} from "@site/src/components/tags/Authenticated";
+
+<Authenticated />
+
+# `list`
+
+Lists all visible channels in a guild.
+
+## Overview
+
+Allows a user to list all visible guilds in a server they are a member of.
+
+---
+
+## Client → Server
+
+<SchemaExample path="/comms/channels/list.json">
+```json Example
+{
+    "target": "channels",
+    "data": {
+        "action": "list",
+        "params": {
+            "id": 847744928655622100
+        }
+    }
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="id" type="integer" required>
+        [Id](/docs/protocol/snowflake) of the guild.
+    </Param>
+</ParamsList>
+
+## Server → Client
+
+<SchemaExample path="/comms/channels/list-response.json">
+```json Example
+{
+    "target": "channels",
+    "data": {
+        "action": "list",
+        "params": {
+            "channels": {  ...  }
+        }
+    }
+}
+```
+</SchemaExample>
+
+<ParamsList>
+    <Param name="channel" type="array" required>
+        [Channel Data](/docs/protocol/definitions/channel/data)
+    </Param>
+</ParamsList>
+
+## Notes
+
+- In the event a user requests the channels of an existing guild that they do not have access to, a `not-found` error will be raised to avoid an info leak.
